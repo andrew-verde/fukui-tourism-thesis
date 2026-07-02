@@ -16,7 +16,8 @@ post-period-mean statistic proved null, with a potential circularity charge
 against the friction–leakage correlation. A defense memo
 (`docs/thesis/defense_memo.md`) steel-mans each attack and grounds each defense in committed
 numbers. This ADR records the posture chosen per seam and the concessions
-accepted, so the reasoning survives the drafting session.
+accepted, so the reasoning survives the drafting session. All quantities
+cited here regenerate via `make reproduce-submission`.
 
 ## Decision
 

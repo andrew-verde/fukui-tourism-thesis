@@ -2,7 +2,9 @@
 
 *Drop-in replacement for §7.3 (see ADR 0016 for placement decision). Ordered
 by how much each limit could change the thesis's reading, not by chapter.
-Companion reasoning in `docs/thesis/defense_memo.md`; posture in ADR 0015.*
+Companion reasoning in `docs/thesis/defense_memo.md`; posture in ADR 0015.
+All quantities regenerate from the committed pipeline via
+`make reproduce-submission`.*
 
 ## 7.3 Limitations
 

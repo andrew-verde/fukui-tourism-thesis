@@ -47,6 +47,15 @@ in the thesis regenerates from pinned open-data inputs via a single command
 than promised. Chapter 7 concludes with contributions, consolidated
 limitations, and the path from design to field experiment.
 
+The contribution, compressed to one claim: the extension's demand shock is
+real but transient by default, endures only where station arrivals convert
+into visits to a destination anchor, and the constraint gating that
+conversion is concentrated — fourfold — in the very visitors the extension
+delivers. The last mile, not the trunk line, is where regional
+revitalization by infrastructure succeeds or fails; and the diagnosis is
+sharp enough to specify, in Chapter 6, the pre-registered experiment that
+would test the fix.
+
 ## 1.3 Stance and scope
 
 Three commitments shape what follows. First, *effect sizes and uncertainty,
