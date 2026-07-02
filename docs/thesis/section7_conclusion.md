@@ -18,10 +18,11 @@ very visitors the extension delivers*: 7.09% of shinkansen arrivers report it,
 against 0.66% of car arrivers, and it is simultaneously the largest structural
 damage path to satisfaction (β ≈ −0.123), the most prevalent coded friction,
 and the friction most correlated with demand leakage (Chapter 4). And the
-mechanism that separates durable from transient response is *station-to-anchor
-conversion, not repeat visitation* — repeat-visit share anti-predicts
-durability — which inverts the natural target of tourism promotion and fixes
-the endpoint of any intervention worth running (Chapter 6). All quantities
+mechanism that, on the pattern-level evidence, separates durable from
+transient response is *station-to-anchor conversion, not repeat visitation* —
+repeat-visit share anti-predicts durability — which inverts the natural
+target of tourism promotion and fixes the endpoint of any intervention worth
+running (Chapter 6). All quantities
 regenerate from the committed pipeline (`make reproduce-submission`; evidence
 bindings in `thesis_master.md`).
 

@@ -302,6 +302,93 @@ new corridor."
 
 ---
 
+## Second-order follow-ups (mock defense)
+
+The defenses above are themselves attackable. For each seam, the sharpest
+follow-up a committee member could put to the *defense*, and the prepared
+answer. These are the questions that arrive after the one-breath answer
+lands, so they are the ones that decide the room.
+
+### Seam A follow-ups
+
+**A-ii. "Your category-specificity argument cuts both ways: carless people
+complain about transport, not cleanliness — so the single-category spike is
+predicted by the composition story too. Specificity separates nothing."**
+Half-right, and the answer is to say which confound each leg kills.
+Specificity rules out the *generic* population confound (grievance-prone,
+older, foreign visitors would elevate wayfinding, waiting, accessibility as
+well — they do not). It cannot separate carlessness-as-mechanism from
+carlessness-as-composition — but that separation is already conceded in
+§7.3, and for policy the two are equivalent: both route the fix through
+destination-side last-mile provision. The legs that work *across* that
+concession are the leakage correlation and the destination-side
+heterogeneity, not specificity.
+
+**A-iii. "You lean on r = 0.826 to defend Seam A while conceding in Seam B
+that it is pattern-level only. You cannot spend the same correlation twice
+at two different prices."**
+The weight claimed in Seam A is directional convergence — a survey artifact
+should not co-locate with independently measured demand leakage *at all* —
+not the magnitude 0.826. But the honest version of the answer: discount the
+correlation entirely, and the Seam A defense still stands on specificity
+plus the Eiheiji/Sakai-versus-Fukui-City heterogeneity. Say that
+explicitly; it converts an apparent double-spend into a redundancy claim.
+
+**A-iv. "Direction B moots selection only for the nudge effect. Your
+headline diagnosis stays observational even after the pilot runs."**
+Correct, and concede immediately: B tests *manipulability* of the friction,
+not the decomposition of the 5.32 pp gap. The diagnosis never claims more
+than: this is the binding, plausibly manipulable constraint on the arriving
+population. A positive B result would license the intervention, not a
+reinterpretation of §4.2.
+
+### Seam B follow-ups
+
+**B-ii. "If the saturation story and your conversion mechanism imply the
+same endpoint, the mechanism adds nothing — drop it and keep the endpoint."**
+The convergence is on the endpoint only, not on the intervention's
+predicted result. The conversion-gate mechanism predicts that relieving
+transport-access friction raises anchor visit-intention (Direction B's H1);
+a pure saturation account gives no reason an information nudge should move
+anything. So the pilot discriminates between them: H1 support is evidence
+for the gate, an H1 null with clean manipulation checks is evidence against
+it. The mechanism is kept because it is the falsifiable one of the pair.
+
+**B-iii. "Your pilot tasks all point at anchors. If anchor presence is the
+confounder, the pilot tells you nothing about municipalities without
+anchors."**
+Concede the scope: the template's conversion step presupposes an anchor to
+convert *to*, and the thesis's advice to anchor-less municipalities is
+outside the tested claim. This is a scope boundary, not a validity threat —
+and it is worth stating at the defense before it is asked, because it
+sounds like a damaging question and is actually a definitional one.
+
+### Seam C follow-ups
+
+**C-ii. "Your 'conjunction' is verbal Bayesianism. Four legs on one vendor
+panel are not four independent tests — a panel-level artifact synchronized
+to March 2024 passes all of them."**
+The legs are independent in *failure mode*, not in data: backdating catches
+estimator-manufactured surges, leave-one-out catches donor luck, the
+placebo rank catches noise, geography catches multiplicity — and that is
+the claim, so grant the data-dependence. Then close the remaining gap: a
+national panel artifact (vendor methodology change in March 2024) would
+shift donors too, and the in-space placebo differences it out. What
+survives is only a *Fukui-corridor-specific* vendor artifact coinciding
+exactly with the opening month — a hypothesis with no independent evidence
+and near-unfalsifiable structure. Name it, price it, move on.
+
+**C-iii. "Where is the pre-registration of the SCM design? 'Ex ante' is an
+assertion about your own mind."**
+Concede: the SCM analysis was not pre-registered (§7.3 says so — the window
+was not pre-registered either). The defense is structural, not
+testimonial: the direction is entailed by the intervention's semantics
+rather than chosen, and the backdated negative control performs the
+discipline pre-registration would have — it is the test that would have
+exposed a shopped design, and it is silent. Direction B is where the
+project's pre-registration standard is actually met, because there the
+stakes are prospective.
+
 ## Cross-seam posture
 
 The three defenses share one spine, worth internalizing before the room:

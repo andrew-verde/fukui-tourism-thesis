@@ -44,8 +44,8 @@ conversion at its causal joint (Chapter 6).
 Chapter 2 precedes all of this with the data and the discipline: every number
 in the thesis regenerates from pinned open-data inputs via a single command
 (`make reproduce-submission`), a property enforced by the test suite rather
-than promised. Chapter 7 concludes with contributions, consolidated
-limitations, and the path from design to field experiment.
+than promised. Chapter 7 concludes with contributions, limitations, and
+the path from design to field experiment.
 
 The contribution, compressed to one claim: the extension's demand shock is
 real but transient by default, endures only where station arrivals convert
