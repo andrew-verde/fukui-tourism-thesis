@@ -163,3 +163,8 @@ AGENTS.md
 *.secret
 credentials.json
 config/credentials.json
+
+# Agent handoff docs — never tracked
+docs/thesis/FABLE_WEEK_BRIEF.md
+*_HANDOFF*.md
+HANDOFF*.md
