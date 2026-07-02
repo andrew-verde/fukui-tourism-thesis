@@ -1,0 +1,140 @@
+PYTHON = .venv/bin/python3
+
+.PHONY: help fetch official-all fetch-official-fukui build-ftas stats-official \
+	synth-official chinese-social fetch-hokuriku-merged hokuriku-did-audit \
+	hokuriku-did-event-study fetch-estat fetch-estat-list fetch-national-direct \
+	fetch-ff-data fetch-japan-kanko-stat accommodation-panel ff-data-panel japan-kanko-panel synthetic-control \
+	vision-descriptive sem-ftas nudge-ranking synth-causal-arm causal-robustness robustness-figures gap-trajectories synthesis synthesis-figures durability-mechanisms durability-figures result-charts data-manifest \
+	reproduce-submission test nudge-pilot-serve nudge-pilot-power
+
+help:
+	@echo "Fukui official-data tourism analysis"
+	@echo ""
+	@echo "  make official-all              Build and analyze official FTAS data"
+	@echo "  make fetch                     Reconstruct checksum-pinned raw data"
+	@echo "  make sem-ftas                  Run two-stage FTAS SEM"
+	@echo "  make nudge-ranking             Build evidence-weighted nudge ranking"
+	@echo "  make hokuriku-did-event-study  Run thesis DiD/event study"
+	@echo "  make fetch-ff-data             Fetch MLIT FF-DATA API records"
+	@echo "  make accommodation-panel      Build JTA overnight-stay panel"
+	@echo "  make ff-data-panel             Build FF-DATA quarterly flow panel"
+	@echo "  make fetch-japan-kanko-stat    Fetch pinned municipal visitor panel"
+	@echo "  make synthetic-control         Run Fukui City synthetic control"
+	@echo "  make causal-robustness         Run causal-arm falsification tests"
+	@echo "  make robustness-figures        Render causal-robustness figures"
+	@echo "  make gap-trajectories          Export per-target SCM gap trajectories"
+	@echo "  make durability-mechanisms     Compute durable-regime mechanism table"
+	@echo "  make durability-figures        Render durability-mechanism figures"
+	@echo "  make result-charts             Generate official-data charts"
+	@echo "  make reproduce-submission      Reproduction path; offline except synth-causal-arm (fetches pinned panel)"
+	@echo "  make test                      Run maintained tests"
+	@echo "  make nudge-pilot-power         Regenerate nudge-pilot power analysis"
+
+official-all: build-ftas stats-official synth-official
+
+fetch: fetch-official-fukui fetch-japan-kanko-stat
+
+# reproduce-submission is a no-network path. Required pre-staged (git-untracked) input:
+#   output/national_stats/japan_kanko_stat_panel.csv  (make fetch-japan-kanko-stat japan-kanko-panel)
+# Exception: synth-causal-arm fetches the pinned panel over the network; its Feed A
+# fixture is byte-stable and regeneration normally leaves it untouched.
+reproduce-submission: test synth-causal-arm causal-robustness robustness-figures gap-trajectories build-ftas stats-official synth-official sem-ftas nudge-ranking synthesis synthesis-figures durability-mechanisms durability-figures hokuriku-did-event-study data-manifest
+
+fetch-official-fukui:
+	$(PYTHON) scripts/fetch_code4fukui_data.py
+
+build-ftas:
+	$(PYTHON) scripts/build_ftas_survey_dataset.py
+
+stats-official:
+	$(PYTHON) scripts/statistical_validation_official.py
+
+synth-official:
+	$(PYTHON) scripts/synthesis_official_pipeline.py
+
+chinese-social:
+	$(PYTHON) scripts/build_chinese_social_media_dataset.py
+
+fetch-hokuriku-merged:
+	$(PYTHON) scripts/fetch_hokuriku_merged.py
+
+hokuriku-did-audit:
+	$(PYTHON) scripts/hokuriku_did_audit.py
+
+hokuriku-did-event-study:
+	$(PYTHON) scripts/hokuriku_did_event_study.py
+
+fetch-estat:
+	$(PYTHON) scripts/fetch_estat_data.py
+
+fetch-estat-list:
+	$(PYTHON) scripts/fetch_estat_data.py --list-only
+
+fetch-national-direct:
+	$(PYTHON) scripts/fetch_national_direct.py
+
+fetch-ff-data:
+	$(PYTHON) scripts/fetch_ff_data.py
+
+accommodation-panel:
+	$(PYTHON) scripts/build_accommodation_panel.py
+
+ff-data-panel:
+	$(PYTHON) scripts/build_ff_data_panel.py
+
+fetch-japan-kanko-stat:
+	$(PYTHON) scripts/fetch_japan_kanko_stat.py
+
+japan-kanko-panel:
+	$(PYTHON) scripts/build_japan_kanko_panel.py
+
+synthetic-control:
+	$(PYTHON) scripts/synthetic_control_fukui.py
+
+vision-descriptive:
+	$(PYTHON) scripts/build_resident_vision.py
+
+sem-ftas:
+	$(PYTHON) scripts/sem_ftas.py
+
+nudge-ranking:
+	$(PYTHON) scripts/rank_nudge_priorities.py
+
+synth-causal-arm:
+	$(PYTHON) scripts/build_causal_arm_summary.py
+
+causal-robustness:
+	$(PYTHON) scripts/causal_robustness.py
+
+robustness-figures:
+	$(PYTHON) scripts/plot_robustness_figures.py
+
+gap-trajectories:
+	$(PYTHON) scripts/export_scm_gap_trajectories.py
+
+synthesis:
+	$(PYTHON) scripts/synthesis_friction_causal.py
+
+synthesis-figures:
+	$(PYTHON) scripts/plot_synthesis_figures.py
+
+durability-mechanisms:
+	$(PYTHON) scripts/durability_mechanisms.py
+
+durability-figures:
+	$(PYTHON) scripts/plot_durability_figures.py
+
+result-charts:
+	$(PYTHON) scripts/generate_result_charts.py
+
+data-manifest:
+	$(PYTHON) scripts/generate_data_manifest.py
+
+test:
+	$(PYTHON) -m pytest tests/ -v
+
+nudge-pilot-serve:
+	python3 -m http.server 8765 --directory experiments/nudge-pilot
+
+nudge-pilot-power:
+	$(PYTHON) scripts/nudge_pilot_power.py

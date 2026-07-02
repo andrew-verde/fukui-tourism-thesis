@@ -1,0 +1,124 @@
+# Official Code for Fukui data sources used by the parallel FTAS analysis.
+#
+# Every source is pinned to a Git commit and content checksum. Updating data is
+# an explicit research decision: change commit + checksum together, fetch with
+# --force, rebuild outputs, and review estimate changes.
+
+sources:
+  ftas_survey_all:
+    upstream_repo: "https://github.com/code4fukui/fukui-kanko-survey"
+    commit: "5857c311acc5782eb44d85f06d95e6a2e6af4509"
+    source_path: "all.csv"
+    sha256: "440a88f2c4e37b9319a3c555716da9e24c33bd518db4dd21c761b00cd6f9b02b"
+    filename: "ftas_survey_all.csv"
+    description: "FTAS respondent-level tourism survey data"
+  ftas_survey_counts:
+    upstream_repo: "https://github.com/code4fukui/fukui-kanko-survey"
+    commit: "5857c311acc5782eb44d85f06d95e6a2e6af4509"
+    source_path: "all-cnt.csv"
+    sha256: "82eecbf369e76e985751be48aecb1ef0a6e2e799d7105653944d93a1cf5a0028"
+    filename: "ftas_survey_counts.csv"
+    description: "Daily FTAS survey response counts"
+  ftas_area_master:
+    upstream_repo: "https://github.com/code4fukui/fukui-kanko-survey"
+    commit: "5857c311acc5782eb44d85f06d95e6a2e6af4509"
+    source_path: "area.csv"
+    sha256: "4905bae83db0a2d2a1aaa21ec3b0de93261dded395db77693a8bbc47e2ecb254"
+    filename: "ftas_area_master.csv"
+    description: "FTAS tourism area master with municipality and coordinates"
+  fukui_reservation_sum:
+    upstream_repo: "https://github.com/code4fukui/fukui-kanko-reservation"
+    commit: "25d342639b8d720a4f9a960c0eeee03c6c65f85b"
+    source_path: "latest_rsv_sum.csv"
+    sha256: "397b4e9d79859e3c4f165adae81fa5c8e761b0bba73fb0cb8c5cb32279aaaf85"
+    filename: "fukui_reservation_sum.csv"
+    description: "Daily Fukui tourism reservation totals"
+  fukui_reservation_prefecture_sum:
+    upstream_repo: "https://github.com/code4fukui/fukui-kanko-reservation"
+    commit: "25d342639b8d720a4f9a960c0eeee03c6c65f85b"
+    source_path: "latest_rsv_prefecture_sum.csv"
+    sha256: "a248b024ab91d49e93be4fbd516c85edac5c03d12f28fe72bcc0614b6eb0545d"
+    filename: "fukui_reservation_prefecture_sum.csv"
+    description: "Daily Fukui tourism reservation totals by origin prefecture"
+  fukui_station_reservation:
+    upstream_repo: "https://github.com/code4fukui/fukui-station-kanko-reservation"
+    commit: "2e6d8e6a30b3518d4d2c36440555a1de8aaaed69"
+    source_path: "latest_rsv_sum.csv"
+    sha256: "a865c9b769b3517de723b24200f3bb3139a2c952dbb258e926e48091120e3aa5"
+    filename: "fukui_station_reservation.csv"
+    rows: 1095
+    role: "treated"
+    description: "Fukui-station catchment daily reservations"
+  obama_reservation:
+    upstream_repo: "https://github.com/code4fukui/obama-kanko-reservation"
+    commit: "732082687a3cdfad5c403331c78c830265772afd"
+    source_path: "latest_rsv_sum.csv"
+    sha256: "d04aa6c9d08cc3e940da10b65fd4e8d6a7c88e327936945ab8e4463ead055b73"
+    filename: "obama_reservation.csv"
+    rows: 1071
+    role: "treated"
+    description: "Obama-area daily reservations"
+  echizen_coast_reservation:
+    upstream_repo: "https://github.com/code4fukui/echizen-coast-kanko-reservation"
+    commit: "6742d707dbfc3247893c3e8ce174f250e3820a15"
+    source_path: "latest_rsv_sum.csv"
+    sha256: "0e4c9a857c47679dda102823d6e98d7de8b6f3489657b59d6ae982b284d55d22"
+    filename: "echizen_coast_reservation.csv"
+    rows: 698
+    role: "post_only"
+    description: "Echizen-coast daily reservations"
+  mikatagoko_reservation:
+    upstream_repo: "https://github.com/code4fukui/mikatagoko-kanko-reservation"
+    commit: "0e715aa3f6d2a5a467ad0aca071d4c1619448a5b"
+    source_path: "latest_rsv_sum.csv"
+    sha256: "53be386fa5a39a8cf0ada7f3c1818923c445daf28e352dd9976af8cc1a8e43a5"
+    filename: "mikatagoko_reservation.csv"
+    rows: 523
+    role: "post_only"
+    description: "Mikata-goko daily reservations"
+  fukui_vision_overview:
+    upstream_repo: "https://github.com/code4fukui/fukui-vision-data"
+    commit: "7eba2ff6ba50f73bb28e36554787882231007527"
+    source_path: "survey_overview.csv"
+    sha256: "9bba3649b4558e1a44b81afe8cd110f4d077d566bac43258c22b31506508b68e"
+    filename: "fukui_vision_overview.csv"
+    rows: 7
+    role: "metadata"
+    description: "Fukui resident survey wave metadata"
+  fukui_vision_timeseries:
+    upstream_repo: "https://github.com/code4fukui/fukui-vision-data"
+    commit: "7eba2ff6ba50f73bb28e36554787882231007527"
+    source_path: "questionnaire_timeseries.csv"
+    sha256: "47c9cc79a32b26307b4437600861961c279b62e81b60c5fd739e3d0101abb930"
+    filename: "fukui_vision_timeseries.csv"
+    rows: 159
+    role: "descriptive"
+    description: "Fukui resident survey aggregate indicator time series"
+  ishikawa_survey_all:
+    upstream_repo: "https://github.com/code4fukui/ishikawa-kanko-survey"
+    commit: "a02e12abd32b9ab6f9a558fe3d7b36afff9623ec"
+    source_path: "all.csv"
+    sha256: "5786e7f2915fc3a22c8c4a13423f9db8928ede2d570fa52407afe1a877c5d912"
+    filename: "ishikawa_survey_all.csv"
+    description: "Ishikawa respondent-level tourism survey data"
+  ishikawa_survey_kanazawa:
+    upstream_repo: "https://github.com/code4fukui/ishikawa-kanko-survey"
+    commit: "a02e12abd32b9ab6f9a558fe3d7b36afff9623ec"
+    source_path: "kanazawa.csv"
+    sha256: "b34e4d8762180cf870899240f9b69bb92002e8b5b19d8cf67e4d7b37e91c6e92"
+    filename: "ishikawa_survey_kanazawa.csv"
+    description: "Ishikawa tourism survey raw Kanazawa-area rows"
+  ishikawa_survey_kaga:
+    upstream_repo: "https://github.com/code4fukui/ishikawa-kanko-survey"
+    commit: "a02e12abd32b9ab6f9a558fe3d7b36afff9623ec"
+    source_path: "kaga.csv"
+    sha256: "3c86213c4a5ee24d894bbfe6f763a6852af6ed2b452aba004ea6550523059ffd"
+    filename: "ishikawa_survey_kaga.csv"
+    description: "Ishikawa tourism survey raw Kaga-area rows"
+  ishikawa_survey_noto:
+    upstream_repo: "https://github.com/code4fukui/ishikawa-kanko-survey"
+    commit: "a02e12abd32b9ab6f9a558fe3d7b36afff9623ec"
+    source_path: "noto.csv"
+    sha256: "f5b6ae5a561d8e58d439fa2a1e4dd426219078d63158a8f2decc7dd4160692a5"
+    filename: "ishikawa_survey_noto.csv"
+    description: "Ishikawa tourism survey raw Noto-area rows"

@@ -1,0 +1,22 @@
+python-dotenv>=1.2
+requests>=2.33
+pandas>=2.2
+numpy>=2.0
+scipy>=1.14
+statsmodels>=0.14.6
+scikit-learn>=1.5
+nltk>=3.9
+langdetect==1.0.9
+openai>=1.12        # optional LLM tagger comparator (ADR 0001 §4)
+matplotlib>=3.9
+seaborn>=0.13
+pyyaml>=6.0
+semopy>=2.3
+pytest>=8.0
+black>=24.0
+flake8>=7.0
+jupyter>=1.0
+jupyterlab>=4.0
+ipykernel>=6.26
+openpyxl>=3.1
+tabulate>=0.9

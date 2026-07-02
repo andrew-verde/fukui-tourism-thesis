@@ -1,0 +1,26 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"   # match the dev machines (MacBook + Fedora)
+          cache: pip
+      # Lock file = the exact env the committed results were produced with,
+      # so green CI proves that pinned env still passes.
+      - run: pip install -r requirements.lock.txt
+      - run: python -m pytest tests/ -q
+      # Smoke-import every pipeline script so missing dependencies fail CI
+      # even where a script lacks dedicated tests.
+      - run: |
+          for f in scripts/*.py; do
+            python -c "import ast,sys; ast.parse(open('$f').read())" || exit 1
+          done
