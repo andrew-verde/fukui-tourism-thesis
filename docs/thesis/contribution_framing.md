@@ -3,9 +3,8 @@
 Task 3 deliverable. Contains: (1) the single defensible contribution
 sentence, with the §1 and §7 variants; (2) the positioning paragraph against
 the regional-revitalization and behavioral-nudge literatures; (3) splice
-targets. Framing decision recorded in ADR 0017. Citation slots are marked
-`[REF: …]` and must be filled with real references before submission — none
-are invented here.
+targets. Framing decision recorded in ADR 0017. The citation slots have been filled
+with the verified references in `references.md`; none are invented here.
 
 ## 1. The contribution sentence
 
@@ -52,32 +51,33 @@ replaced, so the two chapters state the same claim in the same shape.)
 ## 2. Positioning paragraph (thesis → paper)
 
 For §7.2 (after the three layers) or the paper's introduction; the four
-`[REF]` slots are load-bearing and must be filled from the literature, not
-from memory.
+The citation slots were load-bearing; they have been filled from the
+literature (see `references.md`), not from memory.
 
 > This claim sits at the junction of two literatures that have not met. The
 > high-speed-rail evaluation literature asks whether openings raise visitor
 > numbers, almost always at prefectural or city aggregate, and reports mixed,
-> context-dependent effects [REF: HSR/shinkansen tourism-impact evaluations,
-> incl. prior Hokuriku/Kanazawa 2015 studies]; it treats the visitor as
-> delivered once the train arrives, and so has no vocabulary for a shock that
-> arrives and then leaks away — the modal outcome in Fukui's municipal-grain
-> data. The tourism-behavior literature, conversely, measures frictions and
-> satisfaction at the individual level and increasingly tests nudge-style
-> interventions [REF: tourism satisfaction/friction survey studies; REF:
-> behavioral interventions in tourism], but its interventions are typically
-> untethered from any causal evidence about which friction binds, and its
-> effect-size assumptions are rarely disciplined by an observed ceiling. This
-> thesis supplies the missing junction from open data: a causal demand
-> estimate at the grain where durability is decided (the municipality), an
-> individual-level diagnosis of the binding friction in the same event, the
-> observation that the two point at the same phenomenon (r = 0.826 across
-> high-confidence municipalities), and a pre-registered two-stage design
-> [REF: two-stage/pilot-then-confirm experimental designs] whose power
-> analysis is bounded by the measured selection ceiling (d = 0.25) rather
-> than by convention. The exportable object is the template — diagnose the
-> binding friction, identify the conversion condition, pre-register the test
-> at the causal joint — not the Fukui-specific estimates.
+> context-dependent effects (Hashimoto et al., 2017; Li et al., 2019;
+> Yamamoto, 2016); it treats the visitor as delivered once the train arrives,
+> and so has no vocabulary for a shock that arrives and then leaks away — the
+> modal outcome in Fukui's municipal-grain data. The tourism-behavior
+> literature, conversely, measures frictions and satisfaction at the
+> individual level (Bernini & Cagnone, 2014; Sánchez-Rebull et al., 2018;
+> Žabkar et al., 2010) and increasingly tests nudge-style interventions
+> (Bohner & Schlüter, 2014; Goldstein et al., 2008; Kallbekken & Sælen, 2013),
+> but its interventions are typically untethered from any causal evidence
+> about which friction binds, and its effect-size assumptions are rarely
+> disciplined by an observed ceiling. This thesis supplies the missing
+> junction from open data: a causal demand estimate at the grain where
+> durability is decided (the municipality), an individual-level diagnosis of
+> the binding friction in the same event, the observation that the two point
+> at the same phenomenon (r = 0.826 across high-confidence municipalities),
+> and a pre-registered two-stage design (Friede & Kieser, 2003, 2006;
+> Proschan, 2005; Wittes & Brittain, 1990) whose power analysis is bounded by
+> the measured selection ceiling (d = 0.25) rather than by convention. The
+> exportable object is the template — diagnose the binding friction, identify
+> the conversion condition, pre-register the test at the causal joint — not
+> the Fukui-specific estimates.
 
 ## 3. Splice targets (mechanical, post-approval)
 
@@ -88,6 +88,5 @@ from memory.
 | Paper manuscript (future) | Contribution sentence → abstract; positioning paragraph → introduction |
 
 Oracle for the Codex splice: the inserted texts match this file verbatim;
-no other sentence in either chapter changes; `[REF]` slots survive the
-splice so the build's claim-guard (or a grep for `[REF:`) fails loudly until
-real citations are supplied.
+no other sentence in either chapter changes. The citation slots have since
+been filled with the verified references in `references.md`.

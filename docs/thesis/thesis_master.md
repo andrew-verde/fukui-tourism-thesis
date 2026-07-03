@@ -38,6 +38,7 @@ nudge pilot tests the fix at its causal joint (Direction B).
 | 5 | Robustness: is the demand signal real? (synthetic control, Direction D) | **written** | `section5_robustness.md` |
 | 6 | From diagnosis to intervention (Directions C + B) | **written** | `section6_intervention.md` |
 | 7 | Conclusion and transferable template | **written** | `section7_conclusion.md` |
+| — | References (APA author–year, back matter) | **written** | `references.md` |
 
 All seven chapters are written. Every number printed in them is traceable to
 the committed, test-guarded artifacts bound to each chapter below; any revision
