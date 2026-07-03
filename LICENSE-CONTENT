@@ -1,0 +1,23 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 Andrew Green
+
+The written content of this repository — the thesis prose and documentation
+under `docs/`, and the derived/analysed data tables under `data/` — is
+licensed under the Creative Commons Attribution 4.0 International License
+(SPDX identifier: CC-BY-4.0).
+
+You are free to share and adapt this material for any purpose, including
+commercially, provided you give appropriate credit, link to the license, and
+indicate if changes were made.
+
+Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+Human-readable summary: https://creativecommons.org/licenses/by/4.0/
+
+Suggested attribution:
+  Andrew Green (2026), "Fukui Tourism Thesis." Licensed under CC BY 4.0.
+
+Note on upstream data: raw datasets are NOT redistributed in this repository;
+they are re-fetched from their original sources under those sources' own
+terms (see `docs/source_ledger.md` and `data/README.md`). This CC BY 4.0
+grant covers only the author's own written content and derived tables.

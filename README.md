@@ -94,3 +94,19 @@ See:
 
 Main quantitative claims derive only from official survey and accommodation
 datasets.
+
+## License
+
+This repository is dual-licensed to reflect its mixed contents:
+
+- **Code** — everything under `src/`, `scripts/`, `experiments/`, `tests/`,
+  and the build tooling (`Makefile`, workflow files) — is licensed under the
+  **MIT License** (see `LICENSE`).
+- **Written content and derived data** — the thesis prose and documentation
+  under `docs/`, and the analysed data tables under `data/` — is licensed
+  under **Creative Commons Attribution 4.0 International (CC BY 4.0)** (see
+  `LICENSE-CONTENT`).
+
+Raw upstream datasets are not redistributed here; they are re-fetched from
+their original sources under those sources' own terms (see
+`docs/source_ledger.md`).
