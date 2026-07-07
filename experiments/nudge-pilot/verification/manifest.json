@@ -1,0 +1,30 @@
+{
+  "retrieval_date": "2026-07-07",
+  "files": [
+    {"file": "dinosaur_home_en.html", "sha256": "98d306fc9cef296011eea8e1cc6019027894a3ca33fd3d8645d2c59bdcdd34fc"},
+    {"file": "dinosaur_info_en.html", "sha256": "e9634567626cef42e484522cf3502b51c184718990698b65f861a296d8693ca3"},
+    {"file": "echizen_railway_connections.html", "sha256": "f98668c946bc39cc49ea3b81ee23237887260928653ec6b12848482f169e8ff8"},
+    {"file": "echizen_railway_diagram_202604.pdf", "sha256": "205926a001d8c9c065c6d582cc49258b502fdcc082861c7b64c0e49a6187ed65"},
+    {"file": "katsuyama_major_sight_bus.html", "sha256": "d262189292e2990a58983394fb5b1ae676f04eb99c0338a74bc6a0e05c92cdca"},
+    {"file": "katsuyama_museum_bus.html", "sha256": "91e4b83ff96d624f16425d26e98d34a48e06272c0ebe3e21632d6acd1a180b9e"},
+    {"file": "katsuyama_museum_direct_timetable.jpg", "sha256": "ae3ffe36cc9188006072a38c46c6d3778a2b35ed57b564ec6600090bcf466db5"},
+    {"file": "katsuyama_museum_route_timetable.jpg", "sha256": "cf57b3530f6f02d8e6fe2fab49e3b62ea9ae2aad082be863f3ba81f2879a5970"},
+    {"file": "katsuyama_public_transport.html", "sha256": "37ee64a027a587fc8647ea9673773762d5671450da23bf3c0c0c2b65933d0c73"},
+    {"file": "keifuku_eiheiji_86_87_saturday.pdf", "sha256": "fb366ae8785529dbbab42a778b827d17ecb6d7b02c3d705c726001858bc041bd"},
+    {"file": "keifuku_eiheiji_86_87_sunholiday.pdf", "sha256": "b534324b834ea1b5d530fa8d1df1fabe5a75e6d009a0586967090f998282e506"},
+    {"file": "keifuku_eiheiji_86_87_weekday.pdf", "sha256": "ffa7373d658d28c0d97c55ad60283dcd4b3e52bb1ef7634f5a512ee51df72943"},
+    {"file": "keifuku_eiheiji_88_saturday.pdf", "sha256": "db7e4e2febfe5337ed79756722b97f6f7c7a1dbb3118c38386f4e71e6e9c4dc6"},
+    {"file": "keifuku_eiheiji_88_sunholiday.pdf", "sha256": "75a9597d011fd793d249851c95c988578c46a4f291bc11d5f887ba28ba0007ff"},
+    {"file": "keifuku_eiheiji_88_weekday.pdf", "sha256": "a4af693c2e9d87624a74036a5cf5682a585f9e14af90ebc808ae94cbad1784a3"},
+    {"file": "keifuku_eiheiji_liner.html", "sha256": "c32d6b8d61973660203c32f8b033e36b04baf30aa2ab49abff0427bdb15bfdb2"},
+    {"file": "keifuku_eiheiji_local_86_87.html", "sha256": "7b8b077ee46ead56415b6449ab7c68a45a27315a9e4b4133b9660c955f5e46a8"},
+    {"file": "keifuku_eiheiji_local_88.html", "sha256": "36c7f149c0b667a49c804d1548927e2810795b2c19ba49e48a6e1434dde11b0a"},
+    {"file": "keifuku_timetable_list.html", "sha256": "0b9ac832cd671263f8497b45972bf27b6dcd6466d2ae4762d724d92cd49bfea9"},
+    {"file": "keifuku_tojinbo_84_96_saturday.pdf", "sha256": "4d2631c690fa2f9582b2e9fce8e8ccebda8c19d96c8e2deea124dc231bb54216"},
+    {"file": "keifuku_tojinbo_84_96_sunholiday.pdf", "sha256": "f9645104ba3dceec48b6ae30877dcd68977ae5aee63b966a05ce8109ad9d02a1"},
+    {"file": "keifuku_tojinbo_84_96_weekday.pdf", "sha256": "621a00977d9b6ac0599c33b7300871214d4e9f3a1d204bf48aabd6a399ddaa26"},
+    {"file": "keifuku_tojinbo_85_97_saturday.pdf", "sha256": "c51a1318a23f80da181f39311c51710b778b050a17b18032ffe5b630ccc91516"},
+    {"file": "keifuku_tojinbo_85_97_sunholiday.pdf", "sha256": "d6eef5291684fe11c9340e2ff8abc30836721346e13d777020161d3b4d3ca625"},
+    {"file": "keifuku_tojinbo_85_97_weekday.pdf", "sha256": "9b38f5f3e78341c5390d293039c0b8ad4b11d8d7656ec2d569fddec635d4e994"}
+  ]
+}

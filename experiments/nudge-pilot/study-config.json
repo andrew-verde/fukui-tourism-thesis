@@ -1,6 +1,6 @@
 {
   "study_id": "fukui_nudge_pilot_v1",
-  "version": "2026-07-02",
+  "version": "2026-07-07",
   "conditions": [
     {
       "id": "control",
@@ -76,8 +76,8 @@
       },
       "nudges": {
         "transport_access": [
-          "Transit note: From Fukui Station, take the direct Eiheiji Liner bus (about 30 minutes) or the Echizen Railway to Eiheijiguchi with a local bus transfer. Direct buses run roughly once or twice an hour.",
-          "Planning cue: Check the last return bus before you depart — evening departures are sparse — and buy a round-trip ticket so the return is decided in advance."
+          "Transit note: From Fukui Station East Exit, take the direct Eiheiji Liner bus (about 28 minutes) when its limited daytime departures fit your plan, or use the Echizen Railway to Eiheijiguchi with a local bus transfer. Direct Eiheiji Liner departures are hourly in the late morning and early afternoon, so check the timetable before setting out.",
+          "Planning cue: Check the last return before you depart. The direct Eiheiji Liner back to Fukui currently leaves Eiheiji no later than 16:20, while the rail-transfer return has later local-bus options via Eiheijiguchi. Buy the outbound/return tickets you need before boarding so the return is decided in advance."
         ],
         "opening_hours_availability": [
           "Availability note: Check current entry hours before departure. Some temple areas may close earlier than general grounds.",
@@ -152,7 +152,7 @@
       },
       "nudges": {
         "transport_access": [
-          "Transit note: From Awara-Onsen Station, the Tojinbo-bound bus leaves from the station forecourt and takes about 40 minutes. Buses run roughly once an hour — check the departure board on arrival.",
+          "Transit note: From Awara-Onsen Station, take the Tojinbo-bound bus from the station bus stops. The ride takes about 33-43 minutes depending on the route and day, with roughly hourly weekday service and more frequent daytime weekend/holiday service. Check the departure board on arrival.",
           "Planning cue: Note the last return bus before you board; after early evening the return options are effectively taxi only."
         ],
         "opening_hours_availability": [

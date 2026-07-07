@@ -146,13 +146,28 @@ never trigger re-review.
   adding, dropping, or strengthening any commitment (checked
   clause-by-clause against the ADR).
 
-## Mechanical audit (Codex)
+## Mechanical audit (Codex) — results
 
-See `docs/phase0_consistency_audit.md` for the full check-by-check table:
-constants vs script definitions, Direction D headline numbers vs
-`metrics.json`, ADR 0020 frozen inputs vs config and the durability CSV,
-the Spearman n = 13 critical-value re-derivation (bears on P2's 0.48),
-power-table arithmetic and the 0.21/0.41 boundary re-derivations, Arm 3
-donor/window arithmetic, dangling-reference and section-anchor checks.
-Any FAIL there that touches a frozen threshold is a candidate for the F1
-addendum ADR; cosmetic FAILs route to Codex as splice fixes.
+`docs/phase0_consistency_audit.md`: 10 of 12 checks PASS, 2 FAIL, both
+benign; **no frozen threshold is touched**.
+
+- **Confirmed, load-bearing:** the Spearman n = 13 one-sided α = 0.05
+  critical value is 0.478 by seeded 2,000,000-draw permutation null, so
+  ADR 0020's frozen ρ ≥ 0.48 is correct to two decimals (empirical
+  P(ρ ≥ 0.48) = 0.048). Power-table values reproduce under the ceiling
+  convention (which `nudge_pilot_power.py` also uses); the 0.2088 hybrid
+  boundary and 0.41 illustration re-derive exactly. All SCM constants,
+  Direction D headline numbers, ADR 0020 frozen inputs (sha, row count,
+  regime sets, the 13-count), Arm 3 donor/window arithmetic, and the v2
+  architecture's section anchors byte-match their sources. §7.1's draft
+  has empty numeric symmetric difference vs ADR 0020.
+- **FAIL 1 (benign):** the Stage-1 close date 2026-08-16 also appears in
+  ADR 0022, not only ADR 0019 + playbook as the check's expectation
+  stated. Real content of the finding: the date exists in *no committed
+  artifact other than ADR 0019* — it is roadmap-sourced, not
+  instrument-sourced. Confirm the actual deployment's close date against
+  the live PBL instrument before the readout is scheduled.
+- **FAIL 2 (expected):** `experiments/nudge-pilot/timetable_verification.md`
+  is referenced by the playbook but does not exist — it is the *output*
+  the verification protocol produces. Not a defect; closes when Codex
+  runs §4.
