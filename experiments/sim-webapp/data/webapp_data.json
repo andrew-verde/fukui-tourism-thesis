@@ -1,0 +1,116 @@
+{
+  "sites": {
+    "tojinbo": {
+      "label": "Tojinbo",
+      "median_daily": 7615.0,
+      "p95_daily": 17611.75,
+      "weekend_mean": 12486.51552795031,
+      "weekday_mean": 7278.908188585608,
+      "wk_wd_ratio": 1.7154379756473632,
+      "peakiness": 2.3127708470124753,
+      "out_of_pref": null,
+      "metric": "persons/day"
+    },
+    "fukui_station_east": {
+      "label": "Fukui Station East",
+      "median_daily": 7948.0,
+      "p95_daily": 13412.999999999996,
+      "weekend_mean": 10490.67901234568,
+      "weekday_mean": 7535.692307692308,
+      "wk_wd_ratio": 1.3921320807694033,
+      "peakiness": 1.6875943633618515,
+      "out_of_pref": null,
+      "metric": "persons/day"
+    },
+    "rainbow_line_lot1": {
+      "label": "Rainbow Line",
+      "median_daily": 145.0,
+      "p95_daily": 368.70000000000005,
+      "weekend_mean": 210.583850931677,
+      "weekday_mean": 135.22332506203475,
+      "wk_wd_ratio": 1.5573041916775086,
+      "peakiness": 2.5427586206896553,
+      "out_of_pref": 0.6629960098608731,
+      "metric": "vehicles/day"
+    }
+  },
+  "areas": {
+    "awara_onsen": {
+      "label": "Awara Onsen",
+      "occ_weekend": 0.6817184744268078,
+      "occ_weekday": 0.5034612062887761,
+      "gap_pp": 17.825726813803165,
+      "stays_mean": 241.69537624660018,
+      "adr": 106270.0757191314,
+      "capacity": 576.0
+    },
+    "fukui_station": {
+      "label": "Fukui Station",
+      "occ_weekend": 0.5781316348195329,
+      "occ_weekday": 0.5614774114774114,
+      "gap_pp": 1.6654223342121521,
+      "stays_mean": 571.5778985507246,
+      "adr": 7935.663943491902,
+      "capacity": 585.0
+    },
+    "obama": {
+      "label": "Obama",
+      "occ_weekend": 0.5343980343980343,
+      "occ_weekday": 0.5058617058617059,
+      "gap_pp": 2.853632853632848,
+      "stays_mean": 88.70435588507878,
+      "adr": 26045.240385799676,
+      "capacity": 148.0
+    },
+    "echizen_coast": {
+      "label": "Echizen Coast",
+      "occ_weekend": 0.46039603960396047,
+      "occ_weekday": 0.2816924066924067,
+      "gap_pp": 17.87036329115538,
+      "stays_mean": 24.36827195467422,
+      "adr": 84263.81367861989,
+      "capacity": 74.0
+    },
+    "mikatagoko": {
+      "label": "Mikatagoko",
+      "occ_weekend": 0.5757264254385965,
+      "occ_weekday": 0.4849414235190097,
+      "gap_pp": 9.078500191958682,
+      "stays_mean": 27.508474576271187,
+      "adr": 80829.88573340316,
+      "capacity": 96.0
+    }
+  },
+  "sem": {
+    "intent_to_demand": 0.17337153649094222,
+    "loadings": {
+      "trend_directions_lz": 0.7899045558718679,
+      "trend_search_views_lz": 0.597908750523608,
+      "cam_load_lz": 0.38412886448619493,
+      "rsv_n_stay_lz": 0.9618242446618926,
+      "rsv_n_reserve_lz": 0.9909176864930526
+    },
+    "anchor_elasticity": {
+      "beta": 0.12641991596033017,
+      "pearson_logs": 0.47896307517258246,
+      "n_weeks": 111,
+      "note": "DEFENSIBLE ANCHOR: within-Awara weekly elasticity; a 1pct rise in GBP directions associates with ~0.13pct change in stays. Used to bound the intent->demand path in the simulation."
+    }
+  },
+  "site_area_link": {
+    "tojinbo": "awara_onsen",
+    "fukui_station_east": "fukui_station",
+    "rainbow_line_lot1": "mikatagoko"
+  },
+  "meta": {
+    "fit": {
+      "chi2": 67.9009137406868,
+      "CFI": 0.9860337604105707,
+      "TLI": 0.9650844010264266,
+      "RMSEA": 0.09989134770409785,
+      "AIC": 21.915229820548454
+    },
+    "n_obs": 1602,
+    "n_sites": 4
+  }
+}

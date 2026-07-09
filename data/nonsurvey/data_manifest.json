@@ -1,0 +1,181 @@
+{
+  "generated_utc": "2026-07-09T09:32:55Z",
+  "sources": {
+    "fukui-kanko-people-flow-data": {
+      "head_sha": "808b91e903d6d2ce923dc0cc9f550fda05632617",
+      "head_date": "2026-07-08T16:01:40Z",
+      "files": {
+        "full/tojinbo-shotaro/Person.csv": {
+          "sha256": "767ff9d0410d40e973d04d1d254e6e7be58ae537ce600c41d60520b9f91167ae",
+          "bytes": 39068
+        },
+        "full/tojinbo-shotaro/Face.csv": {
+          "sha256": "f84764cdb4235e5f3d47d3872d67a030b101e77cf128aa83c0fd354782d3950f",
+          "bytes": 72322
+        },
+        "full/fukui-station-east-entrance/Person.csv": {
+          "sha256": "74e94e9ab84956ebc97eddb79785f57482704188f5caf1c47f49fff79756dfde",
+          "bytes": 45968
+        },
+        "full/fukui-station-east-entrance/Face.csv": {
+          "sha256": "9962839fea25df1f8ee871dda365a8f709fa51af4188199d0d51f4127d311526",
+          "bytes": 81113
+        },
+        "full/rainbow-line-parking-lot-1-gate/LicensePlate.csv": {
+          "sha256": "7b59c53334af3b915afeea455433588bb55fc2a7ac2fb3a327e8062d3a29aef9",
+          "bytes": 276036
+        },
+        "full/rainbow-line-parking-lot-2-gate/LicensePlate.csv": {
+          "sha256": "5f441a610627c2821ca30fd75f0db7d8be2865927943aa0e8f28154d49ca0782",
+          "bytes": 275889
+        }
+      }
+    },
+    "fukui-kanko-reservation": {
+      "head_sha": "f58e4d8fdc34e8afd1c0d651ea1908764da64df1",
+      "head_date": "2026-07-08T20:05:17Z",
+      "files": {
+        "latest_rsv_sum.csv": {
+          "sha256": "319acc3d6b44c2b81802de9d629167cfd91b1fe33980cff300aa037f9971a0e2",
+          "bytes": 39955
+        },
+        "latest_hotel.csv": {
+          "sha256": "b8d50501f94e21117898a59bc1c73e294eb83dc797a26565a64ee36549d454ee",
+          "bytes": 176
+        },
+        "booking_curve.csv": {
+          "sha256": "e0350d686553e67d13a58e58f205fb84f6f82cde456fbebde3658ca48395a5c1",
+          "bytes": 327486
+        }
+      }
+    },
+    "fukui-station-kanko-reservation": {
+      "head_sha": "913a354a71d3a8ff8155288b3d2097b2954b5f7d",
+      "head_date": "2026-07-09T08:45:00Z",
+      "files": {
+        "latest_rsv_sum.csv": {
+          "sha256": "db2ad487ea4abce2252aa0f9ad4d15601a2b8221c41955790b811789165f1793",
+          "bytes": 37905
+        },
+        "latest_hotel.csv": {
+          "sha256": "81713d092a775f3fdee1ed7e825effed2de5e29648ffb5c03bc732435a8548da",
+          "bytes": 77
+        }
+      }
+    },
+    "echizen-coast-kanko-reservation": {
+      "head_sha": "bb031724dfa3c6234a5acdc274f853cc8aee1f02",
+      "head_date": "2026-07-08T20:04:43Z",
+      "files": {
+        "latest_rsv_sum.csv": {
+          "sha256": "599e02eed2b5edcbb7309128d7d286b05d5d40dfa60127d3fae76a3a1e5a9718",
+          "bytes": 21452
+        },
+        "latest_hotel.csv": {
+          "sha256": "d00c29bd298a96b075b6dc6f451004db828da399da69f15ce9034568cf5c0e3c",
+          "bytes": 141
+        }
+      }
+    },
+    "obama-kanko-reservation": {
+      "head_sha": "63fbb4c85c5dfe6bd90d5413f1309842d09089eb",
+      "head_date": "2026-07-08T20:05:03Z",
+      "files": {
+        "latest_rsv_sum.csv": {
+          "sha256": "5b88993145f9668a1e734594bb8e60350243552d3fdfca9527036bdd85a983c4",
+          "bytes": 34533
+        },
+        "latest_hotel.csv": {
+          "sha256": "c5d31ab6c897e59d7277ccba9f984d19dcf5bc6401ddc737a56913f0dc860212",
+          "bytes": 101
+        }
+      }
+    },
+    "mikatagoko-kanko-reservation": {
+      "head_sha": "be1285353aad36d8dfed4e8aa7f5558dd1ad029e",
+      "head_date": "2026-07-08T20:02:33Z",
+      "files": {
+        "latest_rsv_sum.csv": {
+          "sha256": "c01af76a75d0bb963df117007a0bfe61d515b4f43fe90b31d763126deb6be0f3",
+          "bytes": 17113
+        },
+        "latest_hotel.csv": {
+          "sha256": "b85e72e0f96a75e1c866b3934455a300939823a917fa64b85ba2dcc9325f3d1d",
+          "bytes": 76
+        }
+      }
+    },
+    "fukui-kanko-trend-data": {
+      "head_sha": "b1941502765a7c5f97e48adc278dd4494679e393",
+      "head_date": "2026-07-08T19:00:31Z",
+      "files": {
+        "2024/total_daily_metrics.csv": {
+          "sha256": "b23666e0e54197e4bf17b319556dc33370c4dfb65f46d20459a1c3f4d25f5bf2",
+          "bytes": 17233
+        },
+        "2025/total_daily_metrics.csv": {
+          "sha256": "aa1cbaf42af62c8d1c01b2a824aa1d10e47b83a6348ef016b88893bb15a6844e",
+          "bytes": 19702
+        },
+        "2026/total_daily_metrics.csv": {
+          "sha256": "ab76451b33e882b4d997a8150f087758de40744f7708814d73f9f7c9b5388da0",
+          "bytes": 9656
+        }
+      }
+    }
+  },
+  "outputs": {
+    "panel_site_daily": {
+      "path": "data/nonsurvey/panel_site_daily.parquet",
+      "sha256": "59bb979f885967481a270c226d8b1769ffa3de07931336f48db0f4a88f99b7e6",
+      "rows": 2245
+    },
+    "panel_area_daily": {
+      "path": "data/nonsurvey/panel_area_daily.parquet",
+      "sha256": "bb15fbbf82a0c8d61017e1449e85cf16318ad169b3dc3f3dc03ba65bc4e86a1a",
+      "rows": 4523
+    },
+    "booking_curve_awara": {
+      "path": "data/nonsurvey/booking_curve_awara.parquet",
+      "sha256": "bd9cb22f2e1bd1812a2f6e14ef2edad685b77e7ebe65e28ddd857c9750e8d803",
+      "rows": 1102
+    }
+  },
+  "notes": [],
+  "coverage": [
+    {
+      "table": "panel_site_daily",
+      "rows": 2245,
+      "date_min": "2024-12-20",
+      "date_max": "2026-07-08",
+      "geo_ids": [
+        "fukui_station_east",
+        "rainbow_line_lot1",
+        "rainbow_line_lot2",
+        "tojinbo"
+      ]
+    },
+    {
+      "table": "panel_area_daily",
+      "rows": 4523,
+      "date_min": "2023-10-01",
+      "date_max": "2026-10-08",
+      "geo_ids": [
+        "awara_onsen",
+        "echizen_coast",
+        "fukui_station",
+        "mikatagoko",
+        "obama"
+      ]
+    },
+    {
+      "table": "booking_curve_awara",
+      "rows": 1102,
+      "date_min": "2023-10-01",
+      "date_max": "2026-10-06",
+      "geo_ids": [
+        "awara_onsen"
+      ]
+    }
+  ]
+}

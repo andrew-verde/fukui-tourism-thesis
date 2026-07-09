@@ -54,6 +54,7 @@ Usage:
     python scripts/rank_nudge_priorities.py
 """
 
+import os
 import sys
 from pathlib import Path
 
@@ -73,6 +74,25 @@ STAGE2_CSV = SEM_DIR / "sem_stage2_results.csv"
 NUDGE_MAPPING = ROOT / "config" / "nudge_mapping.yaml"
 OUT_CSV = SEM_DIR / "nudge_priority_ranking.csv"
 OUT_MD = SEM_DIR / "nudge_priority_ranking.md"
+OPPORTUNITY_LEVERAGE = ROOT / "output" / "opportunity" / "site_leverage.csv"
+
+LEVERAGE_BY_CODE = {
+    "waiting_crowding": "Tojinbo",
+    "transport_access": "Rainbow Line",
+    "wayfinding_signage": "Fukui Stn East",
+}
+
+
+def behavioral_leverage_by_code() -> dict[str, float]:
+    if not OPPORTUNITY_LEVERAGE.exists():
+        return {}
+    leverage = pd.read_csv(OPPORTUNITY_LEVERAGE)
+    by_site = dict(zip(leverage["site"], leverage["leverage"]))
+    return {
+        code: float(by_site[site])
+        for code, site in LEVERAGE_BY_CODE.items()
+        if site in by_site
+    }
 
 
 def main() -> int:
@@ -116,6 +136,8 @@ def main() -> int:
             "example_intervention": meta.get("example_intervention"),
         })
     ranking = pd.DataFrame(rows)
+    leverage_by_code = behavioral_leverage_by_code()
+    ranking["behavioral_leverage"] = ranking["friction_code"].map(leverage_by_code).fillna(0.0)
 
     # Merge prevalence from the SEM stage-2 prevalence table if present.
     prevalence_csv = SEM_DIR / "sem_stage2_prevalence.csv"
@@ -140,7 +162,18 @@ def main() -> int:
         logger.warning("Prevalence table missing; ranking by path coefficient only.")
         ranking["priority_score"] = -ranking["sem_path_to_satisfaction_std"].clip(upper=0)
 
-    ranking = ranking.sort_values("priority_score", ascending=False).reset_index(drop=True)
+    blend_weight = float(os.environ.get("NUDGE_BEHAVIORAL_LEVERAGE_WEIGHT", "0.5"))
+    max_priority = ranking["priority_score"].max()
+    if max_priority > 0:
+        ranking["priority_score_norm"] = ranking["priority_score"] / max_priority
+    else:
+        ranking["priority_score_norm"] = 0.0
+    ranking["blended_priority_score"] = (
+        (1.0 - blend_weight) * ranking["priority_score_norm"]
+        + blend_weight * ranking["behavioral_leverage"]
+    )
+
+    ranking = ranking.sort_values("blended_priority_score", ascending=False).reset_index(drop=True)
     ranking.insert(0, "rank", ranking.index + 1)
     ranking.to_csv(OUT_CSV, index=False)
 
@@ -151,16 +184,21 @@ def main() -> int:
         "visit-intention damage it transmits (path x prevalence x satisfaction->intention",
         f"path of {sat_to_intent:.3f}), i.e. the ceiling a nudge targeting it can recover.",
         "Non-negative satisfaction paths score 0 (no damage to recover).",
+        "The physical-intervention reframe adds `behavioral_leverage` from",
+        "`output/opportunity/site_leverage.csv`; `blended_priority_score` combines",
+        f"normalized SEM priority and leverage at weight {blend_weight:.2f} (set",
+        "`NUDGE_BEHAVIORAL_LEVERAGE_WEIGHT` to change the blend).",
         "",
-        "| # | Friction | SEM path (std) | p | Prevalence* | Priority | Nudge type |",
-        "|---|----------|----------------|---|-------------|----------|------------|",
+        "| # | Friction | SEM path (std) | p | Prevalence* | Priority | Leverage | Blend | Nudge type |",
+        "|---|----------|----------------|---|-------------|----------|----------|-------|------------|",
     ]
     for _, r in ranking.iterrows():
         prev = r.get("prevalence_among_reporters")
         prev_str = f"{prev:.1%}" if pd.notna(prev) else "n/a"
         md.append(
             f"| {r['rank']} | {r['friction_label']} | {r['sem_path_to_satisfaction_std']:+.3f} "
-            f"| {r['p_value']:.3g} | {prev_str} | {r['priority_score']:.4f} | {r['nudge_type']} |"
+            f"| {r['p_value']:.3g} | {prev_str} | {r['priority_score']:.4f} "
+            f"| {r['behavioral_leverage']:.3f} | {r['blended_priority_score']:.3f} | {r['nudge_type']} |"
         )
     md += [
         "",

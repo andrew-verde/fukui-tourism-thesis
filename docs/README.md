@@ -8,5 +8,6 @@
 - `reproducibility_checklist.md` — reviewer verification path
 - `national_data_integration_plan.md` — accommodation/e-Stat scope
 - `adr/` — architecture and research-design decisions
+  - `adr/0027-nonsurvey-scope-boundary.md` — scope boundary for non-survey SEM/opportunity simulation
 
 Main reproduction command: `make reproduce-submission`.
