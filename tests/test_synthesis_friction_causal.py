@@ -20,7 +20,7 @@ INPUT_CHECKSUMS = {
     "output/official_fukui/ftas_friction_by_transport_mode.csv":
         "52a74615198651a8e08d45562aef719002b20a34e55695fcfb3b1a423e6dd64f",
     "output/sem/nudge_priority_ranking.csv":
-        "738239c6da60797df0e5f224bf6b9855bfcb30f9ced9ad97fc6cd9274a49d374",
+        "091962932539fc6106fa193654c6aadfbf3b14cb4adb48d8103750bf3a3a1e13",
 }
 GENERATED_INPUTS = {
     "output/official_fukui/ftas_friction_by_municipality.csv",
