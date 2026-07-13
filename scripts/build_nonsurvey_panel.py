@@ -99,6 +99,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--raw-dir", required=True, type=Path, help="Pinned raw/artifact directory")
     parser.add_argument("--out", default=Path("data/nonsurvey"), type=Path)
+    parser.add_argument("--gov-dir", default=Path("data/nonsurvey/gov"), type=Path)
     args = parser.parse_args()
 
     artifact_dir = find_artifact_dir(args.raw_dir)
@@ -120,6 +121,13 @@ def main() -> int:
         args.out / PANEL_FILES["booking_curve_awara"],
         add_post=False,
     )
+    gov_jta = args.gov_dir / "jta_overnight.parquet"
+    if gov_jta.exists():
+        outputs["panel_pref_monthly"] = write_parquet(
+            gov_jta,
+            args.out / "panel_pref_monthly.parquet",
+            add_post=True,
+        )
     write_manifest(artifact_dir, args.out, outputs)
 
     coverage = artifact_dir / "coverage_report.md"

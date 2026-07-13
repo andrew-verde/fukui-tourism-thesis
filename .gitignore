@@ -126,6 +126,8 @@ dmypy.json
 output/*
 !output/.gitkeep
 data/raw/
+data/nonsurvey/raw_estat/
+data/nonsurvey/gov/raw/
 *.xlsx
 *.xls
 
