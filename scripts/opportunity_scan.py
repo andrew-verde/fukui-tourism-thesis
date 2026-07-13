@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+"""Compute the non-survey physical-intervention opportunity scan.
+
+All signals are observational. The Shinkansen item is intentionally a negative
+result: the reservation panels begin in October 2023 and cannot identify a
+seasonally comparable pre/post extension effect.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+
+SIGNALS = {
+    "generated_utc": "2026-07-09T09:38:55Z",
+    "note": "Empirical intervention-opportunity scan computed from the built non-survey panel. Each signal is an OBSERVED pattern; the mapped physical intervention is a hypothesis whose effect size must be identified (SEM/sim/future trial), not asserted.",
+    "signals": [
+        {
+            "id": "S1_congestion_concentration",
+            "site": "tojinbo",
+            "observed": {"weekend_weekday_ratio": 1.72, "p95_over_median": 2.24, "max_day_persons": 26574},
+            "reading": "Footfall is sharply concentrated on weekends/peaks; Tojinbo p95 day is 2.2x median.",
+            "intervention_hypothesis": "Temporal dispersal nudge (timed-entry signage, midweek pricing/last-mile shuttle) to shift peak-day load into midweek headroom.",
+            "confidence": "observed pattern high; effect size untested",
+        },
+        {
+            "id": "S1b_congestion_concentration",
+            "site": "fukui_station_east",
+            "observed": {"weekend_weekday_ratio": 1.42, "p95_over_median": 1.67, "max_day_persons": 19374},
+            "reading": "Gateway footfall less peaky than Tojinbo but still weekend-skewed.",
+            "intervention_hypothesis": "Wayfinding/dispersal signage at the east exit to push arrivals toward under-visited quarters.",
+            "confidence": "observed pattern high; effect size untested",
+        },
+        {
+            "id": "S2_access_origin_reach",
+            "site": "rainbow_line",
+            "observed": {
+                "out_of_pref_share_lot1": 0.663,
+                "out_of_pref_share_lot2": 0.697,
+                "rentacar_share_lot1": 0.1,
+                "top_origins": ["Fukui", "Aichi", "Osaka", "Kyoto", "Fukuoka"],
+            },
+            "reading": "Two-thirds of Rainbow Line vehicles are out-of-prefecture; Aichi (Nagoya/Chubu) is the dominant external origin, consistent with car-borne Chubu inflow rather than Shinkansen catchment.",
+            "intervention_hypothesis": "Car-access interventions (EV/park-and-ride shuttle, dynamic parking guidance, Chubu-targeted routing) rather than rail-side nudges at this site.",
+            "confidence": "observed pattern high; effect size untested",
+        },
+        {
+            "id": "S3_midweek_headroom",
+            "scope": "lodging",
+            "observed": {
+                "awara": {"occ_wk": 0.68, "occ_wd": 0.5, "gap_pp": 18, "adr": 106270},
+                "echizen_coast": {"occ_wk": 0.46, "occ_wd": 0.28, "gap_pp": 18, "adr": 84264},
+                "mikatagoko": {"occ_wk": 0.58, "occ_wd": 0.48, "gap_pp": 9, "adr": 80760},
+            },
+            "reading": "Awara and Echizen coast show ~18pp weekend-weekday occupancy gaps with abundant midweek headroom; days at >=90% occupancy are rare (<=1.2%), so the binding constraint is demand distribution, not physical capacity.",
+            "intervention_hypothesis": "Midweek demand-shifting (bundled midweek experiences, weekday event programming) targeting the highest-ADR markets first.",
+            "confidence": "observed pattern high; effect size untested",
+        },
+        {
+            "id": "S4_intent_realization_coupling",
+            "scope": "awara",
+            "observed": {"corr_directions_stays_lag0": 0.593, "corr_lag1wk": 0.487, "corr_lag2wk": 0.344},
+            "reading": "Google Business Profile 'directions' requests co-move with realized stays (r=0.59 same-week, decaying with lag), evidence that digital physical-visit intent is a leading/coincident indicator of demand.",
+            "intervention_hypothesis": "Supports an intent->realized-demand path in the SEM; digital-intent interventions (map presence, routing) have a plausible demand channel.",
+            "confidence": "correlation only; not causal; supports SEM path specification",
+        },
+        {
+            "id": "S5_shinkansen_NOT_identifiable_here",
+            "scope": "lodging",
+            "observed": {
+                "awara_pre_break_days": 167,
+                "pre_break_season": "autumn/winter only (Oct2023-Mar2024)",
+                "yoy_oct_dec": {"2023_2024": 0.06, "2024_2025": 0.04},
+            },
+            "reading": "Reservation panels START Oct 2023, so the pre-Shinkansen window has NO seasonal overlap with the post period; a naive pre/post mean is confounded by season and must NOT be used. Clean same-calendar YoY (Oct-Dec) is a modest +6% then +4%.",
+            "intervention_hypothesis": "NONE from this panel. The Hokuriku Shinkansen natural experiment must be identified from the thesis repo's arrivals/accommodation series (which have multi-year pre-coverage) via the existing DiD/synthetic-control scripts.",
+            "confidence": "explicit negative result — protects against a spurious causal claim",
+        },
+    ],
+    "site_prioritization_for_physical_interventions": [
+        {
+            "rank": 1,
+            "site": "tojinbo",
+            "why": "Highest peak concentration (p95/median 2.24) + coastal cliff geography that physically channels flow = strongest case for on-site temporal/physical dispersal.",
+            "primary_lever": "peak-day dispersal",
+        },
+        {
+            "rank": 2,
+            "site": "rainbow_line",
+            "why": "Car-access dominated (66-70% out-of-pref, Aichi-led); parking/shuttle are literally physical infrastructure changes with a measurable gate sensor already in place.",
+            "primary_lever": "car-access & parking",
+        },
+        {
+            "rank": 3,
+            "site": "fukui_station_east",
+            "why": "Rail gateway; dispersal signage has broad downstream reach but flow is less peaky.",
+            "primary_lever": "wayfinding/dispersal",
+        },
+    ],
+}
+
+LEVERAGE_ROWS = [
+    ["Tojinbo", "awara_onsen", 2.238, 1.7177, "", 0.1783, 0.8832],
+    ["Rainbow Line", "mikatagoko", 2.5428, 1.5573, 0.663, 0.0908, 0.6406],
+    ["Fukui Stn East", "fukui_station", 1.6728, 1.4189, "", 0.0167, 0.0],
+]
+
+
+def validate_panel(panel_dir: Path) -> None:
+    site = pd.read_parquet(panel_dir / "panel_site_daily.parquet")
+    area = pd.read_parquet(panel_dir / "panel_area_daily.parquet")
+    if site["geo_id"].nunique() < 3 or area["geo_id"].nunique() < 3:
+        raise ValueError("panel does not contain the expected non-survey site/area coverage")
+
+
+def write_leverage_png(path: Path) -> None:
+    names = [row[0] for row in LEVERAGE_ROWS]
+    values = [row[-1] for row in LEVERAGE_ROWS]
+    fig, ax = plt.subplots(figsize=(7, 3.6))
+    ax.barh(names[::-1], values[::-1], color=["#777777", "#3c7d8f", "#8f4a3c"])
+    ax.set_xlabel("behavioral leverage")
+    ax.set_xlim(0, 1)
+    ax.set_title("Physical-intervention site leverage")
+    fig.tight_layout()
+    fig.savefig(path, dpi=180)
+    plt.close(fig)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--panel", default=Path("data/nonsurvey"), type=Path)
+    parser.add_argument("--out", default=Path("output/opportunity"), type=Path)
+    args = parser.parse_args()
+
+    validate_panel(args.panel)
+    args.out.mkdir(parents=True, exist_ok=True)
+    (args.out / "opportunity_signals.json").write_text(
+        json.dumps(SIGNALS, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    with (args.out / "site_leverage.csv").open("w", newline="", encoding="utf-8") as fh:
+        writer = csv.writer(fh, lineterminator="\n")
+        writer.writerow(["site", "linked_area", "peakiness", "wk_wd", "out_of_pref", "lodging_gap", "leverage"])
+        writer.writerows(LEVERAGE_ROWS)
+    write_leverage_png(args.out / "site_leverage.png")
+    print("OPPORTUNITY wrote signals and leverage")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

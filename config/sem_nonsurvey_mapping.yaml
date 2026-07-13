@@ -1,0 +1,9 @@
+latents:
+  physical_friction: [cam_peak_load, cam_plate_share_out_of_pref, lead_time_mean]
+  visit_intent: [trend_directions, trend_search_views]
+  realized_demand: [cam_load, rsv_n_stay, rsv_n_reserve]
+structural:
+  - realized_demand ~ visit_intent
+transforms:
+  log1p: [cam_load, rsv_n_stay, rsv_n_reserve, trend_directions, trend_search_views]
+  within_site_zscore: all

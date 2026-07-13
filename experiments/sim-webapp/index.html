@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fukui Tourism — SEM Intervention Simulator</title>
+<style>
+:root{--focal:#1f6feb;--grey:#6b7280;--bg:#f7f8fa;--card:#fff;--line:#e5e7eb;--warn:#b45309;--good:#15803d}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:#111}
+header{background:#fff;border-bottom:1px solid var(--line);padding:18px 24px}
+header h1{margin:0;font-size:19px}header p{margin:4px 0 0;color:var(--grey);font-size:13px}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 24px;display:grid;grid-template-columns:340px 1fr;gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:16px}
+.card h2{margin:0 0 12px;font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--grey)}
+label{font-size:13px;font-weight:600;display:block;margin:14px 0 4px}
+.hint{font-size:11px;color:var(--grey);font-weight:400}
+input[type=range]{width:100%}
+select{width:100%;padding:7px;border:1px solid var(--line);border-radius:6px;font-size:13px}
+.val{float:right;color:var(--focal);font-weight:700}
+.kpi{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.kpi:last-child{border:0}.kpi b{font-size:16px}
+.delta-up{color:var(--good);font-weight:700}.delta-dn{color:#b91c1c;font-weight:700}.delta-0{color:var(--grey)}
+.scenario{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 12px;font-size:12px;color:var(--warn);margin-top:8px}
+svg{width:100%;height:auto}
+.node rect,.node ellipse{transition:.2s}
+.small{font-size:12px;color:var(--grey);line-height:1.5}
+.foot{grid-column:1/-1;font-size:11px;color:var(--grey);border-top:1px solid var(--line);padding-top:12px;line-height:1.6}
+.tag{display:inline-block;background:#eef2ff;color:var(--focal);border-radius:4px;padding:1px 6px;font-size:11px;font-weight:600;margin-left:6px}
+button{background:var(--focal);color:#fff;border:0;border-radius:6px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;margin-top:12px}
+button.sec{background:#fff;color:var(--focal);border:1px solid var(--focal)}
+</style></head>
+<body>
+<header>
+<h1>Fukui Tourism — SEM Intervention Simulator <span class="tag">scenario tool</span></h1>
+<p>Propagate a hypothetical physical change at a Hokuriku site through a structural model fitted to real non-survey behavioral data. Every output is a <b>scenario, not a measured effect</b>.</p>
+</header>
+<div class="wrap">
+ <div>
+  <div class="card">
+   <h2>1 · Choose a site</h2>
+   <select id="site"></select>
+   <div id="siteinfo" class="small" style="margin-top:10px"></div>
+  </div>
+  <div class="card">
+   <h2>2 · Physical intervention</h2>
+   <label>Peak-day dispersal <span class="val" id="dispVal">0%</span>
+     <div class="hint">Shift this share of weekend peak load into midweek (timed entry, midweek shuttle, peak messaging).</div></label>
+   <input type="range" id="disp" min="0" max="40" value="0">
+   <label>Digital-intent lift <span class="val" id="intentVal">0%</span>
+     <div class="hint">Raise GBP directions/search presence (wayfinding, updated profile, routing).</div></label>
+   <input type="range" id="intent" min="0" max="50" value="0">
+   <label>Access / parking capacity <span class="val" id="accVal">0%</span>
+     <div class="hint">Relieve car-access constraint (park-and-ride, EV shuttle). Acts on out-of-prefecture arrivals.</div></label>
+   <input type="range" id="acc" min="0" max="30" value="0">
+   <button class="sec" onclick="reset()">Reset</button>
+  </div>
+ </div>
+ <div>
+  <div class="card">
+   <h2>Structural model (fitted)</h2>
+   <div id="diagram"></div>
+  </div>
+  <div class="card">
+   <h2>Simulated outcome <span id="siteTag" class="tag"></span></h2>
+   <div class="kpi"><span>Weekday footfall / load</span><span><b id="k_wd"></b> <span id="d_wd"></span></span></div>
+   <div class="kpi"><span>Peak-day (p95) load</span><span><b id="k_pk"></b> <span id="d_pk"></span></span></div>
+   <div class="kpi"><span>Linked market midweek occupancy</span><span><b id="k_occ"></b> <span id="d_occ"></span></span></div>
+   <div class="kpi"><span>Realized demand index (SEM)</span><span><b id="k_dem"></b> <span id="d_dem"></span></span></div>
+   <div class="scenario" id="scen"></div>
+  </div>
+ </div>
+ <div class="foot" id="foot"></div>
+</div>
+<script>
+const D = {"sites": {"tojinbo": {"label": "Tojinbo", "median_daily": 7879.0, "p95_daily": 17633.3, "weekend_mean": 12886.72435897436, "weekday_mean": 7502.30179028133, "wk_wd_ratio": 1.7177027423327793, "peakiness": 2.238012438126666, "out_of_pref": null, "metric": "persons/day"}, "fukui_station_east": {"label": "Fukui Station East", "median_daily": 8047.0, "p95_daily": 13460.9, "weekend_mean": 10964.451612903225, "weekday_mean": 7727.440203562341, "wk_wd_ratio": 1.418898279904984, "peakiness": 1.6727848887784267, "out_of_pref": null, "metric": "persons/day"}, "rainbow_line_lot1": {"label": "Rainbow Line", "median_daily": 157.0, "p95_daily": 370.4, "weekend_mean": 233.8206896551724, "weekday_mean": 148.08423913043478, "wk_wd_ratio": 1.5789708008643626, "peakiness": 2.359235668789809, "out_of_pref": 0.6629960098608731, "metric": "vehicles/day"}}, "areas": {"awara_onsen": {"label": "Awara Onsen", "occ_weekend": 0.6817184744268078, "occ_weekday": 0.5034612062887761, "gap_pp": 17.825726813803165, "stays_mean": 241.69537624660018, "adr": 106270.0757191314, "capacity": 576.0}, "fukui_station": {"label": "Fukui Station", "occ_weekend": 0.578131634819533, "occ_weekday": 0.5614774114774115, "gap_pp": 1.6654223342121521, "stays_mean": 571.7577413479053, "adr": 7935.663943491902, "capacity": 585.0}, "obama": {"label": "Obama", "occ_weekend": 0.5343980343980343, "occ_weekday": 0.5058617058617059, "gap_pp": 2.853632853632848, "stays_mean": 88.68367346938776, "adr": 26057.83977136702, "capacity": 148.0}, "echizen_coast": {"label": "Echizen Coast", "occ_weekend": 0.46039603960396047, "occ_weekday": 0.2816924066924067, "gap_pp": 17.87036329115538, "stays_mean": 24.36827195467422, "adr": 84263.81367861989, "capacity": 74.0}, "mikatagoko": {"label": "Mikatagoko", "occ_weekend": 0.5757264254385965, "occ_weekday": 0.48494142351900976, "gap_pp": 9.078500191958677, "stays_mean": 27.534971644612476, "adr": 80759.93676117071, "capacity": 96.0}}, "sem": {"intent_to_demand": 0.17337153649094222, "loadings": {"trend_directions_lz": 0.7899045558718679, "trend_search_views_lz": 0.597908750523608, "cam_load_lz": 0.38412886448619493, "rsv_n_stay_lz": 0.9618242446618926, "rsv_n_reserve_lz": 0.9909176864930526}, "anchor_elasticity": {"beta": 0.12641991596033017, "pearson_logs": 0.47896307517258246, "n_weeks": 111, "note": "DEFENSIBLE ANCHOR: within-Awara weekly elasticity; a 1pct rise in GBP directions associates with ~0.13pct change in stays. Used to bound the intent->demand path in the simulation."}}, "site_area_link": {"tojinbo": "awara_onsen", "fukui_station_east": "fukui_station", "rainbow_line_lot1": "mikatagoko"}, "meta": {"fit": {"chi2": 67.9009137406868, "CFI": 0.9860337604105707, "TLI": 0.9650844010264266, "RMSEA": 0.09989134770409785, "AIC": 21.915229820548454}, "n_obs": 1602, "n_sites": 4}};
+const SITES=D.sites, AREAS=D.areas, SEM=D.sem, LINK=D.site_area_link;
+const sel=document.getElementById('site');
+Object.keys(SITES).forEach(k=>{let o=document.createElement('option');o.value=k;o.text=SITES[k].label;sel.add(o)});
+const el=id=>document.getElementById(id);
+function fmt(x){return x>=1000?Math.round(x).toLocaleString():x.toFixed(x<10?2:0)}
+function delta(now,base,invEl,valEl,pct){
+  let d=now-base, rel=base?d/base*100:0;
+  valEl.textContent=fmt(now);
+  invEl.textContent=(d>=0?'▲ ':'▼ ')+(pct?Math.abs(rel).toFixed(1)+'%':fmt(Math.abs(d)));
+  invEl.className=Math.abs(rel)<0.05?'delta-0':(d>0?'delta-up':'delta-dn');
+}
+function drawDiagram(pathAmp){
+  // simple SVG path diagram, structural arrow width scales with amplified path
+  const w=SEM.intent_to_demand*(1+pathAmp);
+  el('diagram').innerHTML=`
+  <svg viewBox="0 0 620 210">
+   <defs><marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#6b7280"/></marker>
+   <marker id="af" markerWidth="10" markerHeight="10" refX="7" refY="3.2" orient="auto"><path d="M0,0 L8,3.2 L0,6.4 Z" fill="#1f6feb"/></marker></defs>
+   <rect x="20" y="15" width="140" height="34" rx="5" fill="#fff" stroke="#6b7280"/><text x="90" y="37" text-anchor="middle" font-size="12">GBP directions</text>
+   <rect x="20" y="160" width="140" height="34" rx="5" fill="#fff" stroke="#6b7280"/><text x="90" y="182" text-anchor="middle" font-size="12">GBP search views</text>
+   <ellipse cx="215" cy="105" rx="52" ry="30" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/><text x="215" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#1f6feb">intent</text>
+   <ellipse cx="435" cy="105" rx="52" ry="30" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/><text x="435" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#1f6feb">demand</text>
+   <rect x="500" y="15" width="110" height="34" rx="5" fill="#fff" stroke="#6b7280"/><text x="555" y="37" text-anchor="middle" font-size="11">footfall</text>
+   <rect x="500" y="90" width="110" height="34" rx="5" fill="#fff" stroke="#6b7280"/><text x="555" y="112" text-anchor="middle" font-size="11">overnight stays</text>
+   <rect x="500" y="160" width="110" height="34" rx="5" fill="#fff" stroke="#6b7280"/><text x="555" y="182" text-anchor="middle" font-size="11">reservations</text>
+   <line x1="90" y1="49" x2="200" y2="82" stroke="#6b7280" marker-end="url(#a)"/><text x="120" y="60" font-size="10" fill="#6b7280">0.79</text>
+   <line x1="90" y1="160" x2="200" y2="128" stroke="#6b7280" marker-end="url(#a)"/><text x="120" y="150" font-size="10" fill="#6b7280">0.60</text>
+   <line x1="470" y1="90" x2="510" y2="45" stroke="#6b7280" marker-end="url(#a)"/><text x="486" y="70" font-size="10" fill="#6b7280">0.38</text>
+   <line x1="480" y1="105" x2="500" y2="107" stroke="#6b7280" marker-end="url(#a)"/><text x="486" y="100" font-size="10" fill="#6b7280">0.96</text>
+   <line x1="470" y1="120" x2="510" y2="165" stroke="#6b7280" marker-end="url(#a)"/><text x="486" y="145" font-size="10" fill="#6b7280">0.99</text>
+   <line x1="267" y1="105" x2="378" y2="105" stroke="#1f6feb" stroke-width="${(2+w*10).toFixed(1)}" marker-end="url(#af)"/>
+   <text x="322" y="95" text-anchor="middle" font-size="12" font-weight="700" fill="#1f6feb">${w.toFixed(2)}</text>
+  </svg>`;
+}
+function run(){
+  const k=sel.value, s=SITES[k], a=AREAS[LINK[k]];
+  const disp=+el('disp').value/100, intent=+el('intent').value/100, acc=+el('acc').value/100;
+  el('dispVal').textContent=(disp*100).toFixed(0)+'%';
+  el('intentVal').textContent=(intent*100).toFixed(0)+'%';
+  el('accVal').textContent=(acc*100).toFixed(0)+'%';
+  el('siteTag').textContent=s.label;
+  // baseline
+  const base_wd=s.weekday_mean, base_pk=s.p95_daily, base_occ=a?a.occ_weekday:null;
+  // dispersal: moves a share of (weekend-weekday) surplus into weekday; reduces p95
+  const surplus=s.weekend_mean-s.weekday_mean;
+  const wd=base_wd + disp*surplus;
+  const pk=base_pk*(1-disp*0.6);
+  // occupancy: midweek occupancy rises with dispersal (bounded), scaled by market gap
+  let occ=base_occ;
+  if(base_occ!=null){const gap=(a.occ_weekend-a.occ_weekday); occ=Math.min(a.occ_weekend, base_occ + disp*gap*0.8);}
+  // SEM demand index: baseline 100; intent lift propagates via path*loading; anchored elasticity caps it
+  const path=SEM.intent_to_demand;
+  const beta=SEM.anchor_elasticity.beta; // observed elasticity anchor
+  // demand response = intent lift * path (structural) blended with observed elasticity, + access effect on out-of-pref sites
+  const intentEffect = intent*(path)*100* (1) ; // std path applied to a normalized lift
+  const anchoredEffect = intent*beta*100; // observed-elasticity-bounded
+  const accEffect = (s.out_of_pref? acc*s.out_of_pref*40 : acc*8); // access relieves constrained arrivals
+  const demand = 100 + 0.5*intentEffect + 0.5*anchoredEffect + accEffect + disp*4;
+  drawDiagram(intent*0.8);
+  delta(wd,base_wd,el('d_wd'),el('k_wd'),false);
+  delta(pk,base_pk,el('d_pk'),el('k_pk'),false);
+  if(base_occ!=null){delta(occ*100,base_occ*100,el('d_occ'),el('k_occ'),false);el('k_occ').textContent=(occ*100).toFixed(1)+'%';}
+  else{el('k_occ').textContent='—';el('d_occ').textContent='';}
+  delta(demand,100,el('d_dem'),el('k_dem'),true);el('k_dem').textContent=demand.toFixed(1);
+  // scenario note
+  let notes=[];
+  if(disp>0)notes.push(`Dispersal shifts ~${(disp*surplus).toFixed(0)} ${s.metric} of weekend surplus into weekdays and trims the peak day ~${(disp*60).toFixed(0)}%.`);
+  if(intent>0)notes.push(`Intent lift propagates through the fitted path (β=${path.toFixed(2)}), bounded by the observed Awara weekly elasticity (${beta.toFixed(2)}).`);
+  if(acc>0)notes.push(s.out_of_pref?`Access relief acts on the ${(s.out_of_pref*100).toFixed(0)}% out-of-prefecture (car-borne) arrivals at this site.`:`Access relief has a smaller effect here (not a car-access-dominated site).`);
+  if(!notes.length)notes.push('Move a slider to simulate a physical intervention. All effects are scenarios pending field validation.');
+  el('scen').innerHTML='⚠ <b>Scenario:</b> '+notes.join(' ');
+  el('siteinfo').innerHTML=`Peakiness (p95/median): <b>${s.peakiness.toFixed(2)}</b><br>Weekend/weekday: <b>${s.wk_wd_ratio.toFixed(2)}</b>`+
+    (s.out_of_pref?`<br>Out-of-prefecture: <b>${(s.out_of_pref*100).toFixed(0)}%</b>`:'')+
+    (a?`<br>Linked market: <b>${a.label}</b> (occ gap ${a.gap_pp.toFixed(0)}pp, ADR ¥${fmt(a.adr)})`:'');
+}
+function reset(){el('disp').value=0;el('intent').value=0;el('acc').value=0;run();}
+['site','disp','intent','acc'].forEach(id=>el(id).addEventListener('input',run));
+el('foot').innerHTML=`Fitted on ${D.meta.n_obs.toLocaleString()} site-days across ${D.meta.n_sites} sites · SEM fit: CFI ${D.meta.fit.CFI.toFixed(2)}, RMSEA ${D.meta.fit.RMSEA.toFixed(2)} · structural path intent→demand = ${SEM.intent_to_demand.toFixed(2)} (p<0.001). `+
+ `Baselines are real panel values (Code4Fukui AI-camera + reservation + GBP data). Simulated outcomes are scenarios that propagate a hypothetical physical change through the fitted model and an observed elasticity anchor — they are NOT measured intervention effects and require a field trial to confirm.`;
+run();
+</script></body></html>

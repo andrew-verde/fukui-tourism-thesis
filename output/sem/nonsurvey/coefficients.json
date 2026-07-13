@@ -1,0 +1,70 @@
+{
+  "model": "nonsurvey_extended_sem_v1",
+  "n_obs": 1602,
+  "n_sites": 4,
+  "fit": {
+    "chi2": 67.9009137406868,
+    "CFI": 0.9860337604105707,
+    "TLI": 0.9650844010264266,
+    "RMSEA": 0.09989134770409785,
+    "AIC": 21.915229820548454
+  },
+  "paths": [
+    {
+      "from": "intent",
+      "to": "demand",
+      "std": 0.17337153649094222,
+      "p": 5.9530202856095116e-05
+    }
+  ],
+  "loadings": [
+    {
+      "latent": "intent",
+      "indicator": "trend_directions_lz",
+      "std": 0.7899045558718679
+    },
+    {
+      "latent": "intent",
+      "indicator": "trend_search_views_lz",
+      "std": 0.597908750523608
+    },
+    {
+      "latent": "demand",
+      "indicator": "cam_load_lz",
+      "std": 0.38412886448619493
+    },
+    {
+      "latent": "demand",
+      "indicator": "rsv_n_stay_lz",
+      "std": 0.9618242446618926
+    },
+    {
+      "latent": "demand",
+      "indicator": "rsv_n_reserve_lz",
+      "std": 0.9909176864930526
+    }
+  ],
+  "observed_elasticities": {
+    "directions_to_stays_loglog": {
+      "beta": 0.01496765241574735,
+      "pearson_logs": 0.012584134115182367,
+      "note": "1% rise in GBP directions ~ beta% change in stays (pooled daily across sites with national trend broadcast is attenuated; NOT used as anchor)"
+    },
+    "footfall_to_stays_loglog": {
+      "beta": 0.5188793516442793,
+      "pearson_logs": 0.8545440439265284
+    },
+    "awara_weekly_directions_to_stays_loglog": {
+      "beta": 0.12641991596033017,
+      "pearson_logs": 0.47896307517258246,
+      "n_weeks": 111,
+      "note": "DEFENSIBLE ANCHOR: within-Awara weekly elasticity; a 1pct rise in GBP directions associates with ~0.13pct change in stays. Used to bound the intent->demand path in the simulation."
+    }
+  },
+  "diagnostics": {
+    "loose_complete_case_site_days": 1983,
+    "note": "Reference n_obs preserves the fitted MLW model contract; this diagnostic uses a looser panel completeness filter.",
+    "semopy_rows": 1983,
+    "semopy_intent_to_demand_std": 0.1785962250172322
+  }
+}

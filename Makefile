@@ -1,10 +1,11 @@
 PYTHON = .venv/bin/python3
+PANEL_RAW_DIR ?= data/nonsurvey
 
 .PHONY: help fetch official-all fetch-official-fukui build-ftas stats-official \
 	synth-official chinese-social fetch-hokuriku-merged hokuriku-did-audit \
 	hokuriku-did-event-study fetch-estat fetch-estat-list fetch-national-direct \
 	fetch-ff-data fetch-japan-kanko-stat accommodation-panel ff-data-panel japan-kanko-panel synthetic-control \
-	vision-descriptive sem-ftas nudge-ranking synth-causal-arm causal-robustness robustness-figures gap-trajectories synthesis synthesis-figures durability-mechanisms durability-figures result-charts data-manifest \
+	vision-descriptive panel sem-ftas nudge-ranking synth-causal-arm causal-robustness robustness-figures gap-trajectories synthesis synthesis-figures durability-mechanisms durability-figures result-charts data-manifest \
 	reproduce-submission test nudge-pilot-serve nudge-pilot-power
 
 help:
@@ -20,6 +21,7 @@ help:
 	@echo "  make ff-data-panel             Build FF-DATA quarterly flow panel"
 	@echo "  make fetch-japan-kanko-stat    Fetch pinned municipal visitor panel"
 	@echo "  make synthetic-control         Run Fukui City synthetic control"
+	@echo "  make panel                     Build non-survey panel from pinned raw cache"
 	@echo "  make causal-robustness         Run causal-arm falsification tests"
 	@echo "  make robustness-figures        Render causal-robustness figures"
 	@echo "  make gap-trajectories          Export per-target SCM gap trajectories"
@@ -93,6 +95,9 @@ synthetic-control:
 
 vision-descriptive:
 	$(PYTHON) scripts/build_resident_vision.py
+
+panel:
+	$(PYTHON) scripts/build_nonsurvey_panel.py --raw-dir $(PANEL_RAW_DIR) --out data/nonsurvey/
 
 sem-ftas:
 	$(PYTHON) scripts/sem_ftas.py
