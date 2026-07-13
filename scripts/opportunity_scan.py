@@ -145,7 +145,7 @@ def main() -> int:
         encoding="utf-8",
     )
     with (args.out / "site_leverage.csv").open("w", newline="", encoding="utf-8") as fh:
-        writer = csv.writer(fh)
+        writer = csv.writer(fh, lineterminator="\n")
         writer.writerow(["site", "linked_area", "peakiness", "wk_wd", "out_of_pref", "lodging_gap", "leverage"])
         writer.writerows(LEVERAGE_ROWS)
     write_leverage_png(args.out / "site_leverage.png")

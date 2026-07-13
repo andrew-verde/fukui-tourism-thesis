@@ -18,7 +18,7 @@ A transparent, equal-weight composite over three observed drivers — peak conce
 | 2 | **Rainbow Line** | Mikatagoko | 2.54 | 1.56 | 0.66 | 0.09 | **0.64** |
 | 3 | Fukui Station East | Fukui Station | 1.67 | 1.42 | — | 0.02 | **0.00** |
 
-![Site leverage ranking and its drivers]({{artifact:art_54b562ae-e274-40a5-9168-02e77a0fcd9e}})
+![Site leverage ranking and its drivers](../output/opportunity/site_leverage.png)
 
 The ranking is not a claim that Fukui Station has no opportunity — it has the broadest downstream reach as the rail gateway — but that its *flows are the least physically concentrated*, so a fixed physical change there acts on a flatter distribution.
 

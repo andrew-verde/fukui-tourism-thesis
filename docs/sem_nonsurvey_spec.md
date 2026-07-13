@@ -2,7 +2,7 @@
 
 *How the existing FTAS SEM is extended so its latent constructs are grounded in observed behavior, not only survey responses — with a fitted, real-data reference model.*
 
-Generated 2026-07-09. Fitted on `panel_site_daily.parquet` + `panel_area_daily.parquet`. Artifacts: `sem_nonsurvey_coefficients.json`, `sem_path_diagram.png`. Companion: `reframe_physical_interventions.md`, `intervention_opportunity_analysis.md`.
+Generated 2026-07-09. Fitted on `panel_site_daily.parquet` + `panel_area_daily.parquet`. Artifacts: `output/sem/nonsurvey/coefficients.json`, `output/sem/nonsurvey/path_diagram.png`. Companion: `reframe_physical_interventions.md`, `intervention_opportunity_analysis.md`.
 
 ---
 
@@ -36,7 +36,7 @@ demand ~ intent
 - **Structural path** `intent → demand`: standardized **0.17**, p < 0.001.
 - **Loadings:** directions 0.79 & search_views 0.60 on intent; reservations 0.99, overnight_stays 0.96, camera_footfall **0.38** on demand.
 
-![Fitted non-survey SEM path diagram]({{artifact:art_662d6dd9-af7c-4690-8424-2a078501e401}})
+![Fitted non-survey SEM path diagram](../output/sem/nonsurvey/path_diagram.png)
 
 **The 0.38 footfall loading is substantively interesting, not a defect.** Camera footfall couples only moderately with the reservation/overnight indicators of the demand latent — consistent with a real distinction between day-trip footfall and overnight-staying demand. This is exactly the kind of structure the physical-intervention lens cares about: a site can be busy (footfall) without converting to overnight stays, which is itself an intervention opportunity.
 
@@ -45,7 +45,7 @@ demand ~ intent
 The webapp propagates hypothetical physical-change effects through the SEM. To keep at least one path grounded in data rather than a free parameter, the **within-Awara weekly intent→demand elasticity** is computed as an anchor:
 
 - Log-log regression of overnight stays on GBP directions, Awara, weekly (n = 111 weeks): **β ≈ 0.13**, Pearson(logs) ≈ 0.48. A 1% rise in directions requests associates with ~0.13% change in stays.
-- This anchor is stored in `sem_nonsurvey_coefficients.json` under `observed_elasticities.awara_weekly_directions_to_stays_loglog` and is the default intent→demand sensitivity in the simulation. The attenuated pooled-daily estimate is stored too, explicitly flagged as **not** the anchor (national trend broadcast attenuates it).
+- This anchor is stored in `output/sem/nonsurvey/coefficients.json` under `observed_elasticities.awara_weekly_directions_to_stays_loglog` and is the default intent→demand sensitivity in the simulation. The attenuated pooled-daily estimate is stored too, explicitly flagged as **not** the anchor (national trend broadcast attenuates it).
 
 ## 5. Limitations (documented, not hidden)
 

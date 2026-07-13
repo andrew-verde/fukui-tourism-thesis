@@ -72,4 +72,4 @@ The thesis is therefore honest about being *a rigorous method for identifying an
 
 ## 7. What changes in the repo (handed to Codex)
 
-See the codex handoff spec pack(s). At a high level: add the panel build under `scripts/`/`data/`, extend `config/` + `sem_ftas.py` with the non-survey indicator blocks (`sem_nonsurvey_spec.md`), add the opportunity-scan script, and scaffold the simulation webapp as a new `experiments/` app. A scope-honesty ADR (deferred per decision, to be written after this spike) records the §6 boundary as a project decision.
+The implemented artifacts are the panel builder under `scripts/`/`data/`, the non-survey indicator mapping in `config/` plus sibling `scripts/sem_nonsurvey.py`, the opportunity scan, and the simulation webapp under `experiments/`. ADR 0027 records the §6 scope boundary.
