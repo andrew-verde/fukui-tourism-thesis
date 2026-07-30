@@ -26,7 +26,7 @@ with a bounded null (ADR 0031). Arm 2 built, committed, and **live**
       drafting corrections applied first (guard population → the 13
       high-confidence municipalities by area code; S3 denominator →
       pooled other, 4.003×).
-- [x] **Merged to `main`** — both `reframe/*` branches, merge `dc04308`.
+- [x] **Merged to `main`** — both `reframe/*` branches, merge `476b37d`.
 - [x] **All work committed** — 10 commits, suite 217 passed / 1 skipped,
       Arm 3 artifacts force-added per `docs/arm3_implementation_report.md`.
 
@@ -87,6 +87,6 @@ ordinary version bump.
   estimated under ADR 0018.
 - No chapter file changes before Phase 4 (ADR 0023 §5).
 - Agent handoff docs are never tracked (`.gitignore:170-173`). One was
-  force-added on 2026-07-30 and had to be reverted in `c388c18`.
+  force-added on 2026-07-30 and was scrubbed from history the same day.
 - **Human commits; no seat commits or pushes.** The 2026-07-30 commit and
   merge were a one-off explicit authorization, not a change to this rule.
