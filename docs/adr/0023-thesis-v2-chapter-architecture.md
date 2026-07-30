@@ -1,7 +1,10 @@
 # ADR 0023: Thesis v2 chapter architecture — outcome-branched landing zones fixed before results exist
 
 Date: 2026-07-04
-Status: proposed (pending human review)
+Status: accepted 2026-07-30 as amended — see ADR 0033 for the consolidated
+track ledger (Track B retired by ADR 0029 §4; Track T resolved V1-fail by
+ADR 0031). §5's "no chapter file changes before Phase 4" is accepted and
+binding. Body unedited.
 
 ## Context
 

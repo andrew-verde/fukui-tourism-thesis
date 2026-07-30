@@ -33,6 +33,13 @@ with a bounded null (ADR 0031). Arm 2 built, committed, and **live**
       uncommitted:** two new test files (suite now 243 passed / 1 skipped),
       the CI deselect list, the defense-memo rewrite, and two provenance
       blocks. See `SCIENCE_HANDOFF.md` §6.
+- [x] **ADR 0033** — ADR 0019 and ADR 0023 normalized to accepted-as-amended
+      2026-07-30, with one consolidated amendment/track ledger. Bodies
+      unedited; ADR log stays append-only.
+- [x] **ADR 0034** — journal-manuscript framing settled before drafting
+      (ADR 0031's instruction): one paper, Chapters 3–4 spine, Arm 3 as a
+      bounded null, bound in the abstract, Arm 2 excluded, reviewer-pressure
+      answers fixed in advance.
 - [x] **Pushed 2026-07-30.** Clean fast-forward onto `origin/main`; no
       force-push, no published SHA changed. `SCIENCE_HANDOFF.md` had been
       force-added against `.gitignore:170-173` and was scrubbed from history
@@ -41,10 +48,6 @@ with a bounded null (ADR 0031). Arm 2 built, committed, and **live**
 
 ## Open — decisions awaiting you
 
-- [ ] **Resolve ADR 0019 and ADR 0023 statuses** — both still `proposed`
-  while being relied on as binding. ADR 0023 §5's "no chapter file changes
-  before Phase 4" governs current behaviour; ADR 0019's phase structure
-  and deviation discipline are cited throughout.
 - [ ] **Authorize the Arm 2 production run — when you are ready.** See the
   standing rules below. This is a one-shot test; there is no reason to
   hurry it. More unseen months publish monthly.

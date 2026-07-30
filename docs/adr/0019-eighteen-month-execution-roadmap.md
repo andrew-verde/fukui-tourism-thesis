@@ -1,7 +1,11 @@
 # ADR 0019: Eighteen-month execution roadmap — from diagnosis-plus-design to tested prediction plus causal evidence
 
 Date: 2026-07-03
-Status: proposed (pending human review)
+Status: accepted 2026-07-30 as amended — see ADR 0033 for the consolidated
+amendment ledger (Arm 1 struck by ADR 0029; Phase 1 FTAS long-lead struck by
+ADR 0032; Arm 3 closed by ADR 0031). Body unedited; the Arm 1 text below is
+retained as the record of what was believed when the pre-specifications were
+frozen.
 
 ## Context
 
