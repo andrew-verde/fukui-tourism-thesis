@@ -19,4 +19,5 @@ jupyter>=1.0
 jupyterlab>=4.0
 ipykernel>=6.26
 openpyxl>=3.1
+xlrd==2.0.2
 tabulate>=0.9

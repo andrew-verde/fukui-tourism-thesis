@@ -6,7 +6,8 @@ PANEL_RAW_DIR ?= data/nonsurvey
 	hokuriku-did-event-study fetch-estat fetch-estat-list fetch-national-direct \
 	fetch-ff-data fetch-japan-kanko-stat accommodation-panel ff-data-panel japan-kanko-panel synthetic-control \
 	vision-descriptive panel sem-ftas nudge-ranking synth-causal-arm causal-robustness robustness-figures gap-trajectories synthesis synthesis-figures durability-mechanisms durability-figures result-charts data-manifest \
-	reproduce-submission test nudge-pilot-serve nudge-pilot-power fetch-gov opportunity-scan sem-nonsurvey
+	reproduce-submission test nudge-pilot-serve nudge-pilot-power fetch-gov opportunity-scan sem-nonsurvey \
+	arm3-kanazawa arm3-kanazawa-pdfs
 
 help:
 	@echo "Fukui official-data tourism analysis"
@@ -156,3 +157,9 @@ nudge-pilot-serve:
 
 nudge-pilot-power:
 	$(PYTHON) scripts/nudge_pilot_power.py
+
+arm3-kanazawa-pdfs:
+	$(PYTHON) scripts/extract_arm3_kanazawa_pdfs.py
+
+arm3-kanazawa:
+	$(PYTHON) scripts/arm3_kanazawa_scm.py

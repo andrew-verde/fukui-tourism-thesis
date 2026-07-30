@@ -1,7 +1,7 @@
 # ADR 0021: Arm 3 — Kanazawa 2015 template-replication design
 
 Date: 2026-07-04
-Status: proposed (pending human review)
+Status: accepted 2026-07-29
 
 ## Context
 
