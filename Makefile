@@ -6,7 +6,8 @@ PANEL_RAW_DIR ?= data/nonsurvey
 	hokuriku-did-event-study fetch-estat fetch-estat-list fetch-national-direct \
 	fetch-ff-data fetch-japan-kanko-stat accommodation-panel ff-data-panel japan-kanko-panel synthetic-control \
 	vision-descriptive panel sem-ftas nudge-ranking synth-causal-arm causal-robustness robustness-figures gap-trajectories synthesis synthesis-figures durability-mechanisms durability-figures result-charts data-manifest \
-	reproduce-submission test nudge-pilot-serve nudge-pilot-power
+	reproduce-submission test nudge-pilot-serve nudge-pilot-power fetch-gov opportunity-scan sem-nonsurvey \
+	arm3-kanazawa arm3-kanazawa-pdfs
 
 help:
 	@echo "Fukui official-data tourism analysis"
@@ -22,6 +23,9 @@ help:
 	@echo "  make fetch-japan-kanko-stat    Fetch pinned municipal visitor panel"
 	@echo "  make synthetic-control         Run Fukui City synthetic control"
 	@echo "  make panel                     Build non-survey panel from pinned raw cache"
+	@echo "  make fetch-gov                 Fetch government context layer (JTA overnight + FF-DATA)"
+	@echo "  make opportunity-scan          Scan non-survey panel for opportunity signals"
+	@echo "  make sem-nonsurvey             Run non-survey SEM"
 	@echo "  make causal-robustness         Run causal-arm falsification tests"
 	@echo "  make robustness-figures        Render causal-robustness figures"
 	@echo "  make gap-trajectories          Export per-target SCM gap trajectories"
@@ -99,6 +103,16 @@ vision-descriptive:
 panel:
 	$(PYTHON) scripts/build_nonsurvey_panel.py --raw-dir $(PANEL_RAW_DIR) --out data/nonsurvey/
 
+fetch-gov:
+	$(PYTHON) scripts/fetch_gov_sources.py --source jta
+	$(PYTHON) scripts/fetch_gov_sources.py --source ffdata
+
+opportunity-scan:
+	$(PYTHON) scripts/opportunity_scan.py
+
+sem-nonsurvey:
+	$(PYTHON) scripts/sem_nonsurvey.py
+
 sem-ftas:
 	$(PYTHON) scripts/sem_ftas.py
 
@@ -143,3 +157,9 @@ nudge-pilot-serve:
 
 nudge-pilot-power:
 	$(PYTHON) scripts/nudge_pilot_power.py
+
+arm3-kanazawa-pdfs:
+	$(PYTHON) scripts/extract_arm3_kanazawa_pdfs.py
+
+arm3-kanazawa:
+	$(PYTHON) scripts/arm3_kanazawa_scm.py

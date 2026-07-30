@@ -1,9 +1,9 @@
 # ADR 0025: Arm 2 addendum — P1 set-difference placebo construction and S1 operational pinning
 
 Date: 2026-07-07
-Status: proposed (pending human review; must be accepted and committed
-BEFORE any unseen outcome data is fetched — after that point this
-specification can no longer be added without demoting P1)
+Status: accepted 2026-07-29 (accepted and committed BEFORE any unseen
+outcome data was fetched, as this specification required; after that
+point it could no longer have been added without demoting P1)
 
 ## Context
 

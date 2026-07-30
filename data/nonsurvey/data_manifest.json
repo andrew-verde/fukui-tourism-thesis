@@ -139,6 +139,11 @@
       "path": "data/nonsurvey/booking_curve_awara.parquet",
       "sha256": "bd9cb22f2e1bd1812a2f6e14ef2edad685b77e7ebe65e28ddd857c9750e8d803",
       "rows": 1102
+    },
+    "panel_pref_monthly": {
+      "path": "data/nonsurvey/panel_pref_monthly.parquet",
+      "sha256": "8ceaa7c5ec982bcbbd8a314b63fc1f13bdbfd6373a3faf4595e41a542a875eb0",
+      "rows": 4512
     }
   },
   "notes": [],
@@ -177,5 +182,31 @@
         "awara_onsen"
       ]
     }
-  ]
+  ],
+  "gov_sources": {
+    "jta_overnight": {
+      "origin": "MLIT accommodation survey Excel -> accommodation_panel.csv (e-Stat API 00601020 frozen at 2016; see ADR 0028)",
+      "estat_stats_code": "00601020",
+      "estat_overnight_statsDataId_reference_only": "0003313520",
+      "parquet": "data/nonsurvey/gov/jta_overnight.parquet",
+      "rows": 4512,
+      "sha256": "51eb8fd6c653d5e2efac891b137c415928adfb43ac97d86dc50eec7752b479db",
+      "fetched_utc": "2026-07-13T04:39:36.685803+00:00"
+    },
+    "ffdata_od_annual": {
+      "origin": "MLIT Data Platform FF-DATA GraphQL (catalog ffd)",
+      "catalog_id": "ffd",
+      "years": [
+        2018,
+        2019,
+        2022,
+        2023,
+        2024
+      ],
+      "parquet": "data/nonsurvey/gov/ffdata_od_annual.parquet",
+      "rows": 113850,
+      "sha256": "297a53a20725f917d42b029630470aa714db45baa659d161d6d731dca286ddf6",
+      "fetched_utc": "2026-07-13T04:44:12.685425+00:00"
+    }
+  }
 }

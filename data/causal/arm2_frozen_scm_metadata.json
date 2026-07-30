@@ -1,0 +1,21 @@
+{
+  "purpose": "Arm 2 frozen SCM inputs built from seen data only; not a result",
+  "seen_window": [
+    202101,
+    202512
+  ],
+  "fit_window": [
+    202101,
+    202402
+  ],
+  "event_ym": 202403,
+  "target_iterations": 1000,
+  "placebo_iterations": 400,
+  "rmspe_fit_mult": 5.0,
+  "good_fit_rmspe": 0.15,
+  "n_high_confidence": 13,
+  "n_placebo_units": 1709,
+  "weights_sha256": "824761cd7412a738764f4fc206bccd57f479283e0ad0eb85db0620c59a9bfaa3",
+  "fits_sha256": "5a6fbbdefd1632abdf514293cd6b97d1fd53452ee319fd455efcab253f950147",
+  "friction_ranking_sha256": "1f2d14802960821078d42452417e5d48cc1474797ebcee8036e388fa886e09dc"
+}

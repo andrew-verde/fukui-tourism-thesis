@@ -1,7 +1,12 @@
 # ADR 0020: Arm 2 — frozen out-of-sample prediction criteria for the transience/durability claim
 
 Date: 2026-07-03
-Status: proposed (pending human review; becomes binding on acceptance)
+Status: **accepted 2026-07-30 — binding.** The two pre-acceptance drafting
+corrections recorded at the end of this document were applied before
+acceptance and before any unseen data was fetched or opened. Firewall
+release requires this acceptance **and** the frozen scripts + oracles
+committed (§"Unseen"); both conditions are met as of the commit that
+carries this line.
 
 ## Context
 
@@ -109,8 +114,13 @@ On unseen mobile-panel months 2026-01 onward, using frozen donor weights:
   existing role.
 - **S3 — friction persistence:** transport_access friction prevalence
   among shinkansen arrivers in unseen FTAS waves remains the argmax
-  friction category with a shinkansen-vs-car gap > 2× (seen value ≈ 4.0×,
-  7.09% vs 0.66%). Erosion below 2× would suggest the constraint is
+  friction category with a shinkansen-vs-pooled-other gap > 2× (seen value
+  4.003×, 7.09% vs 1.7711661764394693 — the `shk_over_other_ratio` column
+  of `output/synthesis/synthesis_mode_friction.csv`). The comparison is
+  against **pooled other arrival modes**, not private car: the private-car
+  ratio is 7.09 / 0.66 = 10.74×, against which a 2× floor would be a far
+  weaker test than this threshold was calibrated for. Erosion below 2×
+  would suggest the constraint is
   resolving itself and weakens the Direction B motivation; this feeds the
   Stage-2 fielding decision but gates nothing by itself.
 
@@ -118,7 +128,17 @@ On unseen mobile-panel months 2026-01 onward, using frozen donor weights:
 
 Vendor panels revise history. Before any unseen-window computation: verify
 the new vintage's 2021-01 – 2025-12 series against `city2025.csv` for the
-14 Fukui municipalities and all retained donors. If root-mean-square
+**13 high-confidence Fukui municipalities** and all retained donors. These
+are pinned by area code as: 18201 Fukui City, 18202 Tsuruga, 18204 Obama,
+18205 Ono, 18207 Sabae, 18208 Awara, 18210 Sakai, 18322 Eiheiji, 18404
+Minami-Echizen, 18423 Echizen Town, 18481 Takahama, 18483 Oi, 18501
+Wakasa — the `regime_confidence == "high"` rows of
+`output/synthesis/durability_mechanisms.csv`, which are identical to its
+`good_fit == True` rows. P2 ranks exactly this set and P1's six
+confirmatory municipalities are a subset of it; the artifact's four
+low-confidence municipalities enter no Arm 2 computation and are
+therefore not guarded. "Confirmatory municipality" below means any of
+these 13. If root-mean-square
 relative revision exceeds 2% for any confirmatory municipality, or any
 donor exits the fit gate under revised history, stop; log a deviation ADR
 deciding between (a) re-running the *entire* Direction D + Arm 2 chain on
@@ -178,3 +198,31 @@ chapters routes through the outcome-matched branch above.
   published (in the thesis) before the data exist; unlike Direction B's
   backfire channel (ADR 0018 rule 4), there is no plausible symmetric
   alternative worth α here.
+
+## Pre-acceptance drafting corrections (2026-07-30)
+
+Two internal inconsistencies were found during Arm 2 implementation, while
+this ADR was still `proposed`, and corrected here in draft. Both were
+resolved **before any unseen data was fetched or opened** (firewall
+intact; see ADR 0032) and before this ADR became binding, so neither is a
+deviation and neither demotes any analysis.
+
+1. **Vintage-revision guard population.** The guard specified "14 Fukui
+   municipalities". No set of 14 exists: `durability_mechanisms.csv` holds
+   17 municipalities, of which 13 are high-confidence (identically, 13 are
+   `good_fit`) and 4 are low. Pinned to the 13 high-confidence
+   municipalities by explicit area code, since P2 ranks exactly that set
+   and P1's 6 are a subset.
+
+2. **S3 denominator.** The S3 sentence named a "shinkansen-vs-car" gap and
+   quoted "7.09% vs 0.66%" — the car comparison, whose ratio is 10.74× —
+   while also quoting "≈ 4.0×", which is `shk_over_other_ratio` = 4.003,
+   the comparison against pooled other modes (1.7711661764394693). The two
+   halves of the sentence disagreed. Frozen as **pooled other**: it is the
+   value the 2× threshold was calibrated against, the harder test, and the
+   only ratio the committed artifact defines.
+
+Both were surfaced by the implementing seat, which stopped rather than
+choosing — selecting a denominator or a municipality set during
+implementation would have been exactly the analyst discretion this ADR
+exists to remove.

@@ -13,43 +13,66 @@ routing lives in `SCIENCE_HANDOFF.md`; this file is the *human* queue.
   fielded (ADR 0026). Re-verification at T−4w/T−1w before any launch
   remains a fielding precondition (ADR 0022 §4).
 
+## Scope change 2026-07-29
+
+Direction B (survey arm) retired — see draft ADR 0029. Arm 2 + Arm 3 +
+the non-survey engine now carry the empirical upgrade. Items below are
+rewritten against that decision.
+
 ## Open — decisions and acceptances (ordered)
 
-- [ ] **Accept + commit ADR 0025** (Arm 2 P1 placebo construction, S1
-  pinning). MUST precede any unseen-data fetch; until accepted, Arm 2
-  implementation cannot start.
-- [ ] **Accept + commit ADR 0026** (Stage 1 ≠ PBL vignette; usage rule).
-  Best accepted before 2026-08-16, when the PBL results exist.
-- [ ] **Stage-1 launch decision** — Direction B critical path. Checklist
-  in ADR 0026 §3: deploy `experiments/nudge-pilot` as its own Vercel
-  project (server-side assignment live), panel procurement n = 250 EN+JP,
-  ethics coverage for the online stage, launch ADR with dates. Launch by
-  ~late July keeps the autumn-2026 intercept window plausible; later
-  makes spring 2027 the working assumption (ADR 0022 §5 rule).
+- [ ] **Accept + commit ADR 0029** (retire Direction B; refocus Ch. 6;
+  amend ADRs 0019/0023). Gates everything else in this file.
+- [x] **ADR 0021** (Arm 3 Kanazawa design) accepted 2026-07-29.
+- [x] **Arm 3 complete** 2026-07-30. Verdict: V1 fail, V2 fail, V3 met
+  descriptively — portability not demonstrated at prefecture grain
+  (ADR 0031; corrections in ADR 0030). Force-add the 12 result artifacts
+  + 2 pinned PDFs per `docs/arm3_implementation_report.md`; they sit under
+  the blanket `output/*` ignore.
+- [x] **ADR 0025** (Arm 2 P1 placebo construction, S1 pinning) accepted
+  2026-07-29.
+- [ ] **Resolve ADR 0020's status** — still `proposed`. It is the binding
+  Arm 2 contract that 0025 is an addendum to, and SCIENCE_HANDOFF
+  describes it as accepted while the file disagrees. **The firewall
+  releases only when 0020 is accepted AND the frozen scripts + oracles
+  are committed — both.** Scripts are being built now; this is the other
+  half.
+- [ ] **Merge the non-survey branches to `main`** —
+  `reframe/gov-estat-fetchers` is 3 commits ahead (ADR 0028 + gov
+  parquets + Makefile targets) and unmerged. Arm 3 work should not be
+  built on a side branch. (`mac/FukudaIdea-Contest` was an identical
+  duplicate; deleted 2026-07-29.)
 - [ ] **Review/commit the accumulated working tree** (ADRs 0021–0026,
-  design docs, playbook, v2 architecture, §7.1 draft, verification
-  outputs, screener spec, memos, config amendment).
+  0029, design docs, v2 architecture, §7.1 draft, memos).
 
-## Open — external long leads (start/continue now)
+## Open — external long leads
 
-- [ ] **Ethics/IRB**: application with advisor. Add the ADR 0024/F5
-  clause ("transit facts subject to factual correction before fielding")
-  and scope to both recruitment modes + both windows (ADR 0022 §6).
-- [ ] **Station-forecourt intercept permission**: inquiries to Fukui /
-  Awara / Tsuruga municipal administrators (ADR 0022 §6 preference
-  order; JR West premises only as fallback).
-- [ ] **FTAS new-wave access request** (Arm 2 S1/S3 depend on post-2026-06
-  waves; ADR 0019 Phase 1).
-- [ ] **Panel-vendor quotes**: send
-  `experiments/nudge-pilot/screener_spec.md` after deciding its three
-  open items (recency window, EN panel composition, budget ceiling).
+**None.** Struck by ADR 0029: ethics/IRB application, station-forecourt
+intercept permission, panel-vendor quotes. Struck by ADR 0032: the "FTAS
+new-wave access request" — FTAS and the mobile panel are both public Code
+for Fukui repos, and both have already published the unseen window
+(six mobile-panel months 2026-01..2026-06; 1,892 new FTAS responses).
+Obtaining either is an ordinary version bump.
+
+The project now has no external dependencies. Everything remaining is
+work under your own control.
 
 ## Standing rules (do not lose)
 
 - No unseen Arm 2 data (post-2025-12 mobile, post-2026-06 FTAS, JTA 2025
-  confirmed/2026) fetched or opened until ADR 0025 is accepted and the
-  frozen scripts + oracles are committed (ADR 0020 firewall).
-- PBL vignette results (close 2026-08-16): informative for launch
-  decisions only; never enter d_plan; never thesis evidence (ADR 0026 §2).
-- Direction B is design, not evidence, until Stage 2 completes.
+  confirmed/2026) fetched or opened until **ADR 0020 is accepted AND** the
+  frozen scripts + oracles are committed — both conditions (ADR 0020:34).
+  ADR 0025 is accepted; ADR 0020 is not.
+- **The unseen data is public and one `git clone` away** (ADR 0032). The
+  firewall is now the only thing protecting Arm 2's out-of-sample claim.
+  A single careless `head()` destroys it permanently, with no undo and no
+  audit trail. This was previously protected by accident — the data did
+  not exist yet. That protection is gone.
+- PBL vignette results (close 2026-08-16): never thesis evidence, never
+  any planning quantity (ADR 0026 §2, survives ADR 0029). Retiring
+  Direction B removes d_plan but raises the temptation to substitute
+  these numbers. The prohibition is absolute.
+- Direction B is a specified protocol that was never fielded. Nothing is
+  estimated under ADR 0018.
+- No chapter file changes before Phase 4 (ADR 0023 §5, unchanged).
 - Human commits; no seat commits or pushes.

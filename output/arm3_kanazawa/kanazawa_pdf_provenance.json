@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "scope": "Arm 3 descriptive anchor evidence only; these series are not SCM units or confirmatory causal outcomes.",
+  "publisher": "Kanazawa City",
+  "publisher_page": "https://www4.city.kanazawa.lg.jp/soshikikarasagasu/kankoseisakuka/gyomuannai/1/2/30429.html",
+  "page_citation_convention": "source_pdf_page is the 1-indexed physical PDF page; source_printed_page is the page number printed in the report.",
+  "sources": {
+    "2018": {
+      "filename": "kanazawa_tourism_survey_2018.pdf",
+      "url": "https://www4.city.kanazawa.lg.jp/material/files/group/32/houkoku_2018.pdf",
+      "sha256": "778cf580b354a8923b0be2456bc8e201095f0edfb720a75ddcace0f8a1bd3ea7",
+      "bytes": 1989163,
+      "pages": 107,
+      "title_ja": "平成30年 金沢市観光調査結果報告書",
+      "path": "output/arm3_kanazawa/raw/kanazawa_tourism_survey_2018.pdf"
+    },
+    "2019": {
+      "filename": "kanazawa_tourism_survey_2019.pdf",
+      "url": "https://www4.city.kanazawa.lg.jp/material/files/group/32/houkoku_2019.pdf",
+      "sha256": "d8107ffe851dcbbc9ce1504a95d2403ccffec22a0db1ee99e5a267339b5f7a77",
+      "bytes": 5180426,
+      "pages": 117,
+      "title_ja": "2019年 金沢市観光調査結果報告書",
+      "path": "output/arm3_kanazawa/raw/kanazawa_tourism_survey_2019.pdf"
+    }
+  },
+  "outputs": {
+    "lodging_guests": {
+      "path": "output/arm3_kanazawa/kanazawa_lodging_guests_monthly.csv",
+      "sha256": "51b87ff654470291ed5c8ae05df073e081f7974775c3a75784a0aa26bdd44de5",
+      "rows_excluding_header": 72
+    },
+    "facility_aggregate": {
+      "path": "output/arm3_kanazawa/kanazawa_19_facility_visits_monthly.csv",
+      "sha256": "512511140f8007c723c68e53238515d5dfea15e525fcef292637bc1a01be40f9",
+      "rows_excluding_header": 72
+    },
+    "kenrokuen": {
+      "path": "output/arm3_kanazawa/kenrokuen_visits_monthly.csv",
+      "sha256": "ae14da453830c8149a20ccc5c8fd6400ef669836b4031cd11b5376eb74d30633",
+      "rows_excluding_header": 36
+    },
+    "facility_membership": {
+      "path": "output/arm3_kanazawa/kanazawa_19_facility_membership.csv",
+      "sha256": "cf76623463195b6cce4143215dce6e64f821c9255ea371f01cb03859386d9877",
+      "rows_excluding_header": 38
+    }
+  },
+  "extractions": {
+    "lodging_guests": {
+      "coverage": "2014-01..2019-12",
+      "unit": "persons (lodging guests), not person-nights",
+      "pages": [
+        {
+          "report_year": 2018,
+          "source_pdf_page": 97,
+          "source_printed_page": 96,
+          "years_used": [
+            2014
+          ]
+        },
+        {
+          "report_year": 2019,
+          "source_pdf_page": 109,
+          "source_printed_page": 108,
+          "years_used": [
+            2015,
+            2016,
+            2017,
+            2018,
+            2019
+          ]
+        }
+      ],
+      "reporting_universe_pages": [
+        {
+          "report_year": 2018,
+          "source_pdf_page": 95,
+          "source_printed_page": 94
+        },
+        {
+          "report_year": 2019,
+          "source_pdf_page": 107,
+          "source_printed_page": 106
+        }
+      ]
+    },
+    "facility_aggregate": {
+      "coverage": "2014-01..2019-12",
+      "unit": "person-visits at 19 points; not unique visitors",
+      "pages": [
+        {
+          "report_year": 2018,
+          "source_pdf_page": 90,
+          "source_printed_page": 89,
+          "years_used": [
+            2014
+          ]
+        },
+        {
+          "report_year": 2019,
+          "source_pdf_page": 102,
+          "source_printed_page": 101,
+          "years_used": [
+            2015,
+            2016,
+            2017,
+            2018,
+            2019
+          ]
+        }
+      ]
+    },
+    "kenrokuen": {
+      "coverage": "2017-01..2019-12",
+      "unit": "person-visits at Kenrokuen; not unique visitors",
+      "pages": [
+        {
+          "report_year": 2018,
+          "source_pdf_page": 92,
+          "source_printed_page": 91,
+          "years_used": [
+            2017
+          ]
+        },
+        {
+          "report_year": 2019,
+          "source_pdf_page": 104,
+          "source_printed_page": 103,
+          "years_used": [
+            2018,
+            2019
+          ]
+        }
+      ],
+      "unsupported_monthly_years": [
+        2014,
+        2015,
+        2016
+      ]
+    },
+    "facility_membership": {
+      "coverage": "2018 and 2019 report definitions",
+      "unit": "membership definition",
+      "pages": [
+        {
+          "report_year": 2018,
+          "source_pdf_page": 89,
+          "source_printed_page": 88
+        },
+        {
+          "report_year": 2019,
+          "source_pdf_page": 101,
+          "source_printed_page": 100
+        }
+      ]
+    }
+  },
+  "facility_set_review": {
+    "result": "No membership change between the 2018 and 2019 report definitions: the same 19 named facilities appear in the same order. The 2018 overview spells 金沢蓄音器館 as 金沢蓄音機館; its detail table and the 2019 report use 金沢蓄音器館, so this is treated as a label typo rather than a membership change.",
+    "member_count_each_report": 19,
+    "members_ja": [
+      "兼六園",
+      "金沢城公園",
+      "金沢21世紀美術館",
+      "県立美術館",
+      "県立歴史博物館",
+      "県立伝統産業工芸館",
+      "安江金箔工芸館",
+      "中村記念美術館",
+      "武家屋敷跡野村家",
+      "老舗記念館",
+      "前田土佐守家資料館",
+      "志摩",
+      "泉鏡花記念館",
+      "金沢蓄音器館",
+      "妙立寺",
+      "西茶屋資料館",
+      "室生犀星記念館",
+      "大野からくり記念館",
+      "金沢湯涌夢二館"
+    ]
+  },
+  "source_ambiguities": [
+    {
+      "issue": "lodging_monthly_rows_do_not_sum_to_printed_totals",
+      "detail": "The 12 printed lodging months sum to 2,656,588 for 2014 and 2,816,987 for 2015, but the adjacent printed annual totals are 2,749,577 and 2,905,204. The discrepancies are -92,989 and -88,217. Both reports reproduce the 2015 monthly cells and total. The output preserves the printed monthly cells and does not force them to balance."
+    },
+    {
+      "issue": "2018_facility_aggregate_revised",
+      "detail": "The 2018 report, PDF page 90 (printed 89), reports 9,086,281 visits for 2018. The 2019 report, PDF page 102 (printed 101), revises every 2018 month and reports 9,048,836. Membership is unchanged. The output uses the later 2019-report vintage for 2018."
+    },
+    {
+      "issue": "2019_internal_aggregate_month_discrepancy",
+      "detail": "For 2019 January--June, the dedicated aggregate time-series table on PDF page 102 (printed 101) differs by +6,+9,+14,+14,-55,+12 from the total rows in the facility-detail table on PDF page 104 (printed 103). The differences net to zero and both annual totals are 9,155,285. The output uses the dedicated published aggregate time-series table."
+    },
+    {
+      "issue": "kenrokuen_opening_window_not_supported",
+      "detail": "The reports publish annual Kenrokuen totals back to 2014 but monthly Kenrokuen rows only for 2017--2019. They do not support a monthly Kenrokuen series for the March 2015 opening window."
+    },
+    {
+      "issue": "lodging_reporting_universe_changes",
+      "detail": "The city reports 112 lodging facilities in 2014 and 345 in 2019. The monthly guest series is an evolving citywide reporting universe and remains descriptive."
+    }
+  ]
+}

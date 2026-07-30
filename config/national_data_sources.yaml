@@ -68,6 +68,43 @@ direct:
   # https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html 2026-06-12.
   # 確定値 = confirmed values; 2025 is 年間速報値 (annual preliminary) until
   # its confirmed release — flag vintage when building the panel.
+  # The 2011–2017 corrected confirmed-value releases are checksum-pinned as
+  # Arm 3's vintage cross-check oracle (ADR 0021).
+  jta_accommodation_2011_confirmed:
+    url: "https://www.mlit.go.jp/kankocho/content/000216576.xls"
+    filename: "jta_accommodation_2011_confirmed.xls"
+    sha256: "d47b5caec1da4a2f986cee89636483283d1b4375c5a76f849ce0d32d4d681a1f"
+    description: "宿泊旅行統計調査 2011 Jan–Dec corrected confirmed values — Arm 3 vintage oracle"
+  jta_accommodation_2012_confirmed:
+    url: "https://www.mlit.go.jp/kankocho/content/001002144.xls"
+    filename: "jta_accommodation_2012_confirmed.xls"
+    sha256: "3ece2333d8dd3014e95b9687a9609da9843ed02dafe56928ef9a8faccd1386fe"
+    description: "宿泊旅行統計調査 2012 Jan–Dec corrected confirmed values — Arm 3 vintage oracle"
+  jta_accommodation_2013_confirmed:
+    url: "https://www.mlit.go.jp/kankocho/content/001046404.xls"
+    filename: "jta_accommodation_2013_confirmed.xls"
+    sha256: "fec002e6c1cac48de968fbafee57be6d5f043b53c20e389ced8e721dd0695882"
+    description: "宿泊旅行統計調査 2013 Jan–Dec corrected confirmed values — Arm 3 vintage oracle"
+  jta_accommodation_2014_confirmed:
+    url: "https://www.mlit.go.jp/kankocho/content/001094684.xls"
+    filename: "jta_accommodation_2014_confirmed.xls"
+    sha256: "1546ef4319cc7c1bc6a6868ab849789187faa7d205908877473c5f765578307a"
+    description: "宿泊旅行統計調査 2014 Jan–Dec confirmed values — Arm 3 vintage oracle"
+  jta_accommodation_2015_confirmed:
+    url: "https://www.mlit.go.jp/kankocho/tokei_hakusyo/content/001312940.xlsx"
+    filename: "jta_accommodation_2015_confirmed.xlsx"
+    sha256: "d03b0b35d219e7cedd644f83badb214644c703f71eb924c15a0a241b28f50f13"
+    description: "宿泊旅行統計調査 2015 Jan–Dec confirmed values — Arm 3 vintage oracle"
+  jta_accommodation_2016_confirmed:
+    url: "https://www.mlit.go.jp/kankocho/content/001190399.xlsx"
+    filename: "jta_accommodation_2016_confirmed.xlsx"
+    sha256: "efeef94ea5a549e636c578d18af1a48fc4b982bfa0061ae734003f919d969ed4"
+    description: "宿泊旅行統計調査 2016 Jan–Dec confirmed values — Arm 3 vintage oracle"
+  jta_accommodation_2017_confirmed:
+    url: "https://www.mlit.go.jp/kankocho/content/001247521.xlsx"
+    filename: "jta_accommodation_2017_confirmed.xlsx"
+    sha256: "6ace13525563fd28ff02dc3cadbd7a39fd0c7056db30df1dd9cdbc73254b5ca2"
+    description: "宿泊旅行統計調査 2017 Jan–Dec confirmed values — Arm 3 vintage oracle"
   jta_accommodation_2018_confirmed:
     url: "https://www.mlit.go.jp/kankocho/content/001295984.xlsx"
     filename: "jta_accommodation_2018_confirmed.xlsx"
@@ -103,6 +140,7 @@ direct:
   jta_accommodation_timeseries:
     url: "https://www.mlit.go.jp/kankocho/content/002002831.xlsx"
     filename: "jta_accommodation_timeseries.xlsx"
+    sha256: "c866c06362cbe88ac5241280857427337b9ace71ce6ac42f69394f124fc644bb"
     description: "宿泊旅行統計調査 推移表 — long-run monthly time-series summary"
 
   # JR West press releases with post-opening Hokuriku Shinkansen ridership.
