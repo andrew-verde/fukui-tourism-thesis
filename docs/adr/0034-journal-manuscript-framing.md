@@ -76,7 +76,7 @@ away believing the template replicated.
 pre-declared order.** Non-negotiable content. Every quantity below is
 quoted from ADR 0031, which records them byte-exact from
 `output/arm3_kanazawa/causal_robustness/metrics.json`; the manuscript
-quotes that artifact, not this ADR:
+quotes that artifact, not this ADR. Reproduction: `make arm3-kanazawa`.
 
 - V1 fails on V1a (p = 0.181818) while V1b and V1c pass, and Ishikawa
   pre-period RMSPE is 0.041470 against a 0.15 gate — the pipeline is

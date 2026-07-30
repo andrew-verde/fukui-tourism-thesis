@@ -37,7 +37,7 @@ with a bounded null (ADR 0031). Arm 2 built, committed, and **live**
       2026-07-30, with one consolidated amendment/track ledger. Bodies
       unedited; ADR log stays append-only.
 - [x] **ADR 0034** — journal-manuscript framing settled before drafting
-      (ADR 0031's instruction): one paper, Chapters 3–4 spine, Arm 3 as a
+      (ADR 0031's instruction): one paper, Chapters 3–5 spine, Arm 3 as a
       bounded null, bound in the abstract, Arm 2 excluded, reviewer-pressure
       answers fixed in advance.
 - [x] **Pushed 2026-07-30.** Clean fast-forward onto `origin/main`; no
@@ -56,10 +56,19 @@ with a bounded null (ADR 0031). Arm 2 built, committed, and **live**
       it cannot be added without a new ADR and a demotion to exploratory.
 - [ ] **Fire the Arm 2 production run — when you pick the vintage.** See the
   standing rules below. One-shot; no reason to hurry. More unseen months
-  publish monthly, and six is the floor, not a target. **Blocked on one
-  build task first:** only the mobile leg has quarantine assembly tooling
-  (`tools/arm2_assemble_quarantine.py`); the `ftas/` and `jta/` legs still
-  need theirs.
+  publish monthly, and six is the floor, not a target. **All three
+  quarantine legs now have assembly tooling** —
+  `tools/arm2_assemble_quarantine.py` (mobile),
+  `tools/arm2_assemble_ftas_quarantine.py`,
+  `tools/arm2_assemble_jta_quarantine.py`. Rehearsal passed guard-only on
+  2026-07-30. What remains is your vintage choice, the operator downloads,
+  and one guarded run.
+- [x] **JTA 2026-row problem resolved 2026-07-30 without a contract
+      change.** S2 needs a JTA row at year ≥ 2026; the monthly 観光庁
+      workbooks parse with the existing annual parser, and the 2025 annual
+      confirmed has published. ADR 0036 records the accompanying
+      stratification break (employee count → room count from 2026-01) and
+      fixes the S2 disclosure wording before any S2 series exists.
 
 ## Open — external long leads
 

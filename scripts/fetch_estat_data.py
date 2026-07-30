@@ -42,7 +42,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.utils.logger import setup_logger
 
-logger = setup_logger(__name__)
+logger = None
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "config" / "national_data_sources.yaml"
@@ -56,6 +56,13 @@ CALL_DELAY_S = 1.0
 # getStatsData caps at 100k values per call; large tables need paging via
 # startPosition. We page until NEXT_KEY is absent.
 PAGE_LIMIT = 100_000
+
+
+def get_logger():
+    global logger
+    if logger is None:
+        logger = setup_logger(__name__)
+    return logger
 
 
 def _sha256(data: bytes) -> str:
@@ -117,6 +124,7 @@ def fetch_table(app_id: str, stats_data_id: str, area_codes: list, timeout: int)
 
 
 def main() -> int:
+    logger = get_logger()
     parser = argparse.ArgumentParser(description="Fetch e-Stat datasets")
     parser.add_argument("--config", default=str(CONFIG_PATH), help="Path to source YAML")
     parser.add_argument("--dataset", help="Fetch only this dataset key from the config")
