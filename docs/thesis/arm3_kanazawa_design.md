@@ -87,7 +87,7 @@ It is retained verbatim because the template's content is that the gates are
 | Treated unit(s) | Fukui municipalities (17 units) | **Ishikawa (17) primary; Toyama (16) companion** | Grain is forced to prefecture (audit §§2–3). Ishikawa holds the terminus and the anchor city; Toyama is the pass-through case — the prefecture-grain analog of the durable/transient contrast. |
 | Outcome layer | JTTA mobile-derived monthly municipal tourism visitors | **JTA 宿泊旅行統計調査 prefecture-month total overnight stays** (all-establishment series), Japanese/foreign split as secondary heterogeneity | Forced: the mobile layer begins 2021-01 (audit §3, VERIFIED). Overnight stays measure the staying margin rather than all visits; see §7. |
 | Donor pool | 1,709 municipalities outside prefectures {15, 16, 17, 18} | **34 prefectures**: all 47 minus treated 17 and excluded {01, 02, 03, 04, 07, 15, 16, 20, 33, 34, 38, 43} (audit §4 verdict) | Co-treatment (new-segment prefectures 15/16/20; Hokkaido Shinkansen 2016-03 → 01, 02) and severe in-window disasters (2011 Tōhoku → 02/03/04/07; 2016 Kumamoto → 43; 2018 floods → 33/34/38). |
-| Pre-period | 2021-01..2024-02 (38 months) | **2012-01..2015-02 (38 months)**; sensitivity: 2011-01..2015-02 (49 months) | 2011-01 is the earliest consistent post-frame-break month (audit §1 verdict), but 2011-03 (Great East Japan Earthquake) sits inside a 49-month window; the primary fit window starts after the shock year and matches the template's 38-month length. |
+| Pre-period | 2021-01..2024-02 (38 months) | **2012-01..2015-02 (38 months)**; sensitivity: 2011-01..2015-02 (50 months) | 2011-01 is the earliest consistent post-frame-break month (audit §1 verdict), but 2011-03 (Great East Japan Earthquake) sits inside a 50-month window; the primary fit window starts after the shock year and matches the template's 38-month length. |
 | Post-period | 2024-03..2025-12 (22 months) | **2015-03..2019-12 (58 months), confirmatory window ends 2019-12** | COVID (2020-01 onward) is a global shock that invalidates donor comparability; 2024-03 re-treats the corridor (Tsuruga extension). A descriptive appendix figure may extend the trajectory through 2024 using already-seen JTA vintages, clearly marked non-confirmatory. |
 | Anchor candidates | Eiheiji (18322), Sakai (18210) vs Fukui City (18201) | **Kanazawa city lodging + Kenrokuen / 19-facility monthly series (descriptive only)** vs Toyama prefecture trajectory | Audit §2: Kanazawa monthly city-level lodging from 2014 and monthly point series (incl. 兼六園) exist in city-report PDFs; no balanced municipal panel exists, so anchors are descriptive, not SCM units. |
 
@@ -147,7 +147,7 @@ months. Arm 3's durability content needs one addition, declared here:
 | `EVENT_YM` | 201503 |
 | `INTIME_EVENT_YM` | 201403 |
 | Pre-window (primary) | 2012-01..2015-02 (38 months) |
-| Pre-window (sensitivity) | 2011-01..2015-02 (49 months) |
+| Pre-window (sensitivity) | 2011-01..2015-02 (50 months) |
 | Confirmatory post-window | 2015-03..2019-12 (58 months) |
 | Opening window | 2015-03..2015-04 |
 | Late window | 2018-01..2019-12 |
@@ -182,7 +182,7 @@ Run for each treated unit, on the primary spec:
 4. **Leave-one-out** — drop each positive-weight donor, refit, report the
    opening-surge range and the late-window mean-gap range.
 
-Sensitivities (reported, never headline): 49-month pre-window; strict
+Sensitivities (reported, never headline): 50-month pre-window; strict
 20-donor pool; masking 2018-06..09 (Osaka quake / West-Japan floods months
 in donors kept by the main rule) and 2019-10..12 (Typhoon Hagibis, to be
 date-verified by Codex during implementation — it postdates the audit's
