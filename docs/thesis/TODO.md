@@ -27,17 +27,20 @@ with a bounded null (ADR 0031). Arm 2 built, committed, and **live**
       high-confidence municipalities by area code; S3 denominator →
       pooled other, 4.003×).
 - [x] **Merged to `main`** — both `reframe/*` branches, merge `476b37d`.
-- [x] **All work committed** — 10 commits, suite 217 passed / 1 skipped,
-      Arm 3 artifacts force-added per `docs/arm3_implementation_report.md`.
+- [x] **Arm 3 work committed and pushed** — 11 commits, suite 217 passed /
+      1 skipped at that point, Arm 3 artifacts force-added per
+      `docs/arm3_implementation_report.md`. **Later work on 2026-07-30 is
+      uncommitted:** two new test files (suite now 243 passed / 1 skipped),
+      the CI deselect list, the defense-memo rewrite, and two provenance
+      blocks. See `SCIENCE_HANDOFF.md` §6.
+- [x] **Pushed 2026-07-30.** Clean fast-forward onto `origin/main`; no
+      force-push, no published SHA changed. `SCIENCE_HANDOFF.md` had been
+      force-added against `.gitignore:170-173` and was scrubbed from history
+      the same day — zero handoff objects in the object store, and both
+      handoff documents remain on disk, untracked. `main` now in sync.
 
 ## Open — decisions awaiting you
 
-- [ ] **Push.** `main` is 9 commits ahead of `origin/main` and is a clean
-  **fast-forward** — no force-push needed, no published SHA changed.
-  `SCIENCE_HANDOFF.md` was scrubbed from history on 2026-07-30 (it had
-  been force-added against `.gitignore:170-173`); zero handoff objects
-  remain in the object store, and both handoff documents remain on disk
-  untracked. Suite green at 217 passed / 1 skipped.
 - [ ] **Resolve ADR 0019 and ADR 0023 statuses** — both still `proposed`
   while being relied on as binding. ADR 0023 §5's "no chapter file changes
   before Phase 4" governs current behaviour; ADR 0019's phase structure
