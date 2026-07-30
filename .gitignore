@@ -126,6 +126,7 @@ dmypy.json
 output/*
 !output/.gitkeep
 data/raw/
+/data/quarantine/arm2/
 data/nonsurvey/raw_estat/
 data/nonsurvey/gov/raw/
 *.xlsx
