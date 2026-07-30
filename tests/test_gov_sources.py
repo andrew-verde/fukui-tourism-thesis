@@ -59,7 +59,7 @@ def test_estat_rows_normalizes_shapes_labels_and_numeric_values(gov_modules):
     rows = fetch_gov_sources._estat_rows(
         estat_payload(
             [
-                {"@area": "01000", "@time": "202401", "@cat01": "a", "@unit": "people", "$": "1,234"},
+                {"@area": "01000", "@tab": "category", "@time": "202401", "@cat01": "a", "@unit": "people", "$": "1,234"},
                 {"@tab": "fallback", "@time": "202402", "@cat01": "unknown", "$": "-"},
                 {"@area": "01000", "@time": "202403", "@cat01": "b", "$": ""},
                 {"@area": "01000", "@time": "202404", "@cat01": "a", "$": None},
@@ -70,8 +70,8 @@ def test_estat_rows_normalizes_shapes_labels_and_numeric_values(gov_modules):
     )
 
     expected = [
-        {"stat_id": "table-1", "area": "01000", "time": "202401", "cat": "cat01=Alpha", "value": 1234.0, "unit": "people"},
-        {"stat_id": "table-1", "area": "fallback", "time": "202402", "cat": "tab=fallback|cat01=unknown", "value": None, "unit": ""},
+        {"stat_id": "table-1", "area": "01000", "time": "202401", "cat": "tab=category|cat01=Alpha", "value": 1234.0, "unit": "people"},
+        {"stat_id": "table-1", "area": "fallback", "time": "202402", "cat": "cat01=unknown", "value": None, "unit": ""},
         {"stat_id": "table-1", "area": "01000", "time": "202403", "cat": "cat01=Beta", "value": None, "unit": ""},
         {"stat_id": "table-1", "area": "01000", "time": "202404", "cat": "cat01=Alpha", "value": None, "unit": ""},
         {"stat_id": "table-1", "area": "01000", "time": "202405", "cat": "cat01=Alpha", "value": None, "unit": ""},
@@ -143,7 +143,6 @@ def test_update_manifest_merges_gov_sources_without_losing_other_keys(
     fetch_gov_sources, _ = gov_modules
     monkeypatch.setattr(fetch_gov_sources, "ROOT", tmp_path)
     manifest_path = tmp_path / "data" / "nonsurvey" / "data_manifest.json"
-    manifest_path.parent.mkdir(parents=True)
 
     fetch_gov_sources._update_manifest(tmp_path / "one.parquet", "one", {"rows": 1})
     assert json.loads(manifest_path.read_text(encoding="utf-8")) == {"gov_sources": {"one": {"rows": 1}}}

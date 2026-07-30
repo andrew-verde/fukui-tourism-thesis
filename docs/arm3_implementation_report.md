@@ -14,15 +14,16 @@ figure, and every hash quoted here; the Kanazawa V3 series come from
 provenance guard's `scripts/[a-z_]+\.py` pattern excludes digits and so never
 matches `arm3_kanazawa_scm.py`.)
 
-**Battery size — discrepancy flagged, not repaired.** ADR 0031 and this report's
-prose describe a "24-specification battery", but
-`output/arm3_kanazawa/causal_robustness/metrics.json` records
-`design.specification_count: 12`, run against both targets (Ishikawa and Toyama)
-for 24 target-by-specification rows. The p-value scan behind the verdict is
-unaffected — no run reaches p ≤ 0.05 on V1a either way — but "24 specifications"
-is loose against the frozen artifact. ADR 0031 is accepted, so correcting its
-wording needs a human decision; recorded here so the number is not quoted
-onward unexamined.
+**Battery size — resolved by ADR 0035.** The battery is **12
+specifications, run against two targets (Ishikawa and Toyama), for 24
+target-by-specification rows**, exactly as
+`output/arm3_kanazawa/causal_robustness/metrics.json` records in
+`design.specification_count: 12`. Earlier prose here and in ADR 0031 said
+"24-specification battery"; that wording is retired. The p-value scan behind
+the verdict is unaffected — no run reaches p ≤ 0.05 on V1a either way, and
+the scan covers every row under either description. ADR 0031's body is not
+rewritten (append-only log); it carries a correction note pointing at
+ADR 0035.
 
 ## ADR 0030 resolutions implemented
 

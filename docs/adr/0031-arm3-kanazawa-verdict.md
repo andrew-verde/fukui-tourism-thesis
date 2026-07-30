@@ -3,6 +3,13 @@
 Date: 2026-07-30
 Status: accepted 2026-07-30 (records the ADR 0021 §6 interpretation contract's outcome; binds ADR 0023 Track T)
 
+**Wording corrected by ADR 0035 (2026-07-30):** the phrase
+"24-specification battery" below (`:21`, `:29`, `:80`) is loose against the
+frozen artifact, which records `design.specification_count: 12` run against
+two targets — 12 specifications, 24 target-by-specification rows. Read every
+occurrence that way. No number, tier outcome, or verdict in this ADR changes;
+the p-value scan covers every row either way.
+
 ## Context
 
 Arm 3 ran to completion on 2026-07-30 under ADR 0021 (accepted

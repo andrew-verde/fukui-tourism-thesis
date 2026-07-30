@@ -48,9 +48,18 @@ with a bounded null (ADR 0031). Arm 2 built, committed, and **live**
 
 ## Open — decisions awaiting you
 
-- [ ] **Authorize the Arm 2 production run — when you are ready.** See the
-  standing rules below. This is a one-shot test; there is no reason to
-  hurry it. More unseen months publish monthly.
+- [x] **Arm 2 run authorized 2026-07-30 — held, not fired.** You chose to
+      rehearse now and fire on a later, larger vintage. Rehearsal passed
+      (guard-only, nothing decoded; see `SCIENCE_HANDOFF.md` §6.1). The
+      single-use rule is unchanged: whatever vintage you fire on is the
+      vintage the confirmatory claim is made on, and months published after
+      it cannot be added without a new ADR and a demotion to exploratory.
+- [ ] **Fire the Arm 2 production run — when you pick the vintage.** See the
+  standing rules below. One-shot; no reason to hurry. More unseen months
+  publish monthly, and six is the floor, not a target. **Blocked on one
+  build task first:** only the mobile leg has quarantine assembly tooling
+  (`tools/arm2_assemble_quarantine.py`); the `ftas/` and `jta/` legs still
+  need theirs.
 
 ## Open — external long leads
 

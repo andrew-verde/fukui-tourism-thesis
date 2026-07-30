@@ -30,7 +30,8 @@ and the reader should hold them throughout:
 
 **Reproduction.** Chapter 5's causal battery: `make synth-causal-arm` and
 `make causal-robustness`. The SEM: `make sem-ftas`. Chapter 6's prioritization:
-`make nudge-ranking`. Arm 3's full 24-specification battery and every Arm 3
+`make nudge-ranking`. Arm 3's full battery — 12 specifications across two
+targets, 24 target-by-specification rows (ADR 0035) — and every Arm 3
 number quoted below: `make arm3-kanazawa`, with the Kanazawa V3 series from
 `make arm3-kanazawa-pdfs`. Provenance rows: `docs/source_ledger.md`.
 
@@ -441,9 +442,8 @@ p ≤ 0.05 on V1a, and the smallest one-sided opening p is the primary's
 0.181818. State the battery's size carefully — the frozen artifact records
 `specification_count: 12`, run against both targets (Ishikawa and Toyama) for
 24 target-by-specification rows. Say "12 specifications across two targets," not
-"24 specifications." (ADR 0031 and `docs/arm3_implementation_report.md` both say
-"24-specification battery"; that wording is loose against the artifact and is
-flagged for correction, not relied on here.)
+"24 specifications." (ADR 0031's looser wording is corrected by ADR 0035, which
+retires "24-specification battery" everywhere.)
 
 **4. Aggregation dilution is not an excuse invented after the fact — it was
 named in advance and its untestability was documented in advance.** It appears

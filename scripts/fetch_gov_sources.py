@@ -98,9 +98,12 @@ def _estat_rows(payload: dict, stat_id: str) -> list[dict[str, object]]:
         attrs = {key[1:]: val for key, val in value.items() if key.startswith("@")}
         area_code = attrs.get("area", attrs.get("tab", ""))
         time_code = attrs.get("time", "")
+        category_keys = {"area", "time", "unit"}
+        if "area" not in attrs:
+            category_keys.add("tab")
         category = "|".join(
             f"{key}={labels.get(key, {}).get(code, code)}"
-            for key, code in attrs.items() if key not in {"area", "time", "unit"}
+            for key, code in attrs.items() if key not in category_keys
         )
         raw = value.get("$")
         try:
@@ -223,6 +226,7 @@ def fetch_ffdata(years: list[int] | None = None, *, refresh: bool = False) -> pd
 
 def _update_manifest(out: Path, name: str, record: dict[str, object]) -> None:
     manifest_path = ROOT / "data" / "nonsurvey" / "data_manifest.json"
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
     manifest.setdefault("gov_sources", {})[name] = record
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
