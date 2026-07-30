@@ -32,12 +32,12 @@ with a bounded null (ADR 0031). Arm 2 built, committed, and **live**
 
 ## Open — decisions awaiting you
 
-- [ ] **Push, or scrub history first.** `main` is 10 commits ahead of
-  `origin/main`; nothing has been pushed. `SCIENCE_HANDOFF.md`'s blob
-  still exists in local history at commit `2e187da` even though `c388c18`
-  untracked it. It is an internal agent-process document and this repo has
-  a remote plus CC-BY content licensing. Removable cleanly **now**;
-  pushing bakes it into published history. Decide before pushing.
+- [ ] **Push.** `main` is 9 commits ahead of `origin/main` and is a clean
+  **fast-forward** — no force-push needed, no published SHA changed.
+  `SCIENCE_HANDOFF.md` was scrubbed from history on 2026-07-30 (it had
+  been force-added against `.gitignore:170-173`); zero handoff objects
+  remain in the object store, and both handoff documents remain on disk
+  untracked. Suite green at 217 passed / 1 skipped.
 - [ ] **Resolve ADR 0019 and ADR 0023 statuses** — both still `proposed`
   while being relied on as binding. ADR 0023 §5's "no chapter file changes
   before Phase 4" governs current behaviour; ADR 0019's phase structure
