@@ -1,78 +1,92 @@
 # Pending human tasks
 
-Updated 2026-07-07 (end of Fable reasoning window). Successor-seat task
-routing lives in `SCIENCE_HANDOFF.md`; this file is the *human* queue.
+Updated 2026-07-30. Successor-seat task routing lives in
+`SCIENCE_HANDOFF.md`; thread/session state lives in `HANDOFF.md` (both
+untracked by design). This file is the *human* queue.
 
-- [x] **Fill citations in §7.2**: DONE 2026-07-03 (see git history).
-- [x] **Verify stimulus transit facts against current timetables**: DONE
-  2026-07-07. Protocol executed by Codex
-  (`experiments/nudge-pilot/timetable_verification.md`, evidence archive +
-  sha256 manifest under `experiments/nudge-pilot/verification/`); three
-  corrections applied to `study-config.json` (version 2026-07-07) per
-  ADR 0024. No participant exposure occurred — the instrument had never
-  fielded (ADR 0026). Re-verification at T−4w/T−1w before any launch
-  remains a fielding precondition (ADR 0022 §4).
+## Scope change 2026-07-29/30
 
-## Scope change 2026-07-29
+Direction B (survey arm) retired (ADR 0029). Arm 3 complete and closed
+with a bounded null (ADR 0031). Arm 2 built, committed, and **live**
+(ADR 0020 accepted). The project has no external dependencies.
 
-Direction B (survey arm) retired — see draft ADR 0029. Arm 2 + Arm 3 +
-the non-survey engine now carry the empirical upgrade. Items below are
-rewritten against that decision.
+## Done
 
-## Open — decisions and acceptances (ordered)
+- [x] **ADR 0029** — Direction B retired, Ch. 6 refocused. Accepted 2026-07-29.
+- [x] **ADR 0021** — Arm 3 Kanazawa design. Accepted 2026-07-29.
+- [x] **ADR 0025** — Arm 2 P1 placebo construction, S1 pinning. Accepted 2026-07-29.
+- [x] **ADR 0030** — Arm 3 implementation corrections (50-month window;
+      Hagibis primary `2019-10` + `2019-10..12` sensitivity; V3 = 19-facility
+      aggregate). Accepted 2026-07-30.
+- [x] **ADR 0031** — Arm 3 verdict: V1 fail, V2 fail, V3 met descriptively.
+      Portability not demonstrated at prefecture grain. **Arm 3 is closed.**
+- [x] **ADR 0032** — Arm 2 data-availability correction. Both supposed
+      external dependencies were phantoms.
+- [x] **ADR 0020 accepted 2026-07-30 — binding.** Two pre-acceptance
+      drafting corrections applied first (guard population → the 13
+      high-confidence municipalities by area code; S3 denominator →
+      pooled other, 4.003×).
+- [x] **Merged to `main`** — both `reframe/*` branches, merge `dc04308`.
+- [x] **All work committed** — 10 commits, suite 217 passed / 1 skipped,
+      Arm 3 artifacts force-added per `docs/arm3_implementation_report.md`.
 
-- [ ] **Accept + commit ADR 0029** (retire Direction B; refocus Ch. 6;
-  amend ADRs 0019/0023). Gates everything else in this file.
-- [x] **ADR 0021** (Arm 3 Kanazawa design) accepted 2026-07-29.
-- [x] **Arm 3 complete** 2026-07-30. Verdict: V1 fail, V2 fail, V3 met
-  descriptively — portability not demonstrated at prefecture grain
-  (ADR 0031; corrections in ADR 0030). Force-add the 12 result artifacts
-  + 2 pinned PDFs per `docs/arm3_implementation_report.md`; they sit under
-  the blanket `output/*` ignore.
-- [x] **ADR 0025** (Arm 2 P1 placebo construction, S1 pinning) accepted
-  2026-07-29.
-- [ ] **Resolve ADR 0020's status** — still `proposed`. It is the binding
-  Arm 2 contract that 0025 is an addendum to, and SCIENCE_HANDOFF
-  describes it as accepted while the file disagrees. **The firewall
-  releases only when 0020 is accepted AND the frozen scripts + oracles
-  are committed — both.** Scripts are being built now; this is the other
-  half.
-- [ ] **Merge the non-survey branches to `main`** —
-  `reframe/gov-estat-fetchers` is 3 commits ahead (ADR 0028 + gov
-  parquets + Makefile targets) and unmerged. Arm 3 work should not be
-  built on a side branch. (`mac/FukudaIdea-Contest` was an identical
-  duplicate; deleted 2026-07-29.)
-- [ ] **Review/commit the accumulated working tree** (ADRs 0021–0026,
-  0029, design docs, v2 architecture, §7.1 draft, memos).
+## Open — decisions awaiting you
+
+- [ ] **Push, or scrub history first.** `main` is 10 commits ahead of
+  `origin/main`; nothing has been pushed. `SCIENCE_HANDOFF.md`'s blob
+  still exists in local history at commit `2e187da` even though `c388c18`
+  untracked it. It is an internal agent-process document and this repo has
+  a remote plus CC-BY content licensing. Removable cleanly **now**;
+  pushing bakes it into published history. Decide before pushing.
+- [ ] **Resolve ADR 0019 and ADR 0023 statuses** — both still `proposed`
+  while being relied on as binding. ADR 0023 §5's "no chapter file changes
+  before Phase 4" governs current behaviour; ADR 0019's phase structure
+  and deviation discipline are cited throughout.
+- [ ] **Authorize the Arm 2 production run — when you are ready.** See the
+  standing rules below. This is a one-shot test; there is no reason to
+  hurry it. More unseen months publish monthly.
 
 ## Open — external long leads
 
-**None.** Struck by ADR 0029: ethics/IRB application, station-forecourt
-intercept permission, panel-vendor quotes. Struck by ADR 0032: the "FTAS
-new-wave access request" — FTAS and the mobile panel are both public Code
-for Fukui repos, and both have already published the unseen window
-(six mobile-panel months 2026-01..2026-06; 1,892 new FTAS responses).
-Obtaining either is an ordinary version bump.
-
-The project now has no external dependencies. Everything remaining is
-work under your own control.
+**None.** Struck by ADR 0029: ethics/IRB, station-forecourt permission,
+panel-vendor quotes. Struck by ADR 0032: the "FTAS new-wave access
+request" — FTAS and the mobile panel are both public Code for Fukui repos
+and both have already published the unseen window (six mobile-panel months
+2026-01..2026-06; 1,892 new FTAS responses). Obtaining either is an
+ordinary version bump.
 
 ## Standing rules (do not lose)
 
-- No unseen Arm 2 data (post-2025-12 mobile, post-2026-06 FTAS, JTA 2025
-  confirmed/2026) fetched or opened until **ADR 0020 is accepted AND** the
-  frozen scripts + oracles are committed — both conditions (ADR 0020:34).
-  ADR 0025 is accepted; ADR 0020 is not.
-- **The unseen data is public and one `git clone` away** (ADR 0032). The
-  firewall is now the only thing protecting Arm 2's out-of-sample claim.
-  A single careless `head()` destroys it permanently, with no undo and no
-  audit trail. This was previously protected by accident — the data did
-  not exist yet. That protection is gone.
-- PBL vignette results (close 2026-08-16): never thesis evidence, never
-  any planning quantity (ADR 0026 §2, survives ADR 0029). Retiring
-  Direction B removes d_plan but raises the temptation to substitute
-  these numbers. The prohibition is absolute.
+- **THE ARM 2 FIREWALL IS RELEASED.** ADR 0020's both-of-two condition
+  (ADR accepted **and** frozen scripts + oracles committed) is met as of
+  2026-07-30. Unseen data may now be fetched — but **only** into
+  `data/quarantine/arm2/`, **only** by the frozen scripts, with the
+  vintage-revision guard first, always.
+- **Arm 2 is single-use.** The moment unseen outcome values are observed,
+  the pre-specification option is spent. No re-running with a tweaked
+  donor pool, window, or "quick sanity check". Any re-specification after
+  seeing results requires a new ADR and demotes the analysis to
+  exploratory. Never open unseen data outside the frozen scripts — not
+  with pandas, not with `head`, not to check a parse.
+- **Guard first.** If RMS relative revision exceeds 2% for any of the 13
+  pinned confirmatory municipalities, or any donor exits the fit gate,
+  stop and write a deviation ADR choosing between re-running the entire
+  Direction D + Arm 2 chain on the revised vintage, or demoting Arm 2 to
+  exploratory. Mixing vintages is forbidden.
+- **Quarantine is empty and that is its resting state** until an
+  authorized run. A coverage check left 30 MB there on 2026-07-30; it was
+  deleted the same day (ADR 0032 §Audit trail).
+- **Arm 3 is closed.** No further Arm 3 computation without a new ADR;
+  re-specifying after seeing the verdict destroys what makes the null
+  credible.
+- PBL vignette results: never thesis evidence, never any planning quantity
+  (ADR 0026 §2, survives ADR 0029). Retiring Direction B removed d_plan
+  and therefore *raises* the temptation to substitute these numbers. The
+  prohibition is absolute.
 - Direction B is a specified protocol that was never fielded. Nothing is
   estimated under ADR 0018.
-- No chapter file changes before Phase 4 (ADR 0023 §5, unchanged).
-- Human commits; no seat commits or pushes.
+- No chapter file changes before Phase 4 (ADR 0023 §5).
+- Agent handoff docs are never tracked (`.gitignore:170-173`). One was
+  force-added on 2026-07-30 and had to be reverted in `c388c18`.
+- **Human commits; no seat commits or pushes.** The 2026-07-30 commit and
+  merge were a one-off explicit authorization, not a change to this rule.
