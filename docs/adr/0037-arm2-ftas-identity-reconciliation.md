@@ -1,7 +1,7 @@
 # ADR 0037: Reconcile the frozen FTAS population by row identity
 
 Date: 2026-09-14
-Status: accepted 2026-09-14 by Andrew before any Arm 2 outcome was decoded
+Status: superseded by ADR 0038 on 2026-09-14
 
 ## Context
 
@@ -53,4 +53,3 @@ and its ADR 0036 disclosure are also unchanged.
   change the frozen report contract and leave an unexplained missing leg.
 - Demote P1 and P2. The discovered incompatibility is confined to the FTAS
   secondary inputs and does not touch either primary analysis.
-

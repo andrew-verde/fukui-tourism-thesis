@@ -12,7 +12,6 @@ import hashlib
 import json
 import re
 import subprocess
-from collections import defaultdict, deque
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -489,70 +488,27 @@ def _validate_2026_merged_extension(
     reference: pd.DataFrame,
     extended: pd.DataFrame,
 ) -> pd.DataFrame:
-    if len(extended) <= len(reference):
-        raise ValueError("2026 merged wave has no rows after seen vintage")
     if list(extended.columns) != list(reference.columns):
         raise ValueError("2026 merged wave schema differs from seen vintage")
+    if MERGED_RESPONSE_DATE_COLUMN not in extended.columns:
+        raise ValueError("2026 merged source lacks response date")
 
-    # The upstream merge rebuilds and reorders the full-year file. Match the
-    # frozen population as an exact row multiset, then isolate only surplus
-    # rows. Two independent hashes route matches; the frame equality check
-    # below proves that every routed row is unchanged (ADR 0037).
-    def fingerprints(frame: pd.DataFrame) -> list[tuple[int, int]]:
-        first = pd.util.hash_pandas_object(
-            frame, index=False, hash_key="arm2seenrowkey01"
-        )
-        second = pd.util.hash_pandas_object(
-            frame, index=False, hash_key="arm2seenrowkey02"
-        )
-        return list(zip(first.astype(int), second.astype(int), strict=True))
-
-    extended_positions: dict[tuple[int, int], deque[int]] = defaultdict(deque)
-    for position, fingerprint in enumerate(fingerprints(extended)):
-        extended_positions[fingerprint].append(position)
-
-    matched_positions = []
-    for fingerprint in fingerprints(reference):
-        candidates = extended_positions.get(fingerprint)
-        if not candidates:
-            raise ValueError("frozen seen FTAS row is missing or changed")
-        matched_positions.append(candidates.popleft())
-
-    matched = extended.iloc[matched_positions].reset_index(drop=True)
-    try:
-        pd.testing.assert_frame_equal(
-            matched,
-            reference.reset_index(drop=True),
-            check_dtype=False,
-            obj="2026 committed seen-wave population",
-        )
-    except AssertionError as exc:
-        raise ValueError("frozen seen FTAS row is missing or changed") from exc
-
-    suffix_positions = sorted(
-        position
-        for positions in extended_positions.values()
-        for position in positions
+    # The committed file is the sole seen-population authority. Upstream
+    # revises its rebuilt history, so use the current file only to select rows
+    # strictly beyond the frozen date boundary (ADR 0038).
+    response_dates = pd.to_datetime(
+        extended[MERGED_RESPONSE_DATE_COLUMN], errors="coerce"
     )
-    suffix = extended.iloc[suffix_positions].reset_index(drop=True)
-    if MERGED_RESPONSE_DATE_COLUMN not in suffix.columns:
-        raise ValueError("2026 merged suffix lacks response date")
-    suffix_dates = pd.to_datetime(
-        suffix[MERGED_RESPONSE_DATE_COLUMN], errors="coerce"
-    )
-    if suffix_dates.isna().any() or (
-        suffix_dates < FTAS_SEEN_END_DATE
-    ).any():
-        raise ValueError("appended rows may not backfill the frozen seen period")
-    suffix_hashes = pd.util.hash_pandas_object(suffix, index=False)
-    if suffix_hashes.duplicated().any():
-        raise ValueError("2026 merged suffix duplicates frozen seen rows")
-    unseen_suffix = suffix[suffix_dates > FTAS_SEEN_END_DATE].copy()
+    if response_dates.isna().any():
+        raise ValueError("2026 merged source contains an invalid response date")
+    unseen_suffix = extended.loc[
+        response_dates > FTAS_SEEN_END_DATE
+    ].copy()
     if unseen_suffix.empty:
         raise ValueError("2026 merged wave has no rows after 2026-06")
-    # The pinned file ends 2026-06-29 while the frozen calendar boundary is
-    # after 2026-06. Any newly published 2026-06-30 rows are neither added to
-    # the frozen seen population nor analyzed as unseen; exclude that seam.
+    suffix_hashes = pd.util.hash_pandas_object(unseen_suffix, index=False)
+    if suffix_hashes.duplicated().any():
+        raise ValueError("2026 merged post-boundary rows contain duplicates")
     return pd.concat([reference, unseen_suffix], ignore_index=True)
 
 

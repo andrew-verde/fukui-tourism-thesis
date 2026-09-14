@@ -374,19 +374,22 @@ def test_s1_suffix_must_be_new_nondeduplicated_rows() -> None:
         "2026-07-01",
     ]
 
-    changed = pd.concat([
+    revised_history = pd.concat([
         reference.assign(value=[1, 99]),
         pd.DataFrame({column: ["2026-07-01"], "value": [3]}),
     ], ignore_index=True)
-    with pytest.raises(ValueError, match="missing or changed"):
-        gateway._validate_2026_merged_extension(reference, changed)
+    checked = gateway._validate_2026_merged_extension(reference, revised_history)
+    assert checked.equals(valid)
 
     backfilled = pd.concat([
         reference,
-        pd.DataFrame({column: ["2026-06-28"], "value": [3]}),
+        pd.DataFrame({
+            column: ["2026-06-28", "2026-07-01"],
+            "value": [30, 3],
+        }),
     ], ignore_index=True)
-    with pytest.raises(ValueError, match="backfill"):
-        gateway._validate_2026_merged_extension(reference, backfilled)
+    checked = gateway._validate_2026_merged_extension(reference, backfilled)
+    assert checked.equals(valid)
 
     seam = pd.concat([
         reference,
@@ -409,3 +412,10 @@ def test_s1_suffix_must_be_new_nondeduplicated_rows() -> None:
     duplicate = pd.concat([reference, duplicated_suffix], ignore_index=True)
     with pytest.raises(ValueError, match="duplicates"):
         gateway._validate_2026_merged_extension(reference, duplicate)
+
+    invalid_date = pd.concat([
+        reference,
+        pd.DataFrame({column: ["not-a-date"], "value": [3]}),
+    ], ignore_index=True)
+    with pytest.raises(ValueError, match="invalid response date"):
+        gateway._validate_2026_merged_extension(reference, invalid_date)
