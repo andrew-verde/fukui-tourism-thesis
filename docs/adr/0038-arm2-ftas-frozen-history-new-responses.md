@@ -33,9 +33,11 @@ original gateway. The raw current file remains unchanged in quarantine with
 its source checksum.
 
 S1 and S3 remain exploratory secondary checks under ADR 0037 because their
-assembly protocol changed after ADR 0020 was accepted. P1 and P2 remain
-confirmatory. The failed guarded attempt did not call their computation and
-revealed no result. S2 remains descriptive under ADR 0036.
+assembly protocol changed after ADR 0020 was accepted. P1 and P2 remained
+confirmatory under this decision, but ADR 0039 later demoted them to
+exploratory after a missing mobile cell required a new rule. The failed
+guarded attempt did not call their computation and revealed no result. S2
+remains descriptive under ADR 0036.
 
 ## Rejected alternatives
 
@@ -46,4 +48,3 @@ revealed no result. S2 remains descriptive under ADR 0036.
 - Drop the current FTAS file entirely. That would make the planned post-June
   secondary checks unavailable even though their new-response population is
   identifiable by the frozen date boundary.
-

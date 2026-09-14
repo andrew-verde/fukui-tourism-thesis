@@ -229,6 +229,49 @@ def test_gap_application_rejects_missing_outcomes() -> None:
         )
 
 
+def test_approved_mobile_imputation_is_log_linear() -> None:
+    gateway = _gateway()
+    panel = pd.DataFrame({
+        "年": [2026, 2026],
+        "月": [2, 4],
+        "地域区分": ["市区町村", "市区町村"],
+        "データ区分": ["観光来訪者数", "観光来訪者数"],
+        "都道府県コード": [6, 6],
+        "都道府県名": ["山形県", "山形県"],
+        "地域コード": [6366, 6366],
+        "地域名称": ["戸沢村", "戸沢村"],
+        "人数": [100.0, 400.0],
+        "ym": [202602, 202604],
+    })
+    completed, report = gateway._apply_approved_mobile_imputation(panel)
+    imputed = completed.loc[completed["ym"].eq(202603)].iloc[0]
+    assert imputed["人数"] == pytest.approx(200.0)
+    assert int(imputed["年"]) == 2026
+    assert int(imputed["月"]) == 3
+    assert report.pop("imputed_value") == pytest.approx(200.0)
+    assert report == {
+        "adr": "0039",
+        "analysis_status": "exploratory",
+        "area_code": 6366,
+        "ym": 202603,
+        "method": "geometric mean of 2026-02 and 2026-04",
+        "neighbor_values": {"202602": 100.0, "202604": 400.0},
+        "source_rows_changed": 0,
+        "derived_cells": 1,
+    }
+
+
+def test_approved_mobile_imputation_rejects_observed_target() -> None:
+    gateway = _gateway()
+    panel = pd.DataFrame({
+        "地域コード": [6366, 6366, 6366],
+        "ym": [202602, 202603, 202604],
+        "人数": [100.0, 200.0, 400.0],
+    })
+    with pytest.raises(ValueError, match="no longer missing"):
+        gateway._apply_approved_mobile_imputation(panel)
+
+
 def test_post_2025_gap_is_bound_to_exact_guarded_inputs(
     monkeypatch,
 ) -> None:
@@ -283,6 +326,7 @@ def test_guard_revalidation_rejects_in_memory_unseen_mutation(
         "guard_report": {
             "status": "passed",
             "mobile_vintage_commit": "a" * 40,
+            "mobile_imputation": {"adr": "0039"},
         },
         "frozen_scm": frozen,
     }.items():
@@ -327,6 +371,11 @@ def test_guard_revalidation_rejects_in_memory_unseen_mutation(
         return bound[bound["ym"] == month].copy()
 
     monkeypatch.setattr(gateway, "_normalize_mobile", fake_normalize)
+    monkeypatch.setattr(
+        gateway,
+        "_apply_approved_mobile_imputation",
+        lambda panel: (panel, {"adr": "0039"}),
+    )
     with pytest.raises(AssertionError, match="guarded unseen-panel binding"):
         gateway.assert_guarded_arm2_data(data)
 

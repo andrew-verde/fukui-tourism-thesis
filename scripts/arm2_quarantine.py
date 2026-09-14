@@ -69,6 +69,12 @@ MOBILE_COLUMNS = (
 MERGED_RESPONSE_DATE_COLUMN = "アンケート回答日"
 FTAS_SEEN_END_DATE = pd.Timestamp("2026-06-30")
 MOBILE_UPSTREAM_REPO = "https://github.com/code4fukui/japan-kanko-stat"
+MOBILE_IMPUTATION_AREA_CODE = 6366
+MOBILE_IMPUTATION_YM = 202603
+MOBILE_IMPUTATION_PREVIOUS_YM = 202602
+MOBILE_IMPUTATION_NEXT_YM = 202604
+
+
 class RevisionGuardError(RuntimeError):
     """The load must stop before any unseen outcome is decoded."""
 
@@ -147,6 +153,61 @@ def _normalize_mobile(frame: pd.DataFrame, source: str) -> pd.DataFrame:
     if (data["人数"] <= 0).any():
         raise ValueError(f"{source}: SCM log outcomes must be positive")
     return data.sort_values(["地域コード", "ym"]).reset_index(drop=True)
+
+
+def _apply_approved_mobile_imputation(
+    panel: pd.DataFrame,
+) -> tuple[pd.DataFrame, dict]:
+    """Fill the one ADR 0039 cell by interpolation in the model's log scale."""
+    key = (
+        panel["地域コード"].eq(MOBILE_IMPUTATION_AREA_CODE)
+        & panel["ym"].eq(MOBILE_IMPUTATION_YM)
+    )
+    if key.any():
+        raise ValueError("ADR 0039 target cell is no longer missing")
+
+    neighbors = panel[
+        panel["地域コード"].eq(MOBILE_IMPUTATION_AREA_CODE)
+        & panel["ym"].isin([
+            MOBILE_IMPUTATION_PREVIOUS_YM,
+            MOBILE_IMPUTATION_NEXT_YM,
+        ])
+    ].sort_values("ym")
+    if tuple(neighbors["ym"].astype(int)) != (
+        MOBILE_IMPUTATION_PREVIOUS_YM,
+        MOBILE_IMPUTATION_NEXT_YM,
+    ):
+        raise ValueError("ADR 0039 imputation requires February and April values")
+    neighbor_values = neighbors["人数"].to_numpy(float)
+    if not np.isfinite(neighbor_values).all() or (neighbor_values <= 0).any():
+        raise ValueError("ADR 0039 imputation neighbors must be positive and finite")
+
+    imputed_value = float(np.exp(np.log(neighbor_values).mean()))
+    row = neighbors.iloc[[0]].copy()
+    row["年"] = MOBILE_IMPUTATION_YM // 100
+    row["月"] = MOBILE_IMPUTATION_YM % 100
+    row["ym"] = MOBILE_IMPUTATION_YM
+    row["人数"] = imputed_value
+    completed = pd.concat([panel, row], ignore_index=True).sort_values(
+        ["地域コード", "ym"]
+    ).reset_index(drop=True)
+    if completed.duplicated(["地域コード", "ym"]).any():
+        raise ValueError("ADR 0039 imputation created a duplicate cell")
+    report = {
+        "adr": "0039",
+        "analysis_status": "exploratory",
+        "area_code": MOBILE_IMPUTATION_AREA_CODE,
+        "ym": MOBILE_IMPUTATION_YM,
+        "method": "geometric mean of 2026-02 and 2026-04",
+        "neighbor_values": {
+            str(MOBILE_IMPUTATION_PREVIOUS_YM): float(neighbor_values[0]),
+            str(MOBILE_IMPUTATION_NEXT_YM): float(neighbor_values[1]),
+        },
+        "imputed_value": imputed_value,
+        "source_rows_changed": 0,
+        "derived_cells": 1,
+    }
+    return completed, report
 
 
 def _validate_mobile_vintage_manifest(
@@ -549,6 +610,9 @@ def _build_guarded_loader():
         unseen_mobile = pd.concat(frames, ignore_index=True)
         months = sorted(unseen_mobile["ym"].astype(int).unique().tolist())
         _validate_unseen_months(months)
+        unseen_mobile, imputation_report = _apply_approved_mobile_imputation(
+            unseen_mobile
+        )
 
         ftas_path = FTAS_DIR / "ftas_survey_all.csv"
         required_merged = [
@@ -604,6 +668,7 @@ def _build_guarded_loader():
             "frozen_scm": frozen,
         }
         guard_report["mobile_vintage_commit"] = manifest["commit"]
+        guard_report["mobile_imputation"] = imputation_report
         for name, value in values.items():
             object.__setattr__(data, name, value)
         return data
@@ -669,6 +734,11 @@ def assert_guarded_arm2_data(data: object) -> None:
     bound_unseen = pd.concat(bound_frames, ignore_index=True)
     bound_months = sorted(bound_unseen["ym"].astype(int).unique().tolist())
     _validate_unseen_months(bound_months)
+    bound_unseen, imputation_report = _apply_approved_mobile_imputation(
+        bound_unseen
+    )
+    if data.guard_report.get("mobile_imputation") != imputation_report:
+        raise RevisionGuardError("guarded mobile imputation metadata differs")
     pd.testing.assert_frame_equal(
         data.unseen_mobile.reset_index(drop=True),
         bound_unseen.reset_index(drop=True),

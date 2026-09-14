@@ -387,6 +387,7 @@ def assess_s1(estimates: pd.DataFrame) -> dict:
         status = "not confirmed, not discordant"
     return {
         "status": status,
+        "analysis_status": "exploratory",
         "secondary_only": True,
         "specifications": list(S1_SPECS),
         "estimates": selected.to_dict(orient="records"),
@@ -485,6 +486,7 @@ def assess_s3(ftas_raw: pd.DataFrame) -> dict:
     )
     return {
         "status": "prediction met" if met else "not met",
+        "analysis_status": "exploratory",
         "secondary_only": True,
         "argmax_shinkansen_friction": argmax_codes,
         "transport_access_shinkansen_pct": float(
@@ -507,6 +509,10 @@ def analyze_guarded(data: GuardedArm2Data) -> dict:
     )
     result = {
         "guard": data.guard_report,
+        "analysis_status": "exploratory",
+        "confirmatory_claim_permitted": False,
+        "protocol_deviation_adr": "0039",
+        "headline_verdict_status": "exploratory classification",
         "windows": {
             "mobile_seen_end": SEEN_END_YM,
             "mobile_unseen_start": UNSEEN_START_YM,
@@ -526,6 +532,8 @@ def analyze_guarded(data: GuardedArm2Data) -> dict:
     result["headline_verdict"] = assemble_headline_verdict(
         primary.p1["status"], primary.p2["status"]
     )
+    result["P1"]["analysis_status"] = "exploratory"
+    result["P2"]["analysis_status"] = "exploratory"
     return result
 
 
