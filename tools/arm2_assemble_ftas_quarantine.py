@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Assemble the Arm 2 FTAS quarantine from local operator-supplied files.
 
-This tool performs only byte-level checks. The authoritative row-level
-prefix, backfill, and duplicate validation for ``merged_survey_2026.csv``
-remains ``scripts/arm2_quarantine.py``'s
-``_validate_2026_merged_extension()``, which runs later inside the frozen
-gateway. The 2026 byte-prefix check here is only a cheap early abort.
+This tool performs only file-level checks. The authoritative row-identity,
+backfill, and duplicate validation for ``merged_survey_2026.csv`` remains
+``scripts/arm2_quarantine.py``'s ``_validate_2026_merged_extension()``, which
+runs later inside the guarded gateway. Upstream rebuilds the merged file, so
+physical row order is not an identity condition (ADR 0037).
 """
 from __future__ import annotations
 
@@ -137,22 +137,12 @@ def _verify_pinned_merged_wave(year: int) -> Path:
     return path
 
 
-def _verify_2026_prefix(reference_path: Path, extended_path: Path) -> None:
-    """Reject vintage-mixing before the gateway's row-level extension checks."""
+def _verify_2026_candidate_size(reference_path: Path, extended_path: Path) -> None:
+    """Reject files that cannot contain the frozen rows plus new responses."""
     reference_size = _byte_length(reference_path)
     extended_size = _byte_length(extended_path)
     if extended_size <= reference_size:
         raise ToolError("2026 merged extension must be strictly longer than pinned")
-    with reference_path.open("rb") as reference, extended_path.open("rb") as extended:
-        while True:
-            chunk = reference.read(1024 * 1024)
-            if not chunk:
-                break
-            if extended.read(len(chunk)) != chunk:
-                raise ToolError(
-                    "2026 merged extension rewrites the frozen seen prefix; "
-                    "stop for human decision"
-                )
 
 
 def _copy_file(source_path: Path, destination_path: Path) -> dict[str, int | str]:
@@ -188,7 +178,7 @@ def _copy_extended_2026_wave(
             f"missing operator-supplied 2026 merged wave: {extended_2026_path}"
         )
     reference_path = _verify_pinned_merged_wave(2026)
-    _verify_2026_prefix(reference_path, extended_2026_path)
+    _verify_2026_candidate_size(reference_path, extended_2026_path)
     destination_name = "merged_survey_2026.csv"
     destination_path = arm2_quarantine.FTAS_DIR / destination_name
     metadata = _copy_file(extended_2026_path, destination_path)

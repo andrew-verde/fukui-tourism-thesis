@@ -148,15 +148,18 @@ def test_seen_merged_digest_mismatch_raises(tmp_path, monkeypatch) -> None:
         tool._copy_pinned_merged_waves()
 
 
-def test_prefix_mismatch_raises(tmp_path) -> None:
+def test_candidate_must_be_larger_than_frozen_file(tmp_path) -> None:
     tool = _load_tool()
     reference = tmp_path / "merged_survey_2026.csv"
     extended = tmp_path / "extended.csv"
     _write_bytes(reference, b"abc123")
-    _write_bytes(extended, b"abc124suffix")
+    _write_bytes(extended, b"abc")
 
-    with pytest.raises(tool.ToolError, match="human decision"):
-        tool._verify_2026_prefix(reference, extended)
+    with pytest.raises(tool.ToolError, match="strictly longer"):
+        tool._verify_2026_candidate_size(reference, extended)
+
+    _write_bytes(extended, b"reordered content")
+    tool._verify_2026_candidate_size(reference, extended)
 
 
 def test_non_empty_target_directory_raises(tmp_path, monkeypatch) -> None:

@@ -361,6 +361,26 @@ def test_s1_suffix_must_be_new_nondeduplicated_rows() -> None:
     checked = gateway._validate_2026_merged_extension(reference, valid)
     assert checked.equals(valid)
 
+    reordered = pd.concat([
+        pd.DataFrame({column: ["2026-07-02"], "value": [4]}),
+        reference.iloc[::-1],
+        pd.DataFrame({column: ["2026-07-01"], "value": [3]}),
+    ], ignore_index=True)
+    checked = gateway._validate_2026_merged_extension(reference, reordered)
+    assert checked[column].tolist() == [
+        "2026-06-01",
+        "2026-06-29",
+        "2026-07-02",
+        "2026-07-01",
+    ]
+
+    changed = pd.concat([
+        reference.assign(value=[1, 99]),
+        pd.DataFrame({column: ["2026-07-01"], "value": [3]}),
+    ], ignore_index=True)
+    with pytest.raises(ValueError, match="missing or changed"):
+        gateway._validate_2026_merged_extension(reference, changed)
+
     backfilled = pd.concat([
         reference,
         pd.DataFrame({column: ["2026-06-28"], "value": [3]}),

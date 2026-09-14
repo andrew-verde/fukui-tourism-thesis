@@ -12,6 +12,7 @@ import hashlib
 import json
 import re
 import subprocess
+from collections import defaultdict, deque
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -490,13 +491,50 @@ def _validate_2026_merged_extension(
 ) -> pd.DataFrame:
     if len(extended) <= len(reference):
         raise ValueError("2026 merged wave has no rows after seen vintage")
-    pd.testing.assert_frame_equal(
-        extended.iloc[:len(reference)].reset_index(drop=True),
-        reference.reset_index(drop=True),
-        check_dtype=False,
-        obj="2026 committed seen-wave prefix",
+    if list(extended.columns) != list(reference.columns):
+        raise ValueError("2026 merged wave schema differs from seen vintage")
+
+    # The upstream merge rebuilds and reorders the full-year file. Match the
+    # frozen population as an exact row multiset, then isolate only surplus
+    # rows. Two independent hashes route matches; the frame equality check
+    # below proves that every routed row is unchanged (ADR 0037).
+    def fingerprints(frame: pd.DataFrame) -> list[tuple[int, int]]:
+        first = pd.util.hash_pandas_object(
+            frame, index=False, hash_key="arm2seenrowkey01"
+        )
+        second = pd.util.hash_pandas_object(
+            frame, index=False, hash_key="arm2seenrowkey02"
+        )
+        return list(zip(first.astype(int), second.astype(int), strict=True))
+
+    extended_positions: dict[tuple[int, int], deque[int]] = defaultdict(deque)
+    for position, fingerprint in enumerate(fingerprints(extended)):
+        extended_positions[fingerprint].append(position)
+
+    matched_positions = []
+    for fingerprint in fingerprints(reference):
+        candidates = extended_positions.get(fingerprint)
+        if not candidates:
+            raise ValueError("frozen seen FTAS row is missing or changed")
+        matched_positions.append(candidates.popleft())
+
+    matched = extended.iloc[matched_positions].reset_index(drop=True)
+    try:
+        pd.testing.assert_frame_equal(
+            matched,
+            reference.reset_index(drop=True),
+            check_dtype=False,
+            obj="2026 committed seen-wave population",
+        )
+    except AssertionError as exc:
+        raise ValueError("frozen seen FTAS row is missing or changed") from exc
+
+    suffix_positions = sorted(
+        position
+        for positions in extended_positions.values()
+        for position in positions
     )
-    suffix = extended.iloc[len(reference):].reset_index(drop=True)
+    suffix = extended.iloc[suffix_positions].reset_index(drop=True)
     if MERGED_RESPONSE_DATE_COLUMN not in suffix.columns:
         raise ValueError("2026 merged suffix lacks response date")
     suffix_dates = pd.to_datetime(
@@ -506,12 +544,8 @@ def _validate_2026_merged_extension(
         suffix_dates < FTAS_SEEN_END_DATE
     ).any():
         raise ValueError("appended rows may not backfill the frozen seen period")
-    reference_hashes = set(pd.util.hash_pandas_object(reference, index=False))
     suffix_hashes = pd.util.hash_pandas_object(suffix, index=False)
-    if (
-        suffix_hashes.duplicated().any()
-        or suffix_hashes.isin(reference_hashes).any()
-    ):
+    if suffix_hashes.duplicated().any():
         raise ValueError("2026 merged suffix duplicates frozen seen rows")
     unseen_suffix = suffix[suffix_dates > FTAS_SEEN_END_DATE].copy()
     if unseen_suffix.empty:
