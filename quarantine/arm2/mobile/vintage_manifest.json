@@ -1,0 +1,72 @@
+{
+  "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+  "files": {
+    "city2021.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "c4088c953b7db5451a3df24c697ebe66c3cd9eb3",
+      "sha256": "20db2aaaa766c1985ee09b37f741f27e40902fe320ce7649078deea1259fe554"
+    },
+    "city2022.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "0b8105e7f8c9b7088af2b0717e4484269a5f4a52",
+      "sha256": "e47e44560bcc08537306bf9a99c637409fffefb91863eeb077000bedc23aabb4"
+    },
+    "city2023.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "b73929b227e30605e630bddc884d54f00915f92c",
+      "sha256": "9a6a15f5f431d26b3116033a8b8cd224bbe9757936f2a1ff294f19b01ef3faf6"
+    },
+    "city2024.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "c034ec609bf2a6a09df24a9ac74a7b442310b732",
+      "sha256": "3349691e0613829f3ec267eac2f38bd5415d5a4c61f1ddae114f81f185619953"
+    },
+    "city2025.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "17594e80474bbe7d7ba6cd63f9bb2ac6fb9fce60",
+      "sha256": "7c31fed0a71168b684e61ecc5e092cf8d63679494a9eeeac384ceb58f17d5216"
+    },
+    "city202601.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "622db392fe0677e3422bc687282963dd07fb8b21",
+      "sha256": "d418b2a384ad9940576c845ab8307f27816894a8a7f266bf714169e05f3bf4bf"
+    },
+    "city202602.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "e24a5c5cedbf41df45f19f93986ca432a8c1e2ba",
+      "sha256": "83430634407da2ba6278ea4d9ee47043d835a25fa625203f9976b54c88389bb1"
+    },
+    "city202603.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "a5c28527f3e942522e8d9e5467a1b4eb8541da46",
+      "sha256": "064f547424f5083ccb5e4f503476abff9a5efa8f60059c47b0602c0718339596"
+    },
+    "city202604.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "aa9d2a3325865a70f01e65a9fc8e8b047a727a34",
+      "sha256": "6dabe1d99798f9883b02f060ee8a9770dd34a9ef05897db58c231bb9c2765c64"
+    },
+    "city202605.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "6118922031a3c1a323ce986b1a5a29e5c2c21d49",
+      "sha256": "b7354adf8ea0c5d295fb9d8300f70aade39d5fed69e65ba1c49deb64f4bbb2ca"
+    },
+    "city202606.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "ddd54c21bd374b46c5a940101c8b446d15396e7a",
+      "sha256": "014195627ad8abb67d2c67e88ff4b1d11cf6ad47858f26fc24e455d77f7b56e0"
+    },
+    "city202607.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "9a7a622053078ad2ea2b2173dc4ca5f2d8e502d9",
+      "sha256": "2c28ebe0769a4de174844155b40078d4a7d973d1c743e33d360cb46e688622e9"
+    },
+    "city202608.csv": {
+      "commit": "fd936d6ff3c036d0d53f5ab775ef25ba24c8ca43",
+      "git_blob": "dda3036dffa02a844fe7239e21e90171a5f5f517",
+      "sha256": "b5240e140ae4a5aec1b92a9a261e31ee06cd477826baa1c9613a7563404a7daa"
+    }
+  },
+  "schema_version": 1,
+  "upstream_repo": "https://github.com/code4fukui/japan-kanko-stat"
+}

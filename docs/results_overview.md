@@ -1,4 +1,4 @@
-# Results Overview — Friction Impact and Nudge Design for Fukui Tourism
+# Results overview: friction impact and nudge design for Fukui tourism
 
 One-page map of the thesis's quantitative arc. All numbers regenerate from the
 Makefile targets named in each section; decisions are recorded in
@@ -12,41 +12,46 @@ Shinkansen DiD  →  Two-stage SEM  →  Nudge priority ranking → nudge-pilot 
 (causal shock)     (transmission)     (evidence-weighted)      (built artifact)
 ```
 
-## 1. Impact: a transport-friction shock moves outcomes (DiD)
+## 1. Impact: a transport-friction shock changes outcomes (DiD)
 
-`make hokuriku-did-event-study` — Fukui (treated) vs Ishikawa (control) around
-the March 2024 Hokuriku Shinkansen extension; merged tri-prefecture microdata
-(n≈104k responses, Apr 2023–present, CC-BY); prefecture×month clustered SEs.
+`make hokuriku-did-event-study` compares Fukui (treated) with Ishikawa
+(control) around the March 2024 Hokuriku Shinkansen extension. It uses merged
+tri-prefecture microdata (n≈104k responses, Apr 2023 to present, CC-BY) and
+prefecture-by-month clustered standard errors.
 
 | Outcome | DiD (baseline) | Earthquake-robust* | Verdict |
 |---|---|---|---|
-| NPS (0–10) | +0.55 | +0.65 | robust, grows under robustness |
-| Transport satisfaction (1–5) | +0.05 | +0.08 | robust |
-| Revisit intention (1–5) | +0.04 | +0.01 | fragile — do not headline |
-| Product/service satisfaction | −0.04 | −0.02 | null (placebo-style check) |
+| NPS (0 to 10) | +0.55 | +0.65 | robust, grows under robustness |
+| Transport satisfaction (1 to 5) | +0.05 | +0.08 | robust |
+| Revisit intention (1 to 5) | +0.04 | +0.01 | fragile, do not headline |
+| Product/service satisfaction | −0.04 | −0.02 | null, placebo-style check |
 
-*drop Jan–Mar 2024 + Noto-area control sites. Event-study plot and pre-trend
-diagnostics in `output/hokuriku_merged/did_event_study_report.md`. Pre-trends
-are imperfect (6/20 pre-coefficients significant at huge n); report effect
-magnitudes against the ±0.1–0.4 mixed-sign pre-wobble.
+*Drops January to March 2024 and Noto-area control sites. The event-study plot
+and pre-trend diagnostics are in `output/hokuriku_merged/did_event_study_report.md`.
+Pre-trends are imperfect: 6 of 20 pre-coefficients are significant at a large
+sample size. Report effect magnitudes against the mixed-sign pre-period range
+of ±0.1 to 0.4.
 
 ## 2. Mechanism: friction transmits to intention via satisfaction (SEM)
 
-`make sem-ftas` — deduplicated FTAS respondents; exposure =
-`reported_inconvenience` (asked of everyone — selection-bias-free).
+`make sem-ftas` uses deduplicated FTAS respondents. The exposure is
+`reported_inconvenience`, which the survey asks of every respondent and does
+not condition on writing free text.
 
-- CFA: the three satisfaction items hold as one latent (loadings .87/.51/.84).
-- Stage 1 (n=16,219; CFI .990, RMSEA .044):
-  friction → satisfaction **β = −0.21**; satisfaction → intention **β = 0.80**;
-  direct friction → intention β = −0.06 → **≈73% of friction's damage to visit
-  intention is mediated through satisfaction.**
-- Stage 2 (n=2,565 friction reporters with free text; CFI .91): friction-type
-  paths ranked below. Conditioning on reporters avoids coding non-writers as
+- CFA: the three satisfaction items form one latent construct (loadings
+  .87/.51/.84).
+- Stage 1 (n=16,219; CFI .990, RMSEA .044): friction to satisfaction,
+  **β = −0.21**; satisfaction to intention, **β = 0.80**; direct friction to
+  intention, β = −0.06. Approximately 73% of friction's damage to visit
+  intention is mediated through satisfaction.
+- Stage 2 (n=2,565 friction reporters with free text; CFI .91): ranks
+  friction-type paths below. Conditioning on reporters avoids coding non-writers as
   friction-free.
 
 ## 3. Intervention: evidence-weighted nudge ranking
 
-`make nudge-ranking` — priority = path × prevalence × (satisfaction→intention).
+`make nudge-ranking` calculates priority as path × prevalence ×
+(satisfaction to intention).
 
 | # | Friction | SEM path | Prevalence | Priority |
 |---|----------|----------|------------|----------|
@@ -54,11 +59,11 @@ magnitudes against the ±0.1–0.4 mixed-sign pre-wobble.
 | 2 | Opening Hours / Availability | −0.105 | 4.1% | 0.0034 |
 | 3 | Food / Amenities Gap | −0.049 | 4.2% | 0.0017 |
 
-Transport/access dominates by ~6× — coherent with the DiD: the one historical
-friction-reduction shock we can observe (Shinkansen) was a transport
-intervention, and it moved NPS. Intervention candidates per code in
-`output/sem/nudge_priority_ranking.md`; delivery vehicle =
-`experiments/nudge-pilot/` (artifact only, ADR 0002).
+Transport/access has a priority about six times the next category. This aligns
+with the DiD result: the observable historical friction-reduction shock, the
+Shinkansen extension, was a transport intervention and changed NPS.
+`output/sem/nudge_priority_ranking.md` lists intervention candidates by code.
+`experiments/nudge-pilot/` is an artifact only. See ADR 0002.
 
 ## Supporting layers
 

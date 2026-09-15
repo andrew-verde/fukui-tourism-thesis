@@ -1,23 +1,23 @@
-# Fukui Tourism Official-Data Analysis
+# Fukui tourism official-data analysis
 
 Reproducible research pipeline for a master's thesis on tourism friction in
 Fukui Prefecture after the March 2024 Hokuriku Shinkansen extension.
 
-> **Project history.** This repository holds the semi-final version with a
-> clean history. The full development history — including the design changes
-> the ADR trail (`docs/adr/`) refers to — is archived in
+> **Project history.** This repository contains the semi-final version with a
+> clean history. The full development history, including the design changes
+> referenced by the ADR trail (`docs/adr/`), is archived in
 > [`english-fukui-tourism`](https://github.com/andrew-verde/english-fukui-tourism),
 > frozen at commit `55219e9`, from which this tree was exported.
 
 ## Research design
 
-1. **Impact:** difference-in-differences and event study using merged
+1. **Impact.** Difference-in-differences and event study using merged
    Fukui/Ishikawa/Toyama official survey microdata.
-2. **Mechanism:** two-stage SEM on deduplicated Fukui Tourism Area Survey
+2. **Mechanism.** Two-stage SEM on deduplicated Fukui Tourism Area Survey
    (FTAS) respondents: friction → satisfaction → visit intention.
-3. **Intervention:** evidence-weighted nudge priorities from SEM paths and
+3. **Intervention.** Evidence-weighted nudge priorities from SEM paths and
    official-survey friction prevalence.
-4. **Behavioral context:** prefecture-month accommodation stays from the Japan
+4. **Behavioral context.** Prefecture-month accommodation stays from the Japan
    Tourism Agency.
 
 Official Japanese survey text is tagged with the shared friction package in
@@ -99,11 +99,11 @@ datasets.
 
 This repository is dual-licensed to reflect its mixed contents:
 
-- **Code** — everything under `src/`, `scripts/`, `experiments/`, `tests/`,
-  and the build tooling (`Makefile`, workflow files) — is licensed under the
+- **Code.** Everything under `src/`, `scripts/`, `experiments/`, `tests/`,
+  and the build tooling (`Makefile`, workflow files) is licensed under the
   **MIT License** (see `LICENSE`).
-- **Written content and derived data** — the thesis prose and documentation
-  under `docs/`, and the analysed data tables under `data/` — is licensed
+- **Written content and derived data.** The thesis prose and documentation
+  under `docs/`, and the analysed data tables under `data/`, are licensed
   under **Creative Commons Attribution 4.0 International (CC BY 4.0)** (see
   `LICENSE-CONTENT`).
 

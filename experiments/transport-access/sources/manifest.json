@@ -1,0 +1,32 @@
+{
+  "sources": [
+    {
+      "file": "onoshiei_bus.zip",
+      "url": "https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/gtfs_jp_d/fil/onoshiei_bus.zip",
+      "sha256": "f580fa79174720e57118f64f29e3a9e06f58722476ae306452150d05425f4cd1",
+      "bytes": 17596,
+      "retrieved_utc": "2026-09-15T05:25:16.958419+00:00"
+    },
+    {
+      "file": "ono_timetable_20260401.pdf",
+      "url": "https://www.city.ono.fukui.jp/kurashi/douro-kotsu/bus/bus-taxi3.files/0057_20260317.pdf",
+      "sha256": "a43b89d98ebee3f0441fa56ba58389fb32330e433a02ce3eef36398e459ee33c",
+      "bytes": 734862,
+      "retrieved_utc": "2026-09-15T05:25:29.215735+00:00"
+    },
+    {
+      "file": "kajiso_stores.html",
+      "url": "https://kajiso.com/store/",
+      "sha256": "ba635d3b2cb0f4401e711f89bbde717de6694f660db3e5953d0d1a1044a7e3f0",
+      "bytes": 50071,
+      "retrieved_utc": "2026-09-15T05:25:30.012544+00:00"
+    },
+    {
+      "file": "ono_bus_page.html",
+      "url": "https://www.city.ono.fukui.jp/kurashi/douro-kotsu/bus/bus-taxi3.html",
+      "sha256": "169c6eb7cbcda129b4d1dfc97ce11409fe26eb7298f3c2dbed3214b5c645ae4f",
+      "bytes": 33760,
+      "retrieved_utc": "2026-09-15T05:25:30.403817+00:00"
+    }
+  ]
+}

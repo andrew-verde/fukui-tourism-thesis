@@ -1,14 +1,13 @@
-# Defense memo: the five defense seams
+# Defense memo: five points for examination
 
-Purpose: steel-man the attacks an examiner is most likely to mount, state the
-defense each one meets, and record the residual concession — what we honestly
-cannot rule out — framed so that conceding it strengthens the thesis. Every
+Purpose: state the strongest questions a committee member may raise, the
+evidence that addresses each question, and the remaining uncertainty. Every
 number cited here is the committed, verified value from the thesis chapters
 (§4.2, §4.3, §5.3–5.5, §6.2–6.3) or from a committed result artifact; none is
 new. Companion decision record: ADR 0015.
 
-Reading guide for the defense itself: each seam ends with a **one-breath
-answer** — the sentence to say first when the question lands, before expanding.
+Each section ends with a **short answer** that states the main point before a
+longer discussion.
 
 **Revised 2026-07-30 against ADRs 0029–0032.** Three changes reshape this memo
 and the reader should hold them throughout:
@@ -17,29 +16,27 @@ and the reader should hold them throughout:
    Stage 2 protocol survives as a specified-but-unfielded appendix. Every place
    the earlier edition answered a selection objection with "and the experiment
    settles it" has been rewritten, because that answer is no longer available.
-   Seams A and B are weaker than they were, and this memo says so rather than
-   routing around it.
+   Seams A and B are weaker than they were. This memo states that directly.
 2. **Arm 3 ran and returned a bounded null** (ADR 0031): V1 fail, V2 fail, V3
-   met descriptively. This is a new attack surface — the thesis attempted to
-   replicate its own template and did not succeed — and it is also the memo's
-   single strongest asset, because it is executed evidence that the project
-   reports pre-specified nulls. New **Seam D**.
+   met descriptively. The thesis attempted to replicate its own template and
+   did not succeed. The result also shows that the project reports
+   pre-specified nulls. New **Seam D**.
 3. **Arm 2 is live, single-use, and unfired** (ADRs 0020, 0032). It has no
-   result and this memo states none. Its existence invites its own attack.
-   New **Seam E**.
+   result and this memo states none. The test's status creates a separate
+   question. New **Seam E**.
 
-**Reproduction.** Chapter 5's causal battery: `make synth-causal-arm` and
-`make causal-robustness`. The SEM: `make sem-ftas`. Chapter 6's prioritization:
-`make nudge-ranking`. Arm 3's full battery — 12 specifications across two
-targets, 24 target-by-specification rows (ADR 0035) — and every Arm 3
-number quoted below: `make arm3-kanazawa`, with the Kanazawa V3 series from
-`make arm3-kanazawa-pdfs`. Provenance rows: `docs/source_ledger.md`.
+**Reproduction.** Chapter 5's causal battery uses `make synth-causal-arm` and
+`make causal-robustness`. The SEM uses `make sem-ftas`. Chapter 6's
+prioritization uses `make nudge-ranking`. Arm 3 uses 12 specifications across
+two targets and 24 target-by-specification rows (ADR 0035). Reproduce its
+numbers with `make arm3-kanazawa` and its Kanazawa V3 series with
+`make arm3-kanazawa-pdfs`. Provenance rows are in `docs/source_ledger.md`.
 
 ---
 
-## Seam A — arrival-mode selection (§4.2, the lead result)
+## Seam A: arrival-mode selection (§4.2, the lead result)
 
-### A.1 The attack, steel-manned
+### A.1 Critical question
 
 "Your headline contrast — 7.09% transport-access friction among shinkansen
 arrivers versus 0.66% among car arrivers — is mechanical, not causal. Rail
@@ -54,14 +51,13 @@ Stage 2 is estimated on pooled friction-reporters, not within arrival mode. So
 the 'lead result' is a composition artifact dressed as a finding about the
 shinkansen."
 
-This is the strongest form of the question because every factual premise in it
-is true. The defense must not dispute the premises; it must show they support
-the thesis's actual claim.
+Every factual premise in this question is true. The response should explain how
+those premises relate to the thesis's actual claim.
 
-### A.2 The defense
+### A.2 Response
 
-**1. The "mechanical" reading concedes the mechanism — it does not refute the
-finding.** The thesis's claim is not that the shinkansen makes people
+**1. The "mechanical" reading describes the mechanism.** The thesis does not
+claim that the shinkansen makes people
 friction-prone, nor that rail arrivers are psychologically different. The claim
 (§4.2) is precisely the chain the attack calls definitional: rail arrival →
 carless at the station → the last mile to the anchor is where friction bites.
@@ -70,9 +66,8 @@ to that chain; it is a restatement of it. What the extension changed is the
 *scale and location* at which this definitional friction operates: it delivered
 10,493 in-sample rail arrivers (and the demand surge Chapter 5 verifies) into a
 region whose destination side is provisioned for the 74,266 who arrive by car.
-A constraint can be mechanically produced and still be the binding constraint
-on the marginal visitor the infrastructure delivers — that is exactly what
-makes it actionable rather than mysterious.
+A mechanically produced constraint can still affect the marginal visitor the
+infrastructure delivers.
 
 **2. The contrast is category-specific in a way composition confounds are
 not.** If the gap reflected "rail arrivers are different people who complain
@@ -109,8 +104,8 @@ vs *how much damage*), which is why neither substitutes for the other and why
 the attack's observation that the SEM is pooled does not undercut the split —
 the split, not the SEM, carries the arrival-mode claim.
 
-**5. The clean answer is specified but was not run — say this first, not
-last.** The earlier edition of this memo closed here by pointing at Direction
+**5. The clean answer is specified but was not run.** The earlier edition of
+this memo pointed to Direction
 B: Stage 2 randomized *within* rail arrivers (intercepts at Fukui,
 Awara-Onsen, and Tsuruga stations; §6.3), which would have severed the selection
 channel **for the manipulability question only**. Be precise about this even
@@ -139,8 +134,8 @@ chooses rail (first-timers without local knowledge) rather than carlessness
 per se. We also cannot produce the within-person counterfactual "the same
 visitor, arriving by car."
 
-**Name the denominator before an examiner catches you switching it.** This seam
-uses two different comparisons and they are not interchangeable: 7.09% against
+**Name the denominator before switching it.** This section uses two different
+comparisons and they are not interchangeable. 7.09% against
 0.66% is the **car** comparison, a 6.43 pp gap and a 10.74× ratio; 5.32 pp and
 ≈ 4.003× is the comparison against **pooled other modes**, whose denominator is
 1.7711661764394693. Both are committed values, and the thesis's own ADR 0020 §2
@@ -170,8 +165,8 @@ concession is exact and defensible: *this is the binding constraint on the
 population the infrastructure delivers, and here is the design that would test
 whether it can be relieved.*
 
-**One-breath answer:** "You're right that the gap is mechanical — carless
-arrival creates last-mile exposure — and that mechanism *is* the finding: the
+**Short answer:** "The gap is mechanical. Carless arrival creates last-mile
+exposure, and that mechanism is the finding. The
 extension delivers thousands of carless visitors into a car-provisioned
 region, the friction spikes only in the category the mechanism predicts, and it
 predicts demand leakage in independent data. The randomized test that would
@@ -180,9 +175,9 @@ the diagnosis, not a demonstrated remedy."
 
 ---
 
-## Seam B — the durability reframe (Direction C)
+## Seam B: the durability reframe (Direction C)
 
-### B.1 The attack, steel-manned
+### B.1 Critical question
 
 "Your durability story rests on thirteen municipalities. An r = 0.826 with
 n = 13 has a confidence interval stretching roughly from 0.5 to 0.95, one or
@@ -197,7 +192,7 @@ conversion mechanism. Two anchor municipalities and a just-so story do not
 license inverting the received wisdom that repeat visitation is the goal of
 destination management."
 
-### B.2 The defense
+### B.2 Response
 
 **1. The thesis already stages this evidence at the weight it can bear.**
 §4.1 states in text that with n = 13 this is "a pattern-level observation, not
@@ -245,7 +240,7 @@ conversion. The rival explanation and the conversion mechanism disagree about
 the thesis actually draws. This is worth saying at the defense: the endpoint
 choice is robust to losing the argument about the anti-prediction's cause.
 
-### B.3 Residual concession, and how to frame it
+### B.3 Remaining uncertainty and framing
 
 **What we cannot rule out:** with n = 13, municipality-level confounding —
 most plausibly, anchor presence itself driving both friction-report geography
@@ -280,9 +275,9 @@ says durable growth comes from new-arrival conversion."
 
 ---
 
-## Seam C — SCM marginal significance (Direction D)
+## Seam C: SCM marginal significance (Direction D)
 
-### C.1 The attack, steel-manned
+### C.1 Critical question
 
 "Your causal anchor is a one-sided p = 0.041 — two-sided 0.168, which you
 report but do not headline. One naturally suspects the sidedness was chosen
@@ -295,7 +290,7 @@ survive. And the r = 0.826 'corroboration' is circular: the leaked lift is
 computed from the same synthetic-control gaps whose reality is in question, so
 you are using the estimator to validate the estimator."
 
-### C.2 The defense
+### C.2 Response
 
 **1. The sidedness is entailed by the intervention, not extracted from the
 data.** A high-speed rail extension predicts a demand *increase*; no reviewer
@@ -347,7 +342,7 @@ the demand side of a demand–friction correlation is not the estimator
 validating itself; circularity would require friction data inside the SCM or
 SCM output inside the friction measurement, and neither occurs.
 
-### C.3 Residual concession, and how to frame it
+### C.3 Remaining uncertainty and framing
 
 **What we cannot rule out:** p = 0.041 is marginal by any reading; it would
 not survive a family-wise correction across treated municipalities, a
@@ -375,13 +370,13 @@ new corridor."
 
 ---
 
-## Seam D — the Arm 3 replication null (ADR 0031)
+## Seam D: the Arm 3 replication null (ADR 0031)
 
 Every number in this seam is byte-exact from
 `output/arm3_kanazawa/causal_robustness/metrics.json`, reproduced by
 `make arm3-kanazawa`.
 
-### D.1 The attack, steel-manned
+### D.1 Critical question
 
 "You claim to have built an exportable template. You then applied it to the
 obvious test case — the 2015 Hokuriku Shinkansen extension to Kanazawa, a boom
@@ -393,7 +388,7 @@ result is a Fukui-specific artifact of the analyst's choices, which is exactly
 what the Chapter 5 critique alleged. And 'aggregation dilution' is an
 unfalsifiable excuse that happens to be the one explanation you cannot check."
 
-### D.2 The defense
+### D.2 Response
 
 **1. Lead with the fact that the verdict was written first.** ADR 0021 §6
 fixed the tier tests, the suspect-checking order, and the meaning of each
@@ -480,7 +475,7 @@ what its numbers look like is already interpretation. If an examiner reaches for
 either specification to be generous, decline on the record. Declining a number
 that might help is the cheapest credibility available in the room.
 
-### D.3 Residual concession, and how to frame it
+### D.3 Remaining uncertainty and framing
 
 **What we cannot rule out:** that the template genuinely does not port — that
 the 2024 Fukui pattern is corridor-specific or period-specific and would fail
@@ -513,14 +508,14 @@ and the 2024 Fukui results are untouched."
 
 ---
 
-## Seam E — the unfired prediction test (Arm 2)
+## Seam E: the unfired prediction test (Arm 2)
 
 **Standing constraint on this seam: Arm 2 has no result and this memo asserts
 none.** It is a single-use test; the pre-specification option is spent the
 moment unseen outcome values are observed. Nothing here may be phrased as
 though an outcome were known or expected.
 
-### E.1 The attack, steel-manned
+### E.1 Critical question
 
 "You have written a pre-registered out-of-sample test, declared it live, and
 not run it. That is the most convenient possible state: you get the rhetorical
@@ -531,7 +526,7 @@ the structure that makes selective reporting invisible. And if it does return a
 null, your empirical upgrade is a retired survey arm, a replication null, and a
 prediction failure."
 
-### E.2 The defense
+### E.2 Response
 
 **1. The precedent is on the record and it is adverse.** The right answer to
 "you will only report it if it is favourable" is not a promise but a case: Arm
@@ -574,7 +569,7 @@ because a project willing to state its own falsification condition in advance
 is making a claim about method that survives either outcome. Read it out rather
 than summarizing it — the provenance value is in the exactness.
 
-### E.3 Residual concession, and how to frame it
+### E.3 Remaining uncertainty and framing
 
 **What we cannot rule out:** at the time of writing the test is unfired, so
 this seam rests on Arm 3's precedent and on documentary commitment, not on a

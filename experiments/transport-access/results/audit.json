@@ -1,0 +1,65 @@
+{
+  "status": "exploratory computation; no population or causal interpretation",
+  "sources": {
+    "onoshiei_bus.zip": "f580fa79174720e57118f64f29e3a9e06f58722476ae306452150d05425f4cd1",
+    "ono_timetable_20260401.pdf": "a43b89d98ebee3f0441fa56ba58389fb32330e433a02ce3eef36398e459ee33c",
+    "kajiso_stores.html": "ba635d3b2cb0f4401e711f89bbde717de6694f660db3e5953d0d1a1044a7e3f0",
+    "ono_bus_page.html": "169c6eb7cbcda129b4d1dfc97ce11409fe26eb7298f3c2dbed3214b5c645ae4f"
+  },
+  "implementation_sha256": "47c8ed5989ec58fc2840984b54cb0eded556d769a5778439a9c155da4e5e48fb",
+  "study_sha256": "4e7cabb08ffa0d096f609f984d4a7aace2eb628d2198b53829961bdb292e9ea9",
+  "feed_info": {
+    "feed_publisher_name": "大野市",
+    "feed_publisher_url": "https://www.city.ono.fukui.jp/kurashi/douro-kotsu/bus/index.html",
+    "feed_lang": "ja",
+    "feed_start_date": "20260401",
+    "feed_end_date": "20270331",
+    "feed_version": "ver3-2026年03月27日 13時44分42秒-西沢ツールver8.31",
+    "feed_contact_email": "koutu@city.fukui-ono.lg.jp",
+    "feed_contact_url": ""
+  },
+  "selected_routes": [
+    {
+      "route_id": "1",
+      "agency_id": "6000020182052",
+      "route_short_name": "",
+      "route_long_name": "まちなか循環バス・奥越明成高校先まわり",
+      "route_desc": "",
+      "route_type": "3",
+      "route_color": "F62E36",
+      "route_text_color": "FFFFFF"
+    },
+    {
+      "route_id": "2",
+      "agency_id": "6000020182052",
+      "route_short_name": "",
+      "route_long_name": "まちなか循環バス・大野高校先まわり",
+      "route_desc": "",
+      "route_type": "3",
+      "route_color": "0079C2",
+      "route_text_color": "FFFFFF"
+    }
+  ],
+  "selected_trip_patterns": 12,
+  "active_trip_counts": {
+    "2026-09-15": {
+      "1": 5,
+      "2": 5
+    },
+    "2026-09-19": {
+      "1": 2,
+      "2": 2
+    }
+  },
+  "trips_with_repeated_stop_ids": 12,
+  "origin_count": 10,
+  "destination_count": 2,
+  "journey_rows": 4080,
+  "limitations": [
+    "Direct buses only; no transfer or walking-only alternatives",
+    "Origins are named stop areas, not homes or population samples",
+    "Origin access and store walking times are unmeasured assumptions",
+    "Retiming is hypothetical; no vehicle or driver scheduling data",
+    "Scheduled service only; no delays, capacity, fares or pedestrian barriers modeled"
+  ]
+}

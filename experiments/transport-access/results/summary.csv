@@ -1,0 +1,13 @@
+scenario,date,origin_store_ready_cases,feasible_cases,within_budget_cases,median_elapsed_minutes_feasible_only,max_elapsed_minutes_feasible_only
+baseline,2026-09-15,340,222,45,216.0,344.0
+baseline,2026-09-19,340,193,28,244.0,415.0
+blue_plus_10,2026-09-15,340,225,40,218.0,314.0
+blue_plus_10,2026-09-19,340,195,21,247.0,425.0
+shopping_30,2026-09-15,340,222,45,216.0,344.0
+shopping_30,2026-09-19,340,193,28,244.0,415.0
+shopping_60,2026-09-15,340,222,33,227.0,371.0
+shopping_60,2026-09-19,340,193,14,276.0,505.0
+store_walk_10,2026-09-15,340,222,33,227.0,371.0
+store_walk_10,2026-09-19,340,193,14,276.0,505.0
+boarding_buffer_5,2026-09-15,340,222,44,216.0,344.0
+boarding_buffer_5,2026-09-19,340,192,27,244.5,415.0

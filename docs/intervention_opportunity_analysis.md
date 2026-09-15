@@ -1,69 +1,123 @@
-# Intervention-Site Opportunity Analysis
+# Intervention-site opportunity analysis
 
-*Which Hokuriku hotspots, what physical change, and how large an effect it would need — computed from the built non-survey panel.*
+*Candidate Hokuriku sites, physical changes, and required effect sizes from the non-survey panel.*
 
-Generated 2026-07-09. Evidence: `panel_site_daily.parquet`, `panel_area_daily.parquet`, `opportunity_signals.json`, `site_leverage.csv`. Companion: `reframe_physical_interventions.md`, `sem_nonsurvey_spec.md`.
+Generated 2026-07-09. Evidence: `panel_site_daily.parquet`,
+`panel_area_daily.parquet`, `opportunity_signals.json`, and
+`site_leverage.csv`. Related documents: `reframe_physical_interventions.md`
+and `sem_nonsurvey_spec.md`.
 
-Every number below is computed from real public data. Every *intervention* is a hypothesis; its effect size is a target for the SEM/simulation to bound and a future field trial to test, not a measured result.
+The public-data panel produces every number below. Each intervention is a
+hypothesis. The SEM and simulation bound its required effect size, and a future
+field trial tests it. This document does not report measured intervention
+effects.
 
 ---
 
-## 1. Leverage ranking
+## 1. Opportunity ranking
 
-A transparent, equal-weight composite over three observed drivers — peak concentration (95th-percentile day ÷ median), weekend/weekday footfall ratio, and the linked lodging market's weekend–weekday occupancy gap — each min-max normalized across the three camera sites:
+The score gives equal weight to three observed measures: peak concentration
+(95th-percentile day divided by median), weekend-to-weekday footfall ratio,
+and the linked lodging market's weekend-to-weekday occupancy gap. Each measure
+is min-max normalized across the three camera sites.
 
-| Rank | Site | Linked lodging | Peak/median | Weekend/weekday | Out-of-pref | Occ gap | **Leverage** |
+| Rank | Site | Linked lodging | Peak/median | Weekend/weekday | Out-of-pref | Occ gap | **Opportunity score** |
 |---|---|---|---|---|---|---|---|
-| 1 | **Tojinbo** | Awara Onsen | 2.24 | 1.72 | — | 0.18 | **0.88** |
+| 1 | **Tojinbo** | Awara Onsen | 2.24 | 1.72 | N/A | 0.18 | **0.88** |
 | 2 | **Rainbow Line** | Mikatagoko | 2.54 | 1.56 | 0.66 | 0.09 | **0.64** |
-| 3 | Fukui Station East | Fukui Station | 1.67 | 1.42 | — | 0.02 | **0.00** |
+| 3 | Fukui Station East | Fukui Station | 1.67 | 1.42 | N/A | 0.02 | **0.00** |
 
-![Site leverage ranking and its drivers](../output/opportunity/site_leverage.png)
+![Site opportunity ranking and its drivers](../output/opportunity/site_leverage.png)
 
-The ranking is not a claim that Fukui Station has no opportunity — it has the broadest downstream reach as the rail gateway — but that its *flows are the least physically concentrated*, so a fixed physical change there acts on a flatter distribution.
+The ranking does not say Fukui Station has no opportunity. It has the broadest
+downstream reach as the rail gateway. Its flows are the least physically
+concentrated, so a fixed physical change acts on a flatter distribution.
 
-## 2. Site 1 — Tojinbo (東尋坊): peak-day dispersal
+## 2. Site 1: Tojinbo (東尋坊), peak-day dispersal
 
-**What the data shows.** Tojinbo footfall is the most peak-concentrated site: the 95th-percentile day carries 2.24× the median day's persons, weekends run 1.72× weekdays, and the busiest observed day reached 26,574 persons. The linked Awara Onsen lodging market carries an 18pp weekend–weekday occupancy gap with saturation on only 1.2% of days — so the surrounding beds are *not* full midweek. The bottleneck is temporal concentration of on-site load, not a shortage of capacity.
+**What the data shows.** Tojinbo has the most concentrated footfall. The
+95th-percentile day has 2.24 times the median number of people, weekend
+footfall is 1.72 times weekday footfall, and the busiest observed day had
+26,574 people. Awara Onsen has an 18 percentage-point weekend-to-weekday
+occupancy gap and reaches saturation on only 1.2% of days. The relevant
+constraint is the timing of demand, not available beds.
 
 **Physical intervention hypotheses.**
 - **Timed-entry / peak-hour signage** at the cliff approach to smooth intra-day load.
 - **Midweek last-mile shuttle** from Awara Onsen / Awara-Yunomachi station, priced or scheduled to make a midweek Tojinbo trip frictionless.
-- **Dynamic peak-day messaging** on the GBP profile and approach signage ("today is busy — Thursday is quiet").
+- **Dynamic peak-day messaging** on the GBP profile and approach signage (for
+  example, "today is busy. Thursday is quiet.").
 
-**Effect it would need.** To convert the observed weekend surplus into midweek beds, a dispersal intervention would need to shift on the order of the 18pp occupancy gap — i.e. move a fraction of weekend footfall into weekdays large enough to raise midweek Awara occupancy from ~50% toward the ~68% weekend level. The SEM/simulation expresses this as a target elasticity on the friction→demand path; the webapp lets a partner set the assumed shift and read the propagated demand change.
+**Effect it would need.** A dispersal intervention would need to shift enough
+weekend footfall to narrow the 18 percentage-point occupancy gap. In practical
+terms, it would need to raise midweek Awara occupancy from about 50% toward the
+weekend level of about 68%. The SEM and simulation express this as a target
+elasticity on the friction-to-demand path. The webapp lets a partner set an
+assumed shift and inspect the resulting demand scenario.
 
-**Why it's the top pick.** Highest leverage score, cliff geography physically channels flow (so a physical change has a real choke point to act on), and an existing AI camera already measures the outcome — a future trial has a ready-made instrument.
+**Why it ranks first.** It has the highest opportunity score. The cliff
+geography channels flow through a defined point, and an existing AI camera can
+measure the outcome in a future trial.
 
-## 3. Site 2 — Rainbow Line (レインボーライン): car-access & parking
+## 3. Site 2: Rainbow Line (レインボーライン), car access and parking
 
-**What the data shows.** Rainbow Line is car-access dominated: 66% (lot 1) to 70% (lot 2) of license plates are out-of-prefecture, only ~10% are rental cars (so most are privately-owned vehicles driven in), and the dominant external origin is **Aichi** (Nagoya/Chubu) — not the Shinkansen-served Kanto corridor. Median throughput is ~145 vehicles/day at lot 1 with a peak/median of 2.54, the peakiest site of the three.
+**What the data shows.** Rainbow Line visitors mainly arrive by car. Between
+66% of lot 1 and 70% of lot 2 license plates are from outside the prefecture.
+About 10% are rental cars, so most visitors drive privately owned cars. Aichi
+(Nagoya and Chubu) is the dominant external origin, rather than the
+Shinkansen-served Kanto corridor. Median throughput at lot 1 is about 145
+vehicles per day, with a peak-to-median ratio of 2.54, the highest of the
+three sites.
 
 **Physical intervention hypotheses.**
-- **Park-and-ride + EV shuttle** for peak days, converting a parking constraint into a managed flow.
-- **Dynamic parking guidance** (lot-1 vs lot-2 balancing; the two gates already meter this).
-- **Chubu-targeted routing / signage**, since the origin mix says the marginal visitor arrives by car from Aichi, not by rail.
+- **Park-and-ride and an EV shuttle** for peak days to manage parking demand.
+- **Dynamic parking guidance** to balance lots 1 and 2. The two gates already
+  measure entries.
+- **Chubu-targeted routing and signage** because the marginal visitor arrives
+  by car from Aichi rather than by rail.
 
-**Effect it would need.** The intervention must relieve peak-day parking pressure without suppressing total visits; the target is redistribution across the two lots and across days rather than a headline volume increase. Because both gates are metered, lot-balancing effects are directly observable — a strong candidate for a measurable trial.
+**Effect it would need.** The intervention must reduce peak-day parking
+pressure without reducing total visits. The target is redistribution between
+the two lots and across days, not an increase in total volume. Since both gates
+measure entries, a trial can directly measure lot balancing.
 
-**Key reframe point.** This site demonstrates *why the physical-intervention lens matters*: a survey or a rail-centric analysis would miss that the binding lever here is **parking and road access**, because two-thirds of the demand never touches a train.
+**Interpretation.** A survey or rail-centered analysis would miss that parking
+and road access are the relevant constraints because about two-thirds of demand
+does not use a train.
 
-## 4. Site 3 — Fukui Station East (福井駅東口): wayfinding / dispersal
+## 4. Site 3: Fukui Station East (福井駅東口), wayfinding and dispersal
 
-**What the data shows.** The rail gateway is the least peak-concentrated (peak/median 1.67, weekend/weekday 1.42) and its linked lodging market shows almost no weekend–weekday gap (2pp) — consistent with business + tourism mixed demand that is already relatively smooth.
+**What the data shows.** The rail gateway has the least concentrated footfall
+(peak-to-median 1.67 and weekend-to-weekday 1.42). Its linked lodging market
+has a weekend-to-weekday gap of only 2 percentage points. This is consistent
+with relatively smooth mixed business and tourism demand.
 
 **Physical intervention hypotheses.**
-- **Wayfinding signage at the east exit** steering arrivals toward under-visited quarters (a classic choice-architecture nudge in physical space).
-- **Digital-intent capture** — the station's GBP directions signal is the natural place to test whether map/routing presence shifts where people go next.
+- **Wayfinding signage at the east exit** to direct arrivals toward
+  under-visited quarters.
+- **Digital-intent capture.** The station's GBP directions signal can test
+  whether map and routing information changes where visitors go next.
 
-**Effect it would need.** Because flows are already smooth, the realistic target is *spatial* redistribution (which neighborhood) rather than *temporal*. Effect sizes here are expected to be smaller per the leverage score, so this site is positioned as a lower-priority, broad-reach option.
+**Effect it would need.** Since flows are already smooth, the target is
+redistribution across neighborhoods rather than across time. The opportunity
+score places this site below the other two, despite its broad reach.
 
-## 5. Cross-cutting demand signal (all lodging markets)
+## 5. Demand signal across lodging markets
 
-Google Business Profile "directions" requests co-move with realized stays in Awara (r = 0.59 same-week, decaying to 0.49 at +1 week and 0.34 at +2 weeks). This is the observed **intent→realized-demand channel** that (a) justifies an intent latent in the SEM and (b) gives any digital-facing component of a physical intervention (updated GBP hours, routing, peak messaging) a plausible, *measurable* demand pathway.
+Google Business Profile "directions" requests co-move with realized stays in
+Awara. The correlation is r = 0.59 in the same week, 0.49 one week later, and
+0.34 two weeks later. This supports an intent-to-realized-demand path in the
+SEM and provides a measurable path for a digital component of a physical
+intervention, such as updated GBP hours, routing, or peak messaging.
 
-## 6. What this analysis explicitly does NOT claim
+## 6. Claims outside this analysis
 
-- It does **not** estimate a causal intervention effect. Leverage scores rank *opportunity*, not proven impact.
-- It does **not** use the reservation panels for a Shinkansen DiD — those series begin Oct 2023 and have no seasonally-comparable pre-extension window (`opportunity_signals.json` → `S5`). The clean natural-experiment estimate lives in the thesis repo's multi-year series.
-- Every effect-size statement is framed as *"the shift an intervention would need to produce"*, to be bounded by the SEM/simulation and tested by the pre-registered field trial (nudge-pilot app + power calc), not as an observed outcome.
+- This analysis does not estimate a causal intervention effect. Opportunity
+  scores rank candidate sites, not proven impact.
+- It does not use the reservation panels for a Shinkansen DiD. Those series
+  begin in October 2023 and have no seasonally comparable pre-extension
+  window. See `opportunity_signals.json` (`S5`). The existing multi-year
+  series produces the natural-experiment estimate.
+- Effect-size statements describe the shift an intervention would need to
+  produce. The SEM and simulation bound the shift, and the pre-registered
+  field trial tests it. They do not describe observed outcomes.

@@ -1,0 +1,60 @@
+{
+  "frame_basis_included": true,
+  "inputs": [
+    {
+      "byte_length": 2554483,
+      "filename": "2025_confirmed.xlsx",
+      "sha256": "f248106e23d058ad9f49efd85c80ebb58a41330c1c9556f9c5453cc79ebdef50",
+      "vintage": "confirmed",
+      "year": 2025
+    },
+    {
+      "byte_length": 366548,
+      "filename": "2026_01_second_preliminary.xlsx",
+      "sha256": "717b492a79276073a2f15bfaf712941f856fe725f65a859deda76912f487c309",
+      "vintage": "preliminary",
+      "year": 2026
+    },
+    {
+      "byte_length": 366648,
+      "filename": "2026_02_second_preliminary.xlsx",
+      "sha256": "16422ebe4b3f8892ae9eb977a5a46616338f388ec1ad4d3d48996df71aa3f9ba",
+      "vintage": "preliminary",
+      "year": 2026
+    },
+    {
+      "byte_length": 365706,
+      "filename": "2026_03_second_preliminary.xlsx",
+      "sha256": "fbd467594bebc2bc55655349707199c387d17e49619e60fbda33678c92e8aa02",
+      "vintage": "preliminary",
+      "year": 2026
+    },
+    {
+      "byte_length": 369568,
+      "filename": "2026_04_second_preliminary.xlsx",
+      "sha256": "5ea7fba6267d25e9a9e76b36db98f905ed8b75fbd27bde2fc78d4838adb37ead",
+      "vintage": "preliminary",
+      "year": 2026
+    },
+    {
+      "byte_length": 367172,
+      "filename": "2026_05_second_preliminary.xlsx",
+      "sha256": "1d1dd6be51058219cb79c96d1572e06da1f03d168ebbbf1b764d47f365dcad89",
+      "vintage": "preliminary",
+      "year": 2026
+    },
+    {
+      "byte_length": 365481,
+      "filename": "2026_06_second_preliminary.xlsx",
+      "sha256": "23dde1846dde19d7b3f98c67aeb652af9a77efcabf2cf724d5c99cee144e5dca",
+      "vintage": "preliminary",
+      "year": 2026
+    }
+  ],
+  "schema_version": 1,
+  "seen_panel": {
+    "byte_length": 214979,
+    "filename": "accommodation_panel.csv",
+    "sha256": "09d60caa50a055652fdaac66bec47c6d30c85c336f8bc4aec8d91d5060624304"
+  }
+}

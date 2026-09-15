@@ -1,4 +1,4 @@
-# Domain Context
+# Domain context
 
 ## Thesis question
 
@@ -8,40 +8,40 @@ interventions should be prioritized?
 
 ## Evidence layers
 
-**Official FTAS layer** — Fukui Tourism Area Survey respondent microdata.
+**Official FTAS layer.** Fukui Tourism Area Survey respondent microdata.
 Primary mechanism evidence and SEM input.
 
-**Official comparison layer** — Ishikawa tourism survey data normalized to
+**Official comparison layer.** Ishikawa tourism survey data normalized to
 shared respondent-level friction indicators.
 
-**Hokuriku impact layer** — merged Fukui/Ishikawa/Toyama official survey
+**Hokuriku impact layer.** Merged Fukui/Ishikawa/Toyama official survey
 microdata used for DiD and event-study analysis.
 
-**Accommodation layer** — JTA prefecture-month overnight stays used as
+**Accommodation layer.** JTA prefecture-month overnight stays used as
 behavioral context.
 
-**Chinese social-media side layer** — exploratory recommendation-text
+**Chinese social-media side layer.** Exploratory recommendation-text
 analysis. Never thesis inferential evidence.
 
 ## Canonical terms
 
-**Friction** — obstacle reported in official free text or structured response.
+**Friction.** An obstacle reported in official free text or a structured response.
 
-**Friction tag** — reproducible keyword-based measurement from `src/friction`.
+**Friction tag.** Reproducible keyword-based measurement from `src/friction`.
 Tag validity is bounded by codebook coverage and manual audit; tag is not
 ground truth.
 
-**Respondent** — deduplicated survey participant. Repeat-response handling must
+**Respondent.** A deduplicated survey participant. Repeat-response handling must
 remain explicit.
 
-**Response row** — raw survey submission before respondent deduplication.
+**Response row.** A raw survey submission before respondent deduplication.
 
-**Treatment** — Fukui after March 2024 in Shinkansen impact models.
+**Treatment.** Fukui after March 2024 in Shinkansen impact models.
 
-**Control** — comparison observations specified by each DiD model; never imply
+**Control.** Comparison observations specified by each DiD model. Never imply
 untreated status beyond model definition.
 
-**Nudge priority** — intervention score combining SEM path evidence with
+**Nudge priority.** Intervention score combining SEM path evidence with
 official-survey friction prevalence.
 
 ## Guardrails

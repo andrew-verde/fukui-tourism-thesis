@@ -1,0 +1,30 @@
+{
+  "status": "exploratory feasibility prototype",
+  "feed": "sources/onoshiei_bus.zip",
+  "route_ids": ["1", "2"],
+  "dates": ["2026-09-15", "2026-09-19"],
+  "ready_start": "08:00:00",
+  "ready_end": "16:00:00",
+  "ready_step_minutes": 30,
+  "return_by": "18:00:00",
+  "elapsed_budget_minutes": 180,
+  "origin_access_minutes": 2,
+  "origin_names": [
+    "越前大野駅", "結ステーション", "下庄小学校", "青少年教育センター",
+    "陽明中学校口", "さくら公園", "わかくさ", "篠座", "いなほこども園", "童子丸郵便局口"
+  ],
+  "origin_selection": "Ten named stop areas across the north and south loops, selected before calculating access. No population weighting or claim of representative sampling.",
+  "destinations": [
+    {"id": "kajiso_libre", "name": "かじ惣リブレ店", "stop_name": "かじ惣リブレ店", "opens": "09:30:00", "closes": "20:00:00", "closed_month_days": ["01-01"], "source": "https://kajiso.com/store/"},
+    {"id": "kajiso_vio", "name": "かじ惣ヴィオ店", "stop_name": "ヴィオ", "opens": "09:30:00", "closes": "20:00:00", "closed_month_days": ["01-01"], "source": "https://kajiso.com/store/"}
+  ],
+  "scenarios": [
+    {"id": "baseline", "shopping_minutes": 45, "store_walk_minutes": 5, "boarding_buffer_minutes": 2, "route_shift_minutes": {}},
+    {"id": "blue_plus_10", "shopping_minutes": 45, "store_walk_minutes": 5, "boarding_buffer_minutes": 2, "route_shift_minutes": {"2": 10}},
+    {"id": "shopping_30", "shopping_minutes": 30, "store_walk_minutes": 5, "boarding_buffer_minutes": 2, "route_shift_minutes": {}},
+    {"id": "shopping_60", "shopping_minutes": 60, "store_walk_minutes": 5, "boarding_buffer_minutes": 2, "route_shift_minutes": {}},
+    {"id": "store_walk_10", "shopping_minutes": 45, "store_walk_minutes": 10, "boarding_buffer_minutes": 2, "route_shift_minutes": {}},
+    {"id": "boarding_buffer_5", "shopping_minutes": 45, "store_walk_minutes": 5, "boarding_buffer_minutes": 5, "route_shift_minutes": {}}
+  ],
+  "scenario_selection": "One fixed illustrative retiming and four one-at-a-time sensitivities, chosen before running the prototype. Retiming every blue-route trip preserves trip counts and scheduled running time, but does not establish vehicle, driver, school-connection or budget feasibility."
+}
