@@ -122,3 +122,36 @@ sources:
     sha256: "f5b6ae5a561d8e58d439fa2a1e4dd426219078d63158a8f2decc7dd4160692a5"
     filename: "ishikawa_survey_noto.csv"
     description: "Ishikawa tourism survey raw Noto-area rows"
+  awara_forward_booking_curve:
+    upstream_repo: "https://github.com/code4fukui/fukui-kanko-reservation"
+    commit: "d30a3f079cbb19b2086d4011c93019bc5a9d669c"
+    source_path: "booking_curve.csv"
+    sha256: "08a0b3bef990bebce387f7a9a353ec71bd5de456463c1a3077d1d772b189a470"
+    filename: "awara_forward_booking_curve.csv"
+    rows: 1169
+    role: "ADR 0040 forward-test predictors"
+    description: "Awara on-hand reservations by days-to-stay. Absent from this config until
+      2026-09-14; the 2026-07-09 panel vintage was fetched from the main branch tip with no
+      pin, so f58e4d8fdc34 in coverage_report.md is a receipt, not a pin."
+  awara_forward_reservation_sum:
+    upstream_repo: "https://github.com/code4fukui/fukui-kanko-reservation"
+    commit: "d30a3f079cbb19b2086d4011c93019bc5a9d669c"
+    source_path: "latest_rsv_sum.csv"
+    sha256: "fadd0bfe4db7ad40e2323996f63885ed2063ef326556cf43388eb5eab1adf56c"
+    filename: "awara_forward_reservation_sum.csv"
+    rows: 1170
+    role: "ADR 0040 forward-test outcome"
+    description: "Realised nightly room-nights, ADR 0040 vintage. Distinct entry rather
+      than a bump of fukui_reservation_sum, whose 25d342639b8d pin serves other analyses
+      and must not move. Append-only over the seen window: zero revision across all 1012
+      nights to 2026-07-08."
+  awara_forward_hotel_capacity:
+    upstream_repo: "https://github.com/code4fukui/fukui-kanko-reservation"
+    commit: "d30a3f079cbb19b2086d4011c93019bc5a9d669c"
+    source_path: "latest_hotel.csv"
+    sha256: "b8d50501f94e21117898a59bc1c73e294eb83dc797a26565a64ee36549d454ee"
+    filename: "awara_forward_hotel_capacity.csv"
+    role: "ADR 0040 provenance record only"
+    description: "Room counts per hotel, sum 576. Recorded, NOT used: ADR 0040 freezes the
+      occupancy denominator at 576 because this upstream sum moves and would rescale the
+      outcome underneath the frozen coefficients."

@@ -1,0 +1,24 @@
+{
+  "upstream_repo": "code4fukui/fukui-kanko-reservation",
+  "pinned_commit": "d30a3f079cbb",
+  "pull_date": "2026-09-13",
+  "pulled_utc": "2026-09-14T13:37:12.910195+00:00",
+  "source": "pinned",
+  "files": {
+    "booking_curve.csv": {
+      "sha256": "08a0b3bef990bebce387f7a9a353ec71bd5de456463c1a3077d1d772b189a470",
+      "bytes": 349165,
+      "url": "https://raw.githubusercontent.com/code4fukui/fukui-kanko-reservation/d30a3f079cbb/booking_curve.csv"
+    },
+    "latest_rsv_sum.csv": {
+      "sha256": "fadd0bfe4db7ad40e2323996f63885ed2063ef326556cf43388eb5eab1adf56c",
+      "bytes": 42474,
+      "url": "https://raw.githubusercontent.com/code4fukui/fukui-kanko-reservation/d30a3f079cbb/latest_rsv_sum.csv"
+    },
+    "latest_hotel.csv": {
+      "sha256": "b8d50501f94e21117898a59bc1c73e294eb83dc797a26565a64ee36549d454ee",
+      "bytes": 176,
+      "url": "https://raw.githubusercontent.com/code4fukui/fukui-kanko-reservation/d30a3f079cbb/latest_hotel.csv"
+    }
+  }
+}

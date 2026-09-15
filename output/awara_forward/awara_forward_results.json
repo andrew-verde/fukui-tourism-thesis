@@ -1,0 +1,73 @@
+{
+  "adr": "0040",
+  "executed_utc": "2026-09-14T13:38:30.301036+00:00",
+  "pull_date": "2026-09-13",
+  "capacity_frozen": 576.0,
+  "trend_origin": "2023-10-01",
+  "quarantine_checksums": {
+    "booking_curve.csv": "08a0b3bef990bebce387f7a9a353ec71bd5de456463c1a3077d1d772b189a470",
+    "latest_hotel.csv": "b8d50501f94e21117898a59bc1c73e294eb83dc797a26565a64ee36549d454ee",
+    "latest_rsv_sum.csv": "fadd0bfe4db7ad40e2323996f63885ed2063ef326556cf43388eb5eab1adf56c"
+  },
+  "guard": {
+    "n_seen_nights_compared": 1012,
+    "n_seen_nights_committed": 1012,
+    "n_seen_nights_fresh": 1012,
+    "rms_relative_revision": 0.0,
+    "rms_limit": 0.02,
+    "max_abs_night_diff": 0.0,
+    "max_abs_limit": 0.01,
+    "worst_night": "2023-10-01",
+    "status": "passed"
+  },
+  "unseen": {
+    "flat_curve_excluded": 5,
+    "post_pull_total": 157,
+    "n_eligible": 66,
+    "minimum_required": 60,
+    "date_min": "2026-07-09",
+    "date_max": "2026-09-12"
+  },
+  "P1": {
+    "mae_M3": 0.07576511199802953,
+    "mae_M0_naive": 0.06197390572390572,
+    "median_abs_err_M3": 0.06720365033765355,
+    "median_abs_err_M0": 0.041666666666666685,
+    "wilcoxon_stat": 1315.0,
+    "p_one_sided": 0.9096011613991405,
+    "alpha": 0.05,
+    "status": "falsified"
+  },
+  "P2": {
+    "n_flagged": 34,
+    "hits": 18,
+    "precision": 0.5294117647058824,
+    "recall": 1.0,
+    "unseen_base_rate": 0.2727272727272727,
+    "p_one_sided": 0.001347990067876835,
+    "alpha": 0.05,
+    "status": "confirmed"
+  },
+  "headline_verdict": "prediction falsified",
+  "S1_no_accuracy_collapse": {
+    "mae_M3": 0.07576511199802953,
+    "ceiling": 0.09,
+    "status": "held",
+    "secondary_only": true
+  },
+  "S2_state_beats_calendar": {
+    "mae_M3": 0.07576511199802953,
+    "mae_M1_calendar_only": 0.12298024158591497,
+    "p_one_sided": 6.41615940252552e-05,
+    "status": "replicated",
+    "secondary_only": true
+  },
+  "S3_demand_gap_persists": {
+    "peak_minus_midweek": 0.1786437665343915,
+    "floor": 0.15,
+    "n_peak": 24,
+    "n_midweek": 42,
+    "status": "persists",
+    "secondary_only": true
+  }
+}

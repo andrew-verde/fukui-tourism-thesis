@@ -1,0 +1,23 @@
+{
+  "adr": "0040",
+  "executed_utc": "2026-09-14T13:37:26.803287+00:00",
+  "pull_date": "2026-09-13",
+  "capacity_frozen": 576.0,
+  "trend_origin": "2023-10-01",
+  "quarantine_checksums": {
+    "booking_curve.csv": "08a0b3bef990bebce387f7a9a353ec71bd5de456463c1a3077d1d772b189a470",
+    "latest_hotel.csv": "b8d50501f94e21117898a59bc1c73e294eb83dc797a26565a64ee36549d454ee",
+    "latest_rsv_sum.csv": "fadd0bfe4db7ad40e2323996f63885ed2063ef326556cf43388eb5eab1adf56c"
+  },
+  "guard": {
+    "n_seen_nights_compared": 1012,
+    "n_seen_nights_committed": 1012,
+    "n_seen_nights_fresh": 1012,
+    "rms_relative_revision": 0.0,
+    "rms_limit": 0.02,
+    "max_abs_night_diff": 0.0,
+    "max_abs_limit": 0.01,
+    "worst_night": "2023-10-01",
+    "status": "passed"
+  }
+}
